@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shawonhaque.github.io/sitemap.xml

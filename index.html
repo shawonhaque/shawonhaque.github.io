@@ -1,525 +1,364 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#05030b" />
-  <meta name="description" content="Shawon Haque — Developer, Creative Thinker, Builder" />
-  <title>Shawon Haque</title>
+
+  <title>Shawon Haque — Full Stack Developer</title>
+  <meta name="description" content="Shawon Haque is a Full Stack Developer working with HTML, CSS, JavaScript, React, Next.js and Node.js. Explore projects, technical expertise and get in touch." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#06070d" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Shawon Haque — Full Stack Developer" />
+  <meta property="og:description" content="Full Stack Developer building modern web experiences with React, Next.js and Node.js." />
+  <meta property="og:url" content="https://shawonhaque.github.io/" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Shawon Haque — Full Stack Developer" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shawon Haque — Full Stack Developer" />
+  <meta name="twitter:description" content="Full Stack Developer building modern web experiences with React, Next.js and Node.js." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="assets/img/icon-180.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #05030b;
-      --bg-elevated: #0c0818;
-      --mint: #7fffd4;
-      --mint-dim: #00d9a5;
-      --violet: #8b5cf6;
-      --violet-soft: #a78bfa;
-      --text: #f4f0ff;
-      --text-muted: #b8a9d4;
-      --border: rgba(139, 92, 246, 0.35);
-      --glow: 0 0 40px rgba(139, 92, 246, 0.25);
-    }
+  <link rel="preload" as="image" href="assets/img/profile.webp" type="image/webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shawon Haque",
+    "url": "https://shawonhaque.github.io/",
+    "image": "https://shawonhaque.github.io/assets/img/profile.jpg",
+    "jobTitle": "Full Stack Developer",
+    "email": "mailto:shawon404.141@gmail.com",
+    "sameAs": ["https://github.com/shawonhaque"],
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "React.js", "Next.js", "Node.js"]
+  }
+  </script>
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      min-height: 100vh;
-      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-      background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, #2a0a55 0%, transparent 55%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, #0a2a22 0%, transparent 50%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* subtle grid overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(127, 255, 212, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(127, 255, 212, 0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      width: min(920px, 100%);
-      margin: 0 auto;
-      padding: 48px 20px 80px;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 64px;
-      gap: 16px;
-    }
-
-    .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      color: var(--mint);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--mint);
-      border-color: var(--border);
-      background: rgba(139, 92, 246, 0.12);
-    }
-
-    /* HERO */
-    .hero {
-      text-align: center;
-      margin-bottom: 72px;
-    }
-
-    .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--mint);
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 8vw, 4.6rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 50%, var(--mint) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 420px;
-      margin: 0 auto 36px;
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(8, 0, 24, 0.7);
-    }
-
-    .badge.online { color: var(--mint); border-color: rgba(0, 217, 165, 0.4); }
-    .badge.mode { color: var(--violet-soft); }
-    .badge.mind { color: #67e8f9; }
-
-    /* PHOTO */
-    .photo-frame {
-      position: relative;
-      width: min(520px, 100%);
-      margin: 0 auto 28px;
-      border-radius: 24px;
-      padding: 6px;
-      background: linear-gradient(135deg, rgba(127, 255, 212, 0.35), rgba(139, 92, 246, 0.35));
-      box-shadow: var(--glow), 0 0 80px rgba(0, 217, 165, 0.12);
-    }
-
-    .photo-inner {
-      position: relative;
-      border-radius: 19px;
-      overflow: hidden;
-      background: #080512;
-      aspect-ratio: 1 / 1;
-    }
-
-    .photo-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0;
-      transform: scale(1.04);
-      transition: opacity 0.7s ease, transform 0.9s ease;
-    }
-
-    .photo-frame.loaded .photo-inner img {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .loader {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: #080512;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
-      z-index: 2;
-    }
-
-    .photo-frame.loaded .loader {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 3px solid rgba(255, 255, 255, 0.12);
-      border-top-color: var(--mint);
-      border-right-color: var(--violet);
-      animation: spin 0.85s linear infinite;
-      box-shadow: 0 0 20px rgba(127, 255, 212, 0.3);
-    }
-
-    .loading-label {
-      margin-top: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      color: var(--mint);
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* CTA */
-    .cta-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #00d9a5, #7fffd4);
-      color: #05030b;
-      box-shadow: 0 0 24px rgba(0, 217, 165, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 32px rgba(0, 217, 165, 0.5);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--mint);
-      color: var(--mint);
-      background: rgba(127, 255, 212, 0.06);
-    }
-
-    /* SECTIONS */
-    section {
-      margin-bottom: 72px;
-    }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--violet-soft);
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 1.55rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      letter-spacing: -0.01em;
-    }
-
-    .card {
-      background: rgba(12, 8, 24, 0.75);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px 26px;
-      backdrop-filter: blur(12px);
-    }
-
-    .about-text {
-      color: var(--text-muted);
-      font-size: 1.02rem;
-    }
-
-    .about-text p + p { margin-top: 14px; }
-
-    .highlight {
-      color: var(--mint);
-      font-weight: 500;
-    }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-    }
-
-    .skill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      text-align: center;
-      padding: 14px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(139, 92, 246, 0.25);
-      background: rgba(8, 0, 24, 0.6);
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .skill:hover {
-      border-color: var(--mint);
-      background: rgba(127, 255, 212, 0.06);
-    }
-
-    /* PROJECTS */
-    .projects {
-      display: grid;
-      gap: 14px;
-    }
-
-    .project {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      border-radius: 14px;
-      border: 1px solid rgba(139, 92, 246, 0.22);
-      background: rgba(8, 0, 24, 0.5);
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .project:hover {
-      border-color: var(--mint);
-      background: rgba(127, 255, 212, 0.05);
-      transform: translateX(4px);
-    }
-
-    .project-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .project-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .project-arrow {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--mint);
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding-top: 24px;
-      border-top: 1px solid rgba(139, 92, 246, 0.2);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    footer .mono {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--mint);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .spinner { animation: none; }
-      html { scroll-behavior: auto; }
-      .photo-inner img { transition: none; }
-    }
-
-    @media (max-width: 560px) {
-      .container { padding: 32px 16px 64px; }
-      nav { margin-bottom: 40px; }
-      .hero { margin-bottom: 56px; }
-      h1 { font-size: 2.35rem; }
-    }
-  </style>
+  <!-- Apply the saved/system theme before first paint to avoid a flash -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
-  <div class="container">
-    <nav>
-      <div class="logo">SHAWON.HAQUE</div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="hero">
-      <div class="eyebrow">Personal Space // Online</div>
-      <h1>SHAWON HAQUE</h1>
-      <p class="subtitle">The mind behind the machine.<br/>Developer · Creative Thinker · Builder</p>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-      <div class="status-row">
-        <span class="badge online">● STATUS: ONLINE</span>
-        <span class="badge mode">MODE: CYBERPUNK</span>
-        <span class="badge mind">MINDSET: UNSTOPPABLE</span>
-      </div>
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Shawon Haque — home">
+        <span class="brand-mark" aria-hidden="true">SH</span>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
 
-      <div class="photo-frame" id="photoFrame">
-        <div class="photo-inner">
-          <div class="loader" aria-label="Loading photo">
-            <div style="display:grid;justify-items:center">
-              <div class="spinner"></div>
-              <div class="loading-label">LOADING</div>
-            </div>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#background">Background</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Full Stack Developer</p>
+          <h1 id="hero-title">Shawon Haque</h1>
+          <p class="hero-lede">
+            I build fast, accessible and maintainable web applications — from polished
+            interfaces in React and Next.js to the Node.js services behind them.
+          </p>
+          <p class="hero-sub">
+            Focused on clean architecture, thoughtful user experience and shipping work
+            that holds up in production.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-ghost" href="#contact">Contact Me</a>
           </div>
-          <img
-            src="assets/shawon-and-nephew.jpg"
-            alt="Shawon Haque"
-            onload="document.getElementById('photoFrame').classList.add('loaded')"
-            onerror="document.querySelector('.loading-label').textContent='PHOTO NOT FOUND'"
-          />
+
+          <ul class="hero-stack" aria-label="Core technologies">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Next.js</li><li>Node.js</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <div class="portrait">
+            <picture>
+              <source srcset="assets/img/profile.webp" type="image/webp" />
+              <img src="assets/img/profile.jpg" width="512" height="512"
+                   alt="Portrait of Shawon Haque" fetchpriority="high" decoding="async" />
+            </picture>
+          </div>
+          <p class="availability"><span class="dot" aria-hidden="true"></span> Open to opportunities &amp; collaboration</p>
         </div>
       </div>
-
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
-          View GitHub →
-        </a>
-        <a class="btn btn-ghost" href="https://github.com/shawonhaque?tab=repositories" target="_blank" rel="noopener">
-          Explore Projects
-        </a>
-      </div>
-    </header>
-
-    <section id="about">
-      <div class="section-label">01 // Identity</div>
-      <h2>Who I Am</h2>
-      <div class="card about-text">
-        <p>
-          I’m <span class="highlight">Shawon Haque</span> — a developer driven by curiosity and the desire to turn ideas into real digital experiences.
-        </p>
-        <p>
-          I believe code is more than syntax. It’s a creative medium for solving problems, building systems, and shaping the future one thoughtful line at a time.
-        </p>
-        <p>
-          Always learning. Always evolving. Always building.
-        </p>
-      </div>
     </section>
 
-    <section id="skills">
-      <div class="section-label">02 // Arsenal</div>
-      <h2>Tech Stack</h2>
-      <div class="skills-grid">
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">TypeScript</div>
-        <div class="skill">React</div>
-        <div class="skill">Next.js</div>
-        <div class="skill">Tailwind</div>
-        <div class="skill">Node.js</div>
-        <div class="skill">Python</div>
-        <div class="skill">Git</div>
-        <div class="skill">GitHub</div>
-        <div class="skill">Linux</div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="section-label">03 // Database</div>
-      <h2>Projects</h2>
-      <div class="projects">
-        <a class="project" href="https://github.com/shawonhaque?tab=repositories" target="_blank" rel="noopener">
-          <div>
-            <div class="project-title">All Repositories</div>
-            <div class="project-desc">Explore every experiment, build, and idea in progress</div>
+    <!-- ABOUT -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <p class="section-label">01 — About</p>
+        <h2 id="about-title">Professional profile</h2>
+        <div class="grid-2">
+          <div class="prose">
+            <p>
+              I'm <strong>Shawon Haque</strong>, a Full Stack Developer working across the
+              modern JavaScript ecosystem. I care about the whole path a product takes: how an
+              interface feels to use, how the code is structured underneath it, and how quickly
+              it loads for the people relying on it.
+            </p>
+            <p>
+              My work centres on <strong>React.js</strong> and <strong>Next.js</strong> on the
+              frontend and <strong>Node.js</strong> on the server, supported by a solid
+              foundation in semantic <strong>HTML</strong>, modern <strong>CSS</strong> and
+              <strong>JavaScript</strong>. I build reusable components, keep concerns separated,
+              and treat accessibility and performance as defaults rather than afterthoughts.
+            </p>
+            <p>
+              I'm early in my public track record and building it deliberately. Every project
+              here is real, tested and shipped — I'd rather show a small body of honest work
+              than a long list of things that don't exist.
+            </p>
           </div>
-          <div class="project-arrow">→</div>
-        </a>
-        <a class="project" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
-          <div>
-            <div class="project-title">Profile & Activity</div>
-            <div class="project-desc">Contribution graph, stats, and current focus</div>
-          </div>
-          <div class="project-arrow">→</div>
-        </a>
+
+          <aside class="philosophy" aria-label="Development principles">
+            <h3>How I work</h3>
+            <ul>
+              <li><span>Semantics first.</span> Accessible, meaningful markup as the base layer.</li>
+              <li><span>Reusable by design.</span> Components and styles that scale with a codebase.</li>
+              <li><span>Performance aware.</span> Optimised assets and attention to Core Web Vitals.</li>
+              <li><span>Secure by default.</span> Validated input and the principle of least privilege.</li>
+              <li><span>Consistency over intensity.</span> Steady, reliable progress on real work.</li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <div class="mono">[ SYSTEM ONLINE ✓ ] · DEVELOPER: SHAWON</div>
-      <div>© Shawon Haque · Built with curiosity</div>
-    </footer>
-  </div>
+    <!-- EXPERTISE -->
+    <section class="section" id="expertise" aria-labelledby="expertise-title">
+      <div class="wrap">
+        <p class="section-label">02 — Expertise</p>
+        <h2 id="expertise-title">Technical expertise</h2>
+        <p class="section-lede">
+          The stack I build with, grouped by where it sits in an application.
+        </p>
+
+        <div class="expertise-grid">
+          <article class="card">
+            <h3>Frontend</h3>
+            <p>Interfaces that are responsive, accessible and pleasant to use.</p>
+            <ul class="tag-list">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive layout</li><li>Web accessibility</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Frameworks &amp; libraries</h3>
+            <p>Component-driven application development.</p>
+            <ul class="tag-list">
+              <li>React.js</li><li>Next.js</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Backend</h3>
+            <p>Server-side logic and APIs in the JavaScript ecosystem.</p>
+            <ul class="tag-list">
+              <li>Node.js</li><li>REST APIs</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Tools &amp; workflow</h3>
+            <p>The day-to-day tooling around the code.</p>
+            <ul class="tag-list">
+              <li>Git</li><li>GitHub</li><li>GitHub Actions</li><li>VS Code</li><li>Linux</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <p class="section-label">03 — Projects</p>
+        <h2 id="projects-title">Selected work</h2>
+        <p class="section-lede">
+          A short, honest list — these are real repositories you can open and review today.
+        </p>
+
+        <div class="projects">
+          <article class="project-card">
+            <div class="project-mark" aria-hidden="true">
+              <span class="project-mark-glyph">&lt;/&gt;</span>
+              <span class="project-mark-name">Portfolio</span>
+            </div>
+            <div class="project-body">
+              <h3>Personal Portfolio</h3>
+              <p>
+                This website: a responsive, accessible, single-page portfolio built with
+                semantic HTML, modern CSS and vanilla JavaScript — no framework overhead and
+                no build step. Includes a light/dark theme system, optimised responsive
+                images, complete SEO and social metadata, and automated deployment via
+                GitHub Pages.
+              </p>
+              <ul class="tag-list">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li><li>SEO</li><li>Accessibility</li>
+              </ul>
+              <div class="project-links">
+                <a class="link-arrow" href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">Source code<span aria-hidden="true"> →</span><span class="sr-only"> (opens on GitHub)</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects-more">
+          <p>
+            New work in React, Next.js and Node.js is in progress. Follow along on GitHub,
+            or get in touch if you'd like to collaborate.
+          </p>
+          <a class="btn btn-ghost" href="https://github.com/shawonhaque?tab=repositories" target="_blank" rel="noopener">
+            Browse repositories<span class="sr-only"> (opens on GitHub)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BACKGROUND -->
+    <section class="section" id="background" aria-labelledby="background-title">
+      <div class="wrap">
+        <p class="section-label">04 — Background</p>
+        <h2 id="background-title">Experience &amp; activity</h2>
+
+        <div class="grid-2 background-grid">
+          <div>
+            <h3 class="subhead">Professional experience</h3>
+            <div class="notice">
+              <p>
+                I'm currently building my professional track record and have no formal
+                employment history to list yet. Rather than fill this space with anything
+                unverified, I'm keeping it honest — the projects above are the record of
+                my work so far.
+              </p>
+            </div>
+
+            <h3 class="subhead">Education &amp; certifications</h3>
+            <div class="notice">
+              <p>
+                No certifications are listed here because none have been earned yet. This
+                section will be updated as qualifications are completed and verified.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subhead">GitHub activity</h3>
+            <div class="card activity-card">
+              <div class="activity-head">
+                <a class="activity-user" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
+                  <img src="assets/img/avatar-60.png" width="60" height="60" loading="lazy" decoding="async" alt="" />
+                  <span>@shawonhaque</span>
+                </a>
+                <p>Contribution calendar</p>
+              </div>
+              <img class="activity-chart"
+                   src="https://ghchart.rshah.org/4f8cff/shawonhaque"
+                   width="1200" height="128" loading="lazy" decoding="async"
+                   alt="Shawon Haque's GitHub contribution calendar" />
+              <p class="activity-note">
+                This account is new, so contributions are just starting to accumulate. Live,
+                verified activity is always visible on
+                <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <p class="section-label">05 — Contact</p>
+        <h2 id="contact-title">Let's build something</h2>
+        <p class="section-lede">
+          I'm open to full-time roles, freelance work and collaboration. The fastest way
+          to reach me is email — I'll always reply.
+        </p>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:shawon404.141@gmail.com">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">shawon404.141@gmail.com</span>
+          </a>
+          <a class="contact-card" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/shawonhaque</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque — Full Stack Developer</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
