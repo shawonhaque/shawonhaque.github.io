@@ -19,6 +19,7 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
   Twitter cards, JSON-LD `Person` structured data, `robots.txt` and `sitemap.xml`
 - Performance: system font fallbacks, `font-display: swap`, preloaded hero image,
   WebP with JPEG fallback, lazy loading below the fold
+- Resume: one-page PDF, viewable in the browser or downloadable from the Resume section
 - Custom 404 page
 
 ## Structure
@@ -34,7 +35,20 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 └── assets/
     ├── css/styles.css    # Design tokens, layout, components
     ├── js/main.js        # Theme, navigation, scroll behaviour
-    └── img/              # Optimised images, icons, social card
+    ├── img/              # Optimised images, icons, social card
+    └── resume/
+        ├── resume.html   # Source for the PDF (print stylesheet)
+        └── Shawon-Haque-Resume.pdf
+```
+
+## Editing the resume
+
+`assets/resume/resume.html` is the source. Edit it, then regenerate the PDF:
+
+```bash
+chromium --headless --no-pdf-header-footer \
+  --print-to-pdf=assets/resume/Shawon-Haque-Resume.pdf \
+  file://$PWD/assets/resume/resume.html
 ```
 
 ## Local preview

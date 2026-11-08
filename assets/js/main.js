@@ -215,7 +215,7 @@
   }
 
   /* ---------- Reveal on scroll ---------- */
-  var revealTargets = document.querySelectorAll(".card, .project-card, .notice, .contact-card, .philosophy");
+  var revealTargets = document.querySelectorAll(".card, .project-card, .notice, .contact-card, .philosophy, .resume-card");
 
   if (reduceMotion || !("IntersectionObserver" in window)) {
     Array.prototype.forEach.call(revealTargets, function (el) { el.classList.add("is-visible"); });

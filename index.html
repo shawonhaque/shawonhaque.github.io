@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Shawon Haque — Full Stack Developer</title>
+  <title>Shawon Haque</title>
   <meta name="description" content="Shawon Haque is a Full Stack Developer working with HTML, CSS, JavaScript, React, Next.js and Node.js. Explore projects, technical expertise and get in touch." />
   <meta name="author" content="Shawon Haque" />
   <meta name="theme-color" content="#06070d" media="(prefers-color-scheme: dark)" />
@@ -75,8 +75,12 @@
 
   <header class="site-header" id="top">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="Shawon Haque — home">
-        <span class="brand-mark" aria-hidden="true">SH</span>
+      <a class="brand" href="#top">
+        <picture>
+          <source srcset="assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="assets/img/brand-102.jpg" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
         <span class="brand-text">Shawon Haque</span>
       </a>
 
@@ -92,6 +96,7 @@
           <li><a href="#expertise">Expertise</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#background">Background</a></li>
+          <li><a href="#resume">Resume</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
@@ -375,10 +380,42 @@
       </div>
     </section>
 
+    <!-- RESUME -->
+    <section class="section" id="resume" aria-labelledby="resume-title">
+      <div class="wrap">
+        <p class="section-label">05 — Resume</p>
+        <h2 id="resume-title">Resume</h2>
+        <p class="section-lede">
+          A concise, one-page overview of my stack and the projects I have shipped.
+          View it in the browser or download it as a PDF.
+        </p>
+
+        <div class="resume-card">
+          <span class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+          </span>
+          <div class="resume-info">
+            <h3>Shawon Haque — Full Stack Developer</h3>
+            <p>One page. PDF format. Updated as new work ships.</p>
+          </div>
+          <div class="resume-actions">
+            <a class="btn btn-primary" href="assets/resume/Shawon-Haque-Resume.pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              View resume
+            </a>
+            <a class="btn btn-ghost" href="assets/resume/Shawon-Haque-Resume.pdf" download="Shawon-Haque-Resume.pdf">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              Download PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section class="section" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
-        <p class="section-label">05 — Contact</p>
+        <p class="section-label">06 — Contact</p>
         <h2 id="contact-title">Let's build something</h2>
         <p class="section-lede">
           I'm open to full-time roles, freelance work and collaboration. The fastest way
@@ -410,10 +447,11 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <p class="footer-brand">Shawon Haque — Full Stack Developer</p>
+      <p class="footer-brand">Shawon Haque</p>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
         <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
       </nav>

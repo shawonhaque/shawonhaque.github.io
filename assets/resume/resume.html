@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex" />
+<title>Shawon Haque — Full Stack Developer</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10.2pt;
+    line-height: 1.5;
+    color: #1a1d24;
+  }
+  a { color: #1a4fd6; text-decoration: none; }
+  h1, h2, h3 { margin: 0; }
+  h1 { font-size: 21pt; letter-spacing: -0.02em; }
+  .role { font-size: 11pt; color: #1a4fd6; font-weight: 600; margin-top: 2pt; }
+
+  header { border-bottom: 2px solid #1a1d24; padding-bottom: 8pt; }
+  .contact { margin-top: 7pt; font-size: 9.4pt; color: #3a3f4a; }
+  .contact span { white-space: nowrap; }
+  .contact .sep { color: #b6bcc8; padding: 0 5pt; }
+
+  section { margin-top: 12pt; }
+  h2 {
+    font-size: 9.6pt;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #1a4fd6;
+    border-bottom: 1px solid #d5d9e2;
+    padding-bottom: 3pt;
+    margin-bottom: 7pt;
+  }
+  p { margin: 0 0 6pt; }
+  ul { margin: 0; padding-left: 13pt; }
+  li { margin-bottom: 3pt; }
+
+  .skills { display: grid; grid-template-columns: 32% 1fr; gap: 3pt 10pt; }
+  .skills dt { font-weight: 600; color: #1a1d24; }
+  .skills dd { margin: 0; color: #3a3f4a; }
+
+  .project { margin-bottom: 9pt; }
+  .project:last-child { margin-bottom: 0; }
+  .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+  .project-head h3 { font-size: 10.6pt; }
+  .project-links { font-size: 8.8pt; color: #5b6270; white-space: nowrap; }
+  .stack { font-size: 8.8pt; color: #5b6270; margin-top: 1pt; }
+  .project p { margin: 3pt 0 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Shawon Haque</h1>
+  <p class="role">Full Stack Developer</p>
+  <p class="contact">
+    <span>shawon404.141@gmail.com</span><span class="sep">|</span>
+    <span>github.com/shawonhaque</span><span class="sep">|</span>
+    <span>shawonhaque.github.io</span>
+  </p>
+</header>
+
+<section>
+  <h2>Profile</h2>
+  <p>
+    Full Stack Developer working across the modern JavaScript ecosystem, with a focus on
+    React.js and Next.js on the frontend and Node.js on the server. Builds reusable,
+    accessible interfaces on top of clean, maintainable architecture, and treats
+    performance, accessibility and security as defaults rather than additions.
+  </p>
+</section>
+
+<section>
+  <h2>Technical Skills</h2>
+  <dl class="skills">
+    <dt>Frontend</dt><dd>HTML, CSS, JavaScript, responsive layout, web accessibility</dd>
+    <dt>Frameworks &amp; libraries</dt><dd>React.js, Next.js</dd>
+    <dt>Backend</dt><dd>Node.js, REST APIs</dd>
+    <dt>Databases &amp; services</dt><dd>PostgreSQL, Supabase (Row Level Security)</dd>
+    <dt>Languages</dt><dd>JavaScript, TypeScript</dd>
+    <dt>Tooling</dt><dd>Git, GitHub, GitHub Actions, VS Code, Linux</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>Selected Projects</h2>
+
+  <div class="project">
+    <div class="project-head">
+      <h3>NEXORA — Full Stack Knowledge Platform</h3>
+      <span class="project-links">Live demo · Source on GitHub</span>
+    </div>
+    <p class="stack">React 18, TypeScript, Vite, Tailwind CSS, Supabase, PostgreSQL</p>
+    <ul>
+      <li>Built a content platform for news, books, study resources and writing, with sixteen routed views including full-text search and light/dark theming.</li>
+      <li>Designed a PostgreSQL schema and enforced Row Level Security on every table, so the database decides who may read or write each row rather than the client.</li>
+      <li>Added an authenticated admin area with role-based access, and automated deployment to GitHub Pages via GitHub Actions.</li>
+      <li>Aggregates live publisher feeds at build time so the published site stays current without manual updates.</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-head">
+      <h3>Personal Portfolio</h3>
+      <span class="project-links">Live site · Source on GitHub</span>
+    </div>
+    <p class="stack">HTML, CSS, JavaScript, SEO, Accessibility</p>
+    <ul>
+      <li>Designed and built a responsive, accessible single-page site with no framework overhead and no build step.</li>
+      <li>Implemented light and dark themes with system detection, keyboard navigation, visible focus states and reduced-motion support.</li>
+      <li>Delivered complete SEO and social metadata, structured data, a sitemap and a custom 404 page.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Additional</h2>
+  <ul>
+    <li>Open to full-time roles, freelance work and collaboration.</li>
+    <li>Repositories, commit history and live work: <a href="https://github.com/shawonhaque">github.com/shawonhaque</a></li>
+  </ul>
+</section>
+
+</body>
+</html>
