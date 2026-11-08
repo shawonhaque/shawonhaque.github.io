@@ -297,7 +297,7 @@ html[data-theme="light"] .icon-moon { display: none; }
 .link-arrow:hover span[aria-hidden] { transform: translateX(3px); }
 
 /* ---------- Hero ---------- */
-.hero { padding: clamp(48px, 9vw, 104px) 0 clamp(40px, 6vw, 72px); }
+.hero { position: relative; padding: clamp(48px, 9vw, 104px) 0 clamp(40px, 6vw, 72px); }
 .hero-inner {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
@@ -382,6 +382,54 @@ html[data-theme="light"] .icon-moon { display: none; }
   border-radius: 50%;
   background: var(--accent-2);
   box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Mouse scroll indicator: a quiet cue that there is more below the fold.
+   It is decorative, so it fades out as soon as the page moves. */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(14px, 3vw, 26px);
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: var(--muted);
+  transition: opacity 0.35s var(--ease), color 0.2s var(--ease);
+}
+.scroll-cue:hover { color: var(--accent); }
+.scroll-cue.is-hidden { opacity: 0; pointer-events: none; }
+
+.scroll-cue-mouse {
+  width: 22px;
+  height: 35px;
+  border: 1.6px solid currentColor;
+  border-radius: 12px;
+  display: grid;
+  justify-items: center;
+  padding-top: 6px;
+  opacity: 0.75;
+}
+.scroll-cue-wheel {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: currentColor;
+  animation: cue-wheel 1.9s var(--ease-out) infinite;
+}
+.scroll-cue-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@keyframes cue-wheel {
+  0%   { opacity: 0; transform: translateY(-2px); }
+  35%  { opacity: 1; }
+  70%  { opacity: 0; transform: translateY(9px); }
+  100% { opacity: 0; transform: translateY(9px); }
 }
 
 /* ---------- Sections ---------- */
@@ -730,6 +778,17 @@ html[data-theme="light"] .icon-moon { display: none; }
 
 /* ---------- Motion: intro curtain, hero entrance, scroll reveal ---------- */
 
+/* Lenis drives the native scroll position, so the page's own
+   `scroll-behavior: smooth` has to step aside while it is running, otherwise
+   the two animators fight and the wheel stutters. `.has-lenis` is set by
+   main.js for the whole session; the `.lenis-*` rules are the ones Lenis
+   expects to find. */
+html.lenis, html.lenis body { height: auto; }
+html.has-lenis { scroll-behavior: auto !important; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 /* A branded panel that lifts away on the first visit of a session.
    It only becomes visible when the pre-paint script added .has-intro, and
    main.js removes that class once the whole entrance has finished, so it
@@ -827,6 +886,8 @@ html.has-intro .hero-visual             { animation-delay: 0.70s; }
   .hero-lede, .hero-sub { max-width: 56ch; }
   .project-card { grid-template-columns: 1fr; }
   .project-shot { border-right: 0; border-bottom: 1px solid var(--border); max-height: 300px; }
+  /* A mouse-shaped cue is meaningless on a touch device. */
+  .scroll-cue { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -870,11 +931,17 @@ html.has-intro .hero-visual             { animation-delay: 0.70s; }
   }
   .reveal { opacity: 1; transform: none; }
   .page-curtain { display: none; }
+  /* With smooth scrolling off there is no reason to hide the scrollbar, and
+     the wheel cue would sit still. */
+  html { scrollbar-width: auto; }
+  .scroll-cue-wheel { animation: none; }
+  .bg-glow, .hero-visual { transform: none !important; }
 }
 
 @media print {
   .site-header, .bg-glow, .cta-row, .theme-toggle, .nav-toggle, .site-footer,
-  .progress, .to-top, .copy-btn, .copy-status, .page-curtain { display: none; }
+  .progress, .to-top, .copy-btn, .copy-status, .page-curtain,
+  .scroll-cue { display: none; }
   body { color: #000; background: #fff; }
   .section { border: 0; padding: 12px 0; }
   a { color: #000; }

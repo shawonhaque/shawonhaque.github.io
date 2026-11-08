@@ -35,6 +35,8 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 └── assets/
     ├── css/styles.css    # Design tokens, layout, components
     ├── js/main.js        # Theme, navigation, scroll behaviour
+    ├── js/vendor/        # Third-party scripts, committed as-is
+    │   └── lenis.min.js  # Smooth wheel scrolling (MIT, v1.3.27)
     ├── img/              # Optimised images, icons, social card
     └── resume/
         ├── resume.html   # Source for the PDF (print stylesheet)
