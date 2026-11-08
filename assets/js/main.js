@@ -82,6 +82,99 @@
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
+  /* ---------- Scroll progress + back to top ---------- */
+  var progressBar = document.getElementById("progressBar");
+  var toTop = document.getElementById("toTop");
+
+  var onScrollFrame = function () {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var y = window.scrollY || doc.scrollTop;
+
+    if (progressBar) {
+      var ratio = max > 0 ? Math.min(y / max, 1) : 0;
+      progressBar.style.width = (ratio * 100).toFixed(2) + "%";
+    }
+    if (toTop) toTop.classList.toggle("is-visible", y > 480);
+  };
+
+  var ticking = false;
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      onScrollFrame();
+      ticking = false;
+    });
+  }, { passive: true });
+  window.addEventListener("resize", onScrollFrame, { passive: true });
+  onScrollFrame();
+
+  if (toTop) {
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }
+
+  /* ---------- Copy email ---------- */
+  var copyBtn = document.getElementById("copyEmail");
+  var copyStatus = document.getElementById("copyStatus");
+
+  if (copyBtn) {
+    var legacyCopy = function (text) {
+      var field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "absolute";
+      field.style.left = "-9999px";
+      document.body.appendChild(field);
+      field.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(field);
+      return ok;
+    };
+
+    copyBtn.addEventListener("click", function () {
+      var email = copyBtn.getAttribute("data-email");
+      var label = copyBtn.querySelector(".copy-btn-text");
+
+      var succeed = function () {
+        copyBtn.classList.add("is-copied");
+        if (label) label.textContent = "Copied";
+        if (copyStatus) {
+          copyStatus.textContent = "Email copied to clipboard";
+          copyStatus.classList.add("is-visible");
+        }
+        window.setTimeout(function () {
+          copyBtn.classList.remove("is-copied");
+          if (label) label.textContent = "Copy";
+          if (copyStatus) copyStatus.classList.remove("is-visible");
+        }, 2200);
+      };
+
+      var fail = function () {
+        if (copyStatus) {
+          copyStatus.textContent = "Press Ctrl/Cmd + C to copy";
+          copyStatus.classList.add("is-visible");
+          window.setTimeout(function () {
+            copyStatus.classList.remove("is-visible");
+          }, 2600);
+        }
+      };
+
+      var afterLegacy = function () {
+        if (legacyCopy(email)) { succeed(); } else { fail(); }
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(succeed, afterLegacy);
+      } else {
+        afterLegacy();
+      }
+    });
+  }
+
   /* ---------- Active section highlighting ---------- */
   var navLinks = Array.prototype.slice.call(
     document.querySelectorAll('#primary-nav a[href^="#"]')
