@@ -66,9 +66,31 @@
       } catch (e) {}
     })();
   </script>
+
+  <!-- Mark a first visit before paint so the intro plays once per session.
+       main.js removes the class once the entrance finishes. -->
+  <script>
+    (function () {
+      var first = true;
+      try {
+        first = !sessionStorage.getItem("introSeen");
+        sessionStorage.setItem("introSeen", "1");
+      } catch (e) {}
+      if (!first) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      document.documentElement.classList.add("has-intro");
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="page-curtain" aria-hidden="true">
+    <div class="curtain-mark">
+      <img src="assets/img/brand-102.jpg" width="102" height="102" alt="" />
+      <span>Shawon Haque</span>
+    </div>
+  </div>
 
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>

@@ -22,6 +22,7 @@
   --step-3: clamp(2.2rem, 6vw, 3.6rem);
 
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --shadow-sm: 0 1px 2px rgba(6, 10, 25, 0.06);
   --shadow-md: 0 12px 32px -12px rgba(6, 10, 25, 0.28);
   --shadow-lg: 0 30px 70px -30px rgba(6, 10, 25, 0.45);
@@ -727,12 +728,95 @@ html[data-theme="light"] .icon-moon { display: none; }
 .footer-nav a:hover { color: var(--accent); }
 .footer-meta { color: var(--muted); font-size: 0.84rem; width: 100%; }
 
-/* ---------- Reveal on scroll ---------- */
-.reveal { opacity: 0; transform: translateY(16px); }
+/* ---------- Motion: intro curtain, hero entrance, scroll reveal ---------- */
+
+/* A branded panel that lifts away on the first visit of a session.
+   It only becomes visible when the pre-paint script added .has-intro, and
+   main.js removes that class once the whole entrance has finished, so it
+   can never trap the page. */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  background: var(--bg);
+}
+html.has-intro .page-curtain {
+  opacity: 1;
+  visibility: visible;
+  animation: curtain-lift 0.7s var(--ease-out) 0.55s forwards;
+}
+
+.curtain-mark {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  opacity: 0;
+}
+html.has-intro .curtain-mark { animation: mark-in 0.45s var(--ease-out) 0.05s forwards; }
+.curtain-mark img {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: center 22%;
+  box-shadow: var(--shadow-md);
+}
+.curtain-mark span {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@keyframes curtain-lift {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-16px); visibility: hidden; }
+}
+@keyframes mark-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Hero entrance: the copy blocks and the portrait rise in sequence after the
+   curtain lifts. Applied only when .has-intro is present, so a normal reload
+   shows the hero immediately with no flash. */
+html.has-intro .hero-copy > .eyebrow,
+html.has-intro .hero-copy > h1,
+html.has-intro .hero-copy > .hero-lede,
+html.has-intro .hero-copy > .hero-sub,
+html.has-intro .hero-copy > .cta-row,
+html.has-intro .hero-copy > .hero-stack,
+html.has-intro .hero-visual {
+  animation: rise-in 0.75s var(--ease-out) both;
+}
+html.has-intro .hero-copy > .eyebrow    { animation-delay: 0.62s; }
+html.has-intro .hero-copy > h1          { animation-delay: 0.68s; }
+html.has-intro .hero-copy > .hero-lede  { animation-delay: 0.74s; }
+html.has-intro .hero-copy > .hero-sub   { animation-delay: 0.80s; }
+html.has-intro .hero-copy > .cta-row    { animation-delay: 0.86s; }
+html.has-intro .hero-copy > .hero-stack { animation-delay: 0.92s; }
+html.has-intro .hero-visual             { animation-delay: 0.70s; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Scroll reveal: a gentle lift with a long, decelerating curve so it settles
+   rather than snapping. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
 }
 
 /* ---------- Responsive ---------- */
@@ -785,11 +869,12 @@ html[data-theme="light"] .icon-moon { display: none; }
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .page-curtain { display: none; }
 }
 
 @media print {
   .site-header, .bg-glow, .cta-row, .theme-toggle, .nav-toggle, .site-footer,
-  .progress, .to-top, .copy-btn, .copy-status { display: none; }
+  .progress, .to-top, .copy-btn, .copy-status, .page-curtain { display: none; }
   body { color: #000; background: #fff; }
   .section { border: 0; padding: 12px 0; }
   a { color: #000; }

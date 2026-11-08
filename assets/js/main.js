@@ -226,12 +226,61 @@
         entry.target.classList.add("is-visible");
         obs.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.1 });
 
     Array.prototype.forEach.call(revealTargets, function (el, index) {
       el.classList.add("reveal");
-      el.style.transitionDelay = Math.min(index % 4, 3) * 60 + "ms";
+      /* Stagger within each row of cards, then reset, so long grids do not
+         accumulate an ever-growing delay. */
+      el.style.transitionDelay = (index % 3) * 70 + "ms";
       revealObserver.observe(el);
+    });
+  }
+
+  /* ---------- Intro curtain ---------- */
+  /* The pre-paint script adds .has-intro on the first visit of a session.
+     Everything animated by that class ends in its natural state, so clearing
+     it is safe — but it must happen only after the last animation finishes,
+     or the hero entrance would be cut off part way. .hero-stack carries the
+     longest delay, so its animationend is the signal. A fallback timer runs
+     in case that event never fires. */
+  if (root.classList.contains("has-intro")) {
+    var introTimer = null;
+    var lastHero = document.querySelector(".hero-stack");
+
+    var clearIntro = function () {
+      if (!root.classList.contains("has-intro")) return;
+      root.classList.remove("has-intro");
+      if (introTimer) window.clearTimeout(introTimer);
+      if (lastHero) lastHero.removeEventListener("animationend", clearIntro);
+    };
+
+    if (lastHero) lastHero.addEventListener("animationend", clearIntro);
+    introTimer = window.setTimeout(clearIntro, 2200);
+  }
+
+  /* ---------- Same-page view transitions ---------- */
+  /* Soft cross-fade when a nav link jumps to a section, where the browser
+     supports it. Everything degrades to an instant jump otherwise. */
+  if (!reduceMotion && typeof document.startViewTransition === "function") {
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+      if (event.defaultPrevented || event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (link.target && link.target !== "_self") return;
+
+      var hash = link.getAttribute("href");
+      if (hash === "#" || hash === "#top") return;
+
+      var target = document.getElementById(hash.slice(1));
+      if (!target) return;
+
+      event.preventDefault();
+      document.startViewTransition(function () {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+        if (history.replaceState) history.replaceState(null, "", hash);
+      });
     });
   }
 })();
