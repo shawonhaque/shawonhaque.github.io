@@ -9,6 +9,41 @@
   var root = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- Smooth wheel scrolling ---------- */
+  /* Lenis eases the wheel by animating the real scroll position rather than
+     transforming a wrapper. The scrollbar, sticky header, progress bar and
+     the reveal observer therefore all keep reading the same window.scrollY,
+     so nothing else on the page has to change. It is skipped when the
+     visitor prefers reduced motion, and the page scrolls normally if the
+     library failed to load. */
+  var lenis = null;
+  var HEADER_OFFSET = 88;
+
+  if (!reduceMotion && typeof window.Lenis === "function") {
+    lenis = new window.Lenis({
+      duration: 1.05,
+      easing: function (t) { return 1 - Math.pow(1 - t, 3); },
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.4,
+      autoRaf: true
+    });
+    /* Lenis only adds its own class while a scroll is animating, so mark the
+       document for the whole session. This keeps `scroll-behavior: smooth`
+       off for as long as Lenis is driving the scroll position, which is what
+       stops the two animators fighting. */
+    root.classList.add("has-lenis");
+  }
+
+  /* ---------- Parallax ---------- */
+  /* A small counter-movement between the background glow and the hero
+     portrait. Both are driven from the existing scroll rAF loop. */
+  var parallaxGlow = document.querySelector(".bg-glow");
+  var parallaxVisual = document.querySelector(".hero-visual");
+  var parallaxOn = !reduceMotion && !!(parallaxGlow || parallaxVisual);
+
+  var scrollCue = document.querySelector(".scroll-cue");
+
   /* ---------- Theme ---------- */
   var themeToggle = document.getElementById("themeToggle");
 
@@ -82,9 +117,24 @@
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* ---------- Scroll progress + back to top ---------- */
+  /* ---------- Scroll progress + parallax + back to top ---------- */
   var progressBar = document.getElementById("progressBar");
   var toTop = document.getElementById("toTop");
+
+  /* One place that performs a scroll, so smooth and non-smooth paths agree.
+     With Lenis active the jump is eased; otherwise it falls back to the
+     browser's own behaviour. */
+  var scrollToTarget = function (target, immediate) {
+    var top = 0;
+    if (typeof target === "number") {
+      top = target;
+    } else if (target && target.getBoundingClientRect) {
+      top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    }
+    if (top < 0) top = 0;
+    if (lenis) lenis.scrollTo(top, immediate ? { immediate: true } : undefined);
+    else window.scrollTo({ top: top, behavior: (immediate || reduceMotion) ? "auto" : "smooth" });
+  };
 
   var onScrollFrame = function () {
     var doc = document.documentElement;
@@ -96,6 +146,15 @@
       progressBar.style.width = (ratio * 100).toFixed(2) + "%";
     }
     if (toTop) toTop.classList.toggle("is-visible", y > 480);
+    if (scrollCue) scrollCue.classList.toggle("is-hidden", y > 60);
+
+    if (parallaxOn) {
+      var shift = Math.min(y * 0.06, 34);
+      if (parallaxGlow) parallaxGlow.style.transform = "translate3d(0," + shift.toFixed(2) + "px,0)";
+      if (parallaxVisual && y < window.innerHeight) {
+        parallaxVisual.style.transform = "translate3d(0," + (y * 0.05).toFixed(2) + "px,0)";
+      }
+    }
   };
 
   var ticking = false;
@@ -112,7 +171,7 @@
 
   if (toTop) {
     toTop.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      scrollToTarget(0);
     });
   }
 
@@ -259,28 +318,41 @@
     introTimer = window.setTimeout(clearIntro, 2200);
   }
 
-  /* ---------- Same-page view transitions ---------- */
-  /* Soft cross-fade when a nav link jumps to a section, where the browser
-     supports it. Everything degrades to an instant jump otherwise. */
-  if (!reduceMotion && typeof document.startViewTransition === "function") {
-    document.addEventListener("click", function (event) {
-      var link = event.target.closest('a[href^="#"]');
-      if (!link) return;
-      if (event.defaultPrevented || event.button !== 0) return;
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      if (link.target && link.target !== "_self") return;
+  /* ---------- In-page anchor navigation ---------- */
+  /* One handler covers every in-page link: the header nav, the skip link, the
+     hero buttons, the scroll cue and the footer. Jumps go through
+     scrollToTarget, so the eased path and the plain path behave the same, and
+     where the browser supports View Transitions the jump is cross-faded.
+     Focus is moved to the target afterwards, which keeps the skip link and
+     keyboard navigation working the way a normal anchor jump would. */
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (link.target && link.target !== "_self") return;
 
-      var hash = link.getAttribute("href");
-      if (hash === "#" || hash === "#top") return;
+    var hash = link.getAttribute("href");
+    if (hash === "#") return;
 
-      var target = document.getElementById(hash.slice(1));
-      if (!target) return;
+    var target = hash === "#top" ? null : document.getElementById(hash.slice(1));
+    if (hash !== "#top" && !target) return;
 
-      event.preventDefault();
-      document.startViewTransition(function () {
-        target.scrollIntoView({ behavior: "auto", block: "start" });
-        if (history.replaceState) history.replaceState(null, "", hash);
-      });
-    });
-  }
+    event.preventDefault();
+
+    var go = function (immediate) {
+      scrollToTarget(target || 0, immediate);
+      if (history.replaceState) history.replaceState(null, "", hash);
+      if (target) {
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
+    };
+
+    if (!reduceMotion && typeof document.startViewTransition === "function") {
+      document.startViewTransition(function () { go(true); });
+    } else {
+      go(false);
+    }
+  });
 })();
