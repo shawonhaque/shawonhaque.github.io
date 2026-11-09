@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Shawon Haque</title>
+  <title>Shawon Haque — Full Stack Developer</title>
   <meta name="description" content="Shawon Haque is a Full Stack Developer working with HTML, CSS, JavaScript, React, Next.js and Node.js. Explore projects, technical expertise and get in touch." />
   <meta name="author" content="Shawon Haque" />
-  <meta name="theme-color" content="#06070d" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
   <link rel="canonical" href="https://shawonhaque.github.io/" />
 
   <!-- Open Graph -->
@@ -36,10 +36,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="assets/img/profile.webp" type="image/webp"
-        imagesrcset="assets/img/profile-320.webp 320w, assets/img/profile.webp 512w"
-        imagesizes="(max-width: 640px) 260px, 340px" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/cutout.webp" type="image/webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <script type="application/ld+json">
@@ -86,9 +84,7 @@
         first = !sessionStorage.getItem("introSeen");
         sessionStorage.setItem("introSeen", "1");
       } catch (e) {}
-      if (!first) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      document.documentElement.classList.add("has-intro");
+      if (first) document.documentElement.classList.add("has-intro");
     })();
   </script>
 </head>
@@ -127,7 +123,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#expertise">Expertise</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#background">Background</a></li>
+          <li><a href="#background">Experience</a></li>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -141,44 +137,46 @@
 
   <main id="main">
     <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="wrap hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">Full Stack Developer</p>
-          <h1 id="hero-title">Shawon Haque</h1>
-          <p class="hero-lede">
-            I build fast, accessible and maintainable web applications — from polished
-            interfaces in React and Next.js to the Node.js services behind them.
-          </p>
-          <p class="hero-sub">
-            Focused on clean architecture, thoughtful user experience and shipping work
-            that holds up in production.
-          </p>
+    <section class="hero panel" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <p class="availability"><span class="dot" aria-hidden="true"></span> Available for new projects</p>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn btn-ghost" href="#contact">Contact Me</a>
+        <h1 class="hero-title" id="hero-title">
+          <span class="outline">Shawon</span> <span class="solid">Haque</span>
+        </h1>
+
+        <div class="hero-bottom">
+          <div class="hero-copy">
+            <p class="hero-role">Full Stack Developer</p>
+            <p class="hero-lede">
+              I build fast, accessible and maintainable web applications — from polished
+              React and Next.js interfaces to the Node.js services behind them.
+            </p>
+            <a class="btn btn-primary" href="#contact">Let's collaborate<span aria-hidden="true"> ↗</span></a>
           </div>
 
-          <ul class="hero-stack" aria-label="Core technologies">
-            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Next.js</li><li>Node.js</li>
-          </ul>
+          <div class="hero-visual">
+            <div class="portrait">
+              <picture>
+                <source srcset="assets/img/cutout.webp" type="image/webp" />
+                <img src="assets/img/cutout.png" width="496" height="498"
+                     alt="Portrait of Shawon Haque" fetchpriority="high" decoding="async" />
+              </picture>
+            </div>
+          </div>
+
+          <div class="hero-links">
+            <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub<span aria-hidden="true"> ↗</span></a>
+            <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn<span aria-hidden="true"> ↗</span></a>
+            <a href="mailto:shawon404.141@gmail.com">Email<span aria-hidden="true"> ↗</span></a>
+          </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="portrait">
-            <picture>
-              <source srcset="assets/img/profile-320.webp 320w, assets/img/profile.webp 512w"
-                      sizes="(max-width: 640px) 260px, 340px" type="image/webp" />
-              <img src="assets/img/profile.jpg"
-                   srcset="assets/img/profile-320.jpg 320w, assets/img/profile.jpg 512w"
-                   sizes="(max-width: 640px) 260px, 340px"
-                   width="512" height="512"
-                   alt="Portrait of Shawon Haque" fetchpriority="high" decoding="async" />
-            </picture>
-          </div>
-          <p class="availability"><span class="dot" aria-hidden="true"></span> Open to opportunities &amp; collaboration</p>
-        </div>
+        <ul class="hero-stack" aria-label="Core technologies">
+          <li>HTML · CSS · JavaScript</li>
+          <li>React · Next.js</li>
+          <li>Node.js · PostgreSQL</li>
+        </ul>
       </div>
 
       <a class="scroll-cue" href="#about" aria-label="Scroll down to the about section">
@@ -192,8 +190,11 @@
     <!-- ABOUT -->
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="wrap">
-        <p class="section-label">01 — About</p>
-        <h2 id="about-title">Professional profile</h2>
+        <div class="section-head">
+          <p class="ghost" aria-hidden="true">PROFILE</p>
+          <h2 id="about-title">Professional profile</h2>
+        </div>
+
         <div class="grid-2">
           <div class="prose">
             <p>
@@ -210,9 +211,9 @@
               and treat accessibility and performance as defaults rather than afterthoughts.
             </p>
             <p>
-              I'm early in my public track record and building it deliberately. Every project
-              here is real, tested and shipped — I'd rather show a small body of honest work
-              than a long list of things that don't exist.
+              Alongside my professional role in the store department at
+              <strong>Jinnat Knitwears Ltd.</strong>, I build and ship web applications — the
+              projects below are the record of that work.
             </p>
           </div>
 
@@ -233,16 +234,18 @@
     <!-- EXPERTISE -->
     <section class="section" id="expertise" aria-labelledby="expertise-title">
       <div class="wrap">
-        <p class="section-label">02 — Expertise</p>
-        <h2 id="expertise-title">Technical expertise</h2>
-        <p class="section-lede">
-          The stack I build with, grouped by where it sits in an application.
-        </p>
+        <div class="section-head">
+          <p class="ghost" aria-hidden="true">STACK</p>
+          <h2 id="expertise-title">Technical expertise</h2>
+          <p class="section-lede">
+            The stack I build with, grouped by where it sits in an application.
+          </p>
+        </div>
 
         <div class="expertise-grid">
           <article class="card">
             <span class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="14" rx="2"/><path d="M2.5 8.5h19"/><path d="M5.5 6.2h.01M7.8 6.2h.01"/></svg>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="14" rx="2"/><path d="M2.5 8.5h19"/><path d="M5.5 6.2h.01M7.8 6.2h.01"/></svg>
             </span>
             <h3>Frontend</h3>
             <p>Interfaces that are responsive, accessible and pleasant to use.</p>
@@ -253,7 +256,7 @@
 
           <article class="card">
             <span class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 20.5 8v8L12 20.5 3.5 16V8z"/><path d="M12 12v8.5M12 12l8.5-4M12 12 3.5 8"/></svg>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 20.5 8v8L12 20.5 3.5 16V8z"/><path d="M12 12v8.5M12 12l8.5-4M12 12 3.5 8"/></svg>
             </span>
             <h3>Frameworks &amp; libraries</h3>
             <p>Component-driven application development.</p>
@@ -264,7 +267,7 @@
 
           <article class="card">
             <span class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6"/><path d="M4.5 12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3"/></svg>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6"/><path d="M4.5 12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3"/></svg>
             </span>
             <h3>Backend</h3>
             <p>Server-side logic and APIs in the JavaScript ecosystem.</p>
@@ -275,7 +278,7 @@
 
           <article class="card">
             <span class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0 6 6l-9 9a2.83 2.83 0 0 1-4-4z"/><path d="M17.5 3.5 20.5 6.5"/></svg>
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0 6 6l-9 9a2.83 2.83 0 0 1-4-4z"/><path d="M17.5 3.5 20.5 6.5"/></svg>
             </span>
             <h3>Tools &amp; workflow</h3>
             <p>The day-to-day tooling around the code.</p>
@@ -290,11 +293,13 @@
     <!-- PROJECTS -->
     <section class="section" id="projects" aria-labelledby="projects-title">
       <div class="wrap">
-        <p class="section-label">03 — Projects</p>
-        <h2 id="projects-title">Selected work</h2>
-        <p class="section-lede">
-          A short, honest list — these are real repositories you can open and review today.
-        </p>
+        <div class="section-head">
+          <p class="ghost" aria-hidden="true">PORTFOLIO</p>
+          <h2 id="projects-title">Selected work</h2>
+          <p class="section-lede">
+            A short, honest list — these are real repositories you can open and review today.
+          </p>
+        </div>
 
         <div class="projects">
           <article class="project-card">
@@ -302,12 +307,11 @@
               <picture>
                 <source srcset="assets/img/project-nexora.webp" type="image/webp" />
                 <img src="assets/img/project-nexora.jpg" width="800" height="480"
-                     loading="lazy" decoding="async"
-                     alt="" />
+                     loading="lazy" decoding="async" alt="" />
               </picture>
             </a>
             <div class="project-body">
-              <h3>NEXORA</h3>
+              <h3>NEXORA — Full Stack Knowledge Platform</h3>
               <p>
                 A full-stack knowledge platform for news, books, study resources and writing.
                 The frontend is React 18 and TypeScript on Vite with Tailwind CSS — sixteen
@@ -331,8 +335,7 @@
               <picture>
                 <source srcset="assets/img/project-portfolio.webp" type="image/webp" />
                 <img src="assets/img/project-portfolio.jpg" width="800" height="480"
-                     loading="lazy" decoding="async"
-                     alt="" />
+                     loading="lazy" decoding="async" alt="" />
               </picture>
             </a>
             <div class="project-body">
@@ -340,94 +343,91 @@
               <p>
                 This website: a responsive, accessible, single-page portfolio built with
                 semantic HTML, modern CSS and vanilla JavaScript — no framework overhead and
-                no build step. Includes a light/dark theme system, optimised responsive
-                images, complete SEO and social metadata, and automated deployment via
-                GitHub Pages.
+                no build step. It ships light and dark themes with system detection, full
+                keyboard navigation, visible focus states, reduced-motion support, complete
+                SEO and social metadata, structured data, a sitemap and a custom 404 page.
               </p>
               <ul class="tag-list">
                 <li>HTML</li><li>CSS</li><li>JavaScript</li><li>SEO</li><li>Accessibility</li>
               </ul>
               <div class="project-links">
-                <a class="link-arrow" href="https://shawonhaque.github.io/" target="_blank" rel="noopener">Live demo<span aria-hidden="true"> →</span><span class="sr-only"> (opens in a new tab)</span></a>
+                <a class="link-arrow" href="https://shawonhaque.github.io/" target="_blank" rel="noopener">Live site<span aria-hidden="true"> →</span><span class="sr-only"> (opens in a new tab)</span></a>
                 <a class="link-arrow" href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">Source code<span aria-hidden="true"> →</span><span class="sr-only"> (opens on GitHub)</span></a>
               </div>
             </div>
           </article>
         </div>
-
-        <div class="projects-more">
-          <p>
-            More work in Next.js and Node.js is in progress. Follow along on GitHub, or get
-            in touch if you'd like to collaborate.
-          </p>
-          <a class="btn btn-ghost" href="https://github.com/shawonhaque?tab=repositories" target="_blank" rel="noopener">
-            Browse repositories<span class="sr-only"> (opens on GitHub)</span>
-          </a>
-        </div>
       </div>
     </section>
 
-    <!-- BACKGROUND -->
-    <section class="section" id="background" aria-labelledby="background-title">
-      <div class="wrap">
-        <p class="section-label">04 — Background</p>
-        <h2 id="background-title">Experience &amp; activity</h2>
+    <!-- EXPERIENCE -->
+    <section class="wrap experience" id="background" aria-labelledby="background-title">
+      <div class="exp-top">
+        <h2 id="background-title">Experience</h2>
+        <p>Professional &amp; project record</p>
+      </div>
 
-        <div class="grid-2 background-grid">
-          <div>
-            <h3 class="subhead">Professional experience</h3>
-            <article class="role-card">
-              <header class="role-head">
-                <h4 class="role-title">Input Man</h4>
-                <p class="role-period">Jan 2025 — Present</p>
-              </header>
-              <p class="role-company">Jinnat Knitwears Ltd. — DBL Group</p>
-              <ul class="role-meta">
-                <li><span>Department</span> Store</li>
-                <li><span>Unit</span> JKL — Embroidery</li>
-                <li><span>Since</span> 07 Jan 2025</li>
-              </ul>
-              <ul class="role-duties">
-                <li>Data entry and record keeping in the <strong>Oracle</strong> system</li>
-                <li>Processing delivery <strong>challans</strong> and related store documents</li>
-                <li>Preparing <strong>MIS</strong> reports for the store department</li>
-              </ul>
-            </article>
-            <p class="role-note">
-              Alongside this role I design, build and ship web applications — the projects
-              above are the record of that work.
+      <article class="role-card">
+        <header class="role-head">
+          <h3>Input Man</h3>
+          <p class="role-period">Jan 2025 — Present</p>
+        </header>
+        <p class="role-company">Jinnat Knitwears Ltd. — DBL Group</p>
+        <ul class="role-meta">
+          <li><span>Department</span> Store</li>
+          <li><span>Unit</span> JKL — Embroidery</li>
+          <li><span>Since</span> 07 Jan 2025</li>
+        </ul>
+        <ul class="role-duties">
+          <li>Data entry and record keeping in the <strong>Oracle</strong> system</li>
+          <li>Processing delivery <strong>challans</strong> and related store documents</li>
+          <li>Preparing <strong>MIS</strong> reports for the store department</li>
+        </ul>
+      </article>
+
+      <p class="role-note">
+        Alongside this role I design, build and ship web applications — the projects above are
+        the record of that work.
+      </p>
+
+      <div class="exp-grid">
+        <div>
+          <h3 class="subhead">Independent development</h3>
+          <ul class="role-duties">
+            <li>Building and shipping real-world web projects end to end</li>
+            <li>Technical focus: React.js · Next.js · Node.js · REST APIs</li>
+            <li>Data &amp; workflow: PostgreSQL · Supabase · GitHub Actions · Linux</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="subhead">Education &amp; certifications</h3>
+          <div class="notice">
+            <p>
+              No certifications are listed here because none have been earned yet. This
+              section will be updated as qualifications are completed and verified.
             </p>
-
-            <h3 class="subhead">Education &amp; certifications</h3>
-            <div class="notice">
-              <p>
-                No certifications are listed here because none have been earned yet. This
-                section will be updated as qualifications are completed and verified.
-              </p>
-            </div>
           </div>
+        </div>
 
-          <div>
-            <h3 class="subhead">GitHub activity</h3>
-            <div class="card activity-card">
-              <div class="activity-head">
-                <a class="activity-user" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
-                  <img src="assets/img/avatar-60.png" width="60" height="60" loading="lazy" decoding="async" alt="" />
-                  <span>@shawonhaque</span>
-                </a>
-                <p>Contribution calendar</p>
-              </div>
-              <img class="activity-chart"
-                   src="https://ghchart.rshah.org/4f8cff/shawonhaque"
-                   width="1200" height="128" loading="lazy" decoding="async"
-                   alt="Shawon Haque's GitHub contribution calendar" />
-              <p class="activity-note">
-                This account is new, so contributions are just starting to accumulate. Live,
-                verified activity is always visible on
-                <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>.
-              </p>
-            </div>
+        <div>
+          <h3 class="subhead">GitHub activity</h3>
+          <div class="activity-head">
+            <a class="activity-user" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
+              <img src="assets/img/avatar-60.png" width="60" height="60" loading="lazy" decoding="async" alt="" />
+              <span>@shawonhaque</span>
+            </a>
+            <p>Contribution calendar</p>
           </div>
+          <img class="activity-chart"
+               src="https://ghchart.rshah.org/4f8cff/shawonhaque"
+               width="1200" height="128" loading="lazy" decoding="async"
+               alt="Shawon Haque's GitHub contribution calendar" />
+          <p class="activity-note">
+            This account is new, so contributions are just starting to accumulate. Live,
+            verified activity is always visible on
+            <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>.
+          </p>
         </div>
       </div>
     </section>
@@ -435,16 +435,18 @@
     <!-- RESUME -->
     <section class="section" id="resume" aria-labelledby="resume-title">
       <div class="wrap">
-        <p class="section-label">05 — Resume</p>
-        <h2 id="resume-title">Resume</h2>
-        <p class="section-lede">
-          A concise, one-page overview of my stack and the projects I have shipped.
-          View it in the browser or download it as a PDF.
-        </p>
+        <div class="section-head">
+          <p class="ghost" aria-hidden="true">RESUME</p>
+          <h2 id="resume-title">Resume</h2>
+          <p class="section-lede">
+            A concise, one-page overview of my stack, experience and the projects I have
+            shipped. View it in the browser or download it as a PDF.
+          </p>
+        </div>
 
         <div class="resume-card">
           <span class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
           </span>
           <div class="resume-info">
             <h3>Shawon Haque — Full Stack Developer</h3>
@@ -452,11 +454,11 @@
           </div>
           <div class="resume-actions">
             <a class="btn btn-primary" href="assets/resume/Shawon-Haque-Resume.pdf" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
               View resume
             </a>
-            <a class="btn btn-ghost" href="assets/resume/Shawon-Haque-Resume.pdf" download="Shawon-Haque-Resume.pdf">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <a class="btn" href="assets/resume/Shawon-Haque-Resume.pdf" download="Shawon-Haque-Resume.pdf">
+              <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
               Download PDF
             </a>
           </div>
@@ -467,38 +469,82 @@
     <!-- CONTACT -->
     <section class="section" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
-        <p class="section-label">06 — Contact</p>
-        <h2 id="contact-title">Let's build something</h2>
-        <p class="section-lede">
-          I'm open to full-time roles, freelance work and collaboration. The fastest way
-          to reach me is email — I'll always reply.
-        </p>
+        <div class="contact-panel">
+          <p class="availability"><span class="dot" aria-hidden="true"></span> Available for new projects</p>
+          <h2 id="contact-title">Have a project in mind?</h2>
+          <p>
+            I'm open to full-time roles, freelance work and collaboration. The fastest way to
+            reach me is email — I'll always reply.
+          </p>
 
-        <div class="contact-grid">
-          <div class="contact-card contact-card--email">
-            <span class="contact-label">Email</span>
-            <a class="contact-value" href="mailto:shawon404.141@gmail.com">shawon404.141@gmail.com</a>
-            <button class="copy-btn" id="copyEmail" type="button" data-email="shawon404.141@gmail.com">
-              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg>
-              <span class="copy-btn-text">Copy</span>
-            </button>
-            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+          <form class="contact-form" id="contactForm" novalidate>
+            <label for="visitorName">Your name</label>
+            <input id="visitorName" name="name" type="text" autocomplete="name" required />
+
+            <label for="visitorEmail">Your email</label>
+            <input id="visitorEmail" name="email" type="email" autocomplete="email" required />
+
+            <label for="projectDetails">Project details</label>
+            <textarea id="projectDetails" name="message" required></textarea>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Send message<span aria-hidden="true"> ↗</span></button>
+              <button class="btn" type="button" id="copyEmailForm">Copy email</button>
+            </div>
+            <p class="form-note" id="formNote" role="status" aria-live="polite">
+              Fill in all fields with a valid email address.
+            </p>
+          </form>
+
+          <ul class="contact-social">
+            <li>
+              <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.1 3.53 1.5.1-.72.4-1.21.72-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.61 5.23-5.1 5.51.4.35.76 1.03.76 2.08V22c0 .29.2.64.77.53A11.1 11.1 0 0 0 12 .9Z"/></svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM2.4 9.5h5.16V21H2.4V9.5Zm7.74 0h4.95v1.57h.07c.69-1.24 2.37-2.55 4.88-2.55 5.22 0 6.18 3.28 6.18 7.55V21h-5.16v-5.2c0-1.24-.02-2.84-1.78-2.84-1.79 0-2.06 1.35-2.06 2.75V21H10.1V9.5Z"/></svg>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="mailto:shawon404.141@gmail.com">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13Zm2 .1v.5l8 5.4 8-5.4v-.5H4Zm16 2.9-7.4 5a1.1 1.1 0 0 1-1.2 0L4 8.5v10h16v-10Z"/></svg>
+                Gmail
+              </a>
+            </li>
+          </ul>
+
+          <div class="contact-grid">
+            <div class="contact-card contact-card--email">
+              <span class="contact-label">Email</span>
+              <a class="contact-value" href="mailto:shawon404.141@gmail.com">shawon404.141@gmail.com</a>
+              <button class="copy-btn" id="copyEmail" type="button" data-email="shawon404.141@gmail.com">
+                <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg>
+                <span class="copy-btn-text">Copy</span>
+              </button>
+              <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+            </div>
+
+            <a class="contact-card" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-value">github.com/shawonhaque</span>
+            </a>
+
+            <a class="contact-card" href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-value">linkedin.com/in/shawon-haque</span>
+            </a>
           </div>
-          <a class="contact-card" href="https://github.com/shawonhaque" target="_blank" rel="noopener">
-            <span class="contact-label">GitHub</span>
-            <span class="contact-value">github.com/shawonhaque</span>
-          </a>
-          <a class="contact-card" href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">linkedin.com/in/shawon-haque</span>
-          </a>
         </div>
       </div>
     </section>
   </main>
 
   <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5.5 11.5 6.5-6.5 6.5 6.5"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
   </button>
 
   <footer class="site-footer">
@@ -518,5 +564,59 @@
 
   <script src="assets/js/vendor/lenis.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <script defer>
+    (function () {
+      "use strict";
+      var form = document.getElementById("contactForm");
+      var note = document.getElementById("formNote");
+
+      var setNote = function (message, state) {
+        if (!note) return;
+        note.textContent = message;
+        note.classList.remove("is-error", "is-ok");
+        if (state) note.classList.add(state);
+      };
+
+      if (form) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var name = (document.getElementById("visitorName").value || "").trim();
+          var email = (document.getElementById("visitorEmail").value || "").trim();
+          var details = (document.getElementById("projectDetails").value || "").trim();
+
+          if (!name || !email || !details) {
+            setNote("Please complete every field before sending.", "is-error");
+            return;
+          }
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setNote("That email address doesn't look right.", "is-error");
+            return;
+          }
+
+          var subject = encodeURIComponent("Portfolio enquiry from " + name);
+          var body = encodeURIComponent(
+            "Name: " + name + "\nEmail: " + email + "\n\nProject details:\n" + details
+          );
+          setNote("Opening your email client…", "is-ok");
+          window.location.href = "mailto:shawon404.141@gmail.com?subject=" + subject + "&body=" + body;
+        });
+      }
+
+      var copyForm = document.getElementById("copyEmailForm");
+      if (copyForm) {
+        copyForm.addEventListener("click", function () {
+          var email = "shawon404.141@gmail.com";
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(
+              function () { setNote("Email address copied.", "is-ok"); },
+              function () { setNote("Email: " + email, null); }
+            );
+          } else {
+            setNote("Email: " + email, null);
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
