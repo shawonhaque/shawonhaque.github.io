@@ -20,6 +20,7 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 - Performance: system font fallbacks, `font-display: swap`, preloaded hero image,
   WebP with JPEG fallback, lazy loading below the fold
 - Resume: one-page PDF, viewable in the browser or downloadable from the Resume section
+- Contact form that composes a prefilled email, plus one-click address copy
 - Custom 404 page
 
 ## Structure
@@ -38,10 +39,18 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
     ├── js/vendor/        # Third-party scripts, committed as-is
     │   └── lenis.min.js  # Smooth wheel scrolling (MIT, v1.3.27)
     ├── img/              # Optimised images, icons, social card
+    │   └── cutout.*      # Hero portrait, alpha cut-out (WebP + PNG)
     └── resume/
         ├── resume.html   # Source for the PDF (print stylesheet)
         └── Shawon-Haque-Resume.pdf
 ```
+
+## Design
+
+An editorial layout: a greige canvas behind white panels, near-black type set in
+Inter, and a single restrained accent. The hero pairs a large outlined name with an
+alpha cut-out portrait, and the experience block inverts to near-black for contrast.
+Light and dark themes both run off the same token set.
 
 ## Editing the resume
 
