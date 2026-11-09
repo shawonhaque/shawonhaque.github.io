@@ -39,7 +39,7 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
     ├── js/vendor/        # Third-party scripts, committed as-is
     │   └── lenis.min.js  # Smooth wheel scrolling (MIT, v1.3.27)
     ├── img/              # Optimised images, icons, social card
-    │   └── cutout.*      # Hero portrait, alpha cut-out (WebP + PNG)
+    │   └── portrait-new.*  # Hero portrait, alpha cut-out (WebP + PNG)
     └── resume/
         ├── resume.html   # Source for the PDF (print stylesheet)
         └── Shawon-Haque-Resume.pdf
