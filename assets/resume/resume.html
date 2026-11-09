@@ -20,51 +20,59 @@
   h1, h2, h3 { margin: 0; }
   p { margin: 0 0 5pt; }
   ul { margin: 0; padding-left: 12pt; }
-  li { margin-bottom: 2pt; }
+  li { margin-bottom: 2.5pt; }
+  li::marker { color: #1a4fd6; }
 
   /* ---------- Header ---------- */
   header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 10pt;
-    padding-bottom: 6pt;
+    gap: 12pt;
+    padding-bottom: 7pt;
     border-bottom: 2px solid #1a1d24;
   }
   .header-text { min-width: 0; }
-  h1 { font-size: 20.5pt; line-height: 1.1; letter-spacing: -0.02em; }
-  .role { margin-top: 2pt; font-size: 11pt; font-weight: 600; color: #1a4fd6; }
-  .contact { margin-top: 6pt; font-size: 9.2pt; line-height: 1.65; color: #3a3f4a; }
+  h1 { font-size: 21pt; line-height: 1.05; letter-spacing: -0.025em; }
+  .role { margin-top: 3pt; font-size: 11pt; font-weight: 600; color: #1a4fd6; }
+  .contact { margin-top: 7pt; font-size: 9.2pt; line-height: 1.7; color: #3a3f4a; }
   .contact span { white-space: nowrap; }
-  .contact .sep { padding: 0 4pt; color: #b6bcc8; }
+  .contact .sep { padding: 0 4pt; color: #c2c7d1; }
   .photo {
     flex: none;
-    width: 24mm;
+    width: 25mm;
     height: auto;
+    border-radius: 3pt;
     border: 1px solid #d5d9e2;
-    border-radius: 2pt;
   }
 
   /* ---------- Sections ---------- */
-  section { margin-top: 6.5pt; }
+  section { margin-top: 7pt; }
   h2 {
+    display: flex;
+    align-items: center;
+    gap: 6pt;
     font-size: 9.4pt;
     text-transform: uppercase;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.1em;
     color: #1a4fd6;
-    border-bottom: 1px solid #d5d9e2;
-    padding-bottom: 2.5pt;
-    margin-bottom: 6pt;
+    margin-bottom: 6.5pt;
+  }
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #d5d9e2;
   }
 
   .skills { display: grid; grid-template-columns: 33% 1fr; gap: 2.5pt 10pt; margin: 0; }
   .skills dt { font-weight: 600; }
   .skills dd { margin: 0; color: #3a3f4a; }
 
-  .entry { margin-bottom: 7pt; }
+  .entry { margin-bottom: 7.5pt; page-break-inside: avoid; break-inside: avoid; }
   .entry:last-child { margin-bottom: 0; }
   .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
-  .entry-head h3 { font-size: 10.5pt; }
+  .entry-head h3 { font-size: 10.6pt; letter-spacing: -0.01em; }
   .entry-meta { font-size: 8.8pt; color: #5b6270; white-space: nowrap; }
   .stack { margin-top: 1pt; font-size: 8.8pt; color: #5b6270; }
   .entry p { margin: 3pt 0 0; }
