@@ -41,7 +41,8 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
     ├── img/              # Optimised images, icons, social card
     │   └── portrait-new.*  # Hero portrait, alpha cut-out (WebP + PNG)
     └── resume/
-        ├── resume.html   # Source for the PDF (print stylesheet)
+        ├── resume.html       # Source for the PDF (print stylesheet)
+        ├── shawon-haque.jpg  # Headshot used in the resume header
         └── Shawon-Haque-Resume.pdf
 ```
 
@@ -61,6 +62,9 @@ chromium --headless --no-pdf-header-footer \
   --print-to-pdf=assets/resume/Shawon-Haque-Resume.pdf \
   file://$PWD/assets/resume/resume.html
 ```
+
+`shawon-haque.jpg` sits next to the source, so the `file://` path above resolves it
+without a server. The PDF is a single A4 page; check the page count after editing.
 
 ## Local preview
 
