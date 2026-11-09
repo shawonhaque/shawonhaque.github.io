@@ -237,24 +237,26 @@
     });
   }
 
-  /* ---------- Intro curtain ---------- */
-  /* The pre-paint script adds .has-intro on the first visit of a session.
-     Everything animated by that class ends in its natural state, so clearing
-     it is safe — but it must happen only after the last animation finishes,
-     or the hero entrance would be cut off part way. .hero-stack carries the
-     longest delay, so its animationend is the signal. A fallback timer runs
-     in case that event never fires. */
-  if (root.classList.contains("has-intro")) {
-    var introTimer = null;
-    var lastHero = document.querySelector(".hero-stack");
+  /* ---------- Intro curtain and hero entrance ---------- */
+  /* The pre-paint script adds .has-intro for the curtain (first visit of a
+     session) and .has-entrance for the hero entrance (every load). Both end in
+     the elements' natural state, so clearing them is safe — but only once the
+     last animation finishes, or the entrance would be cut off part way.
+     .hero-stack carries the longest delay, so its animationend is the signal.
+     A fallback timer runs in case that event never fires. */
+  var introTimer = null;
+  var lastHero = document.querySelector(".hero-stack");
+  var entranceClasses = ["has-intro", "has-entrance"];
 
-    var clearIntro = function () {
-      if (!root.classList.contains("has-intro")) return;
-      root.classList.remove("has-intro");
-      if (introTimer) window.clearTimeout(introTimer);
-      if (lastHero) lastHero.removeEventListener("animationend", clearIntro);
-    };
+  var clearIntro = function () {
+    var pending = entranceClasses.some(function (name) { return root.classList.contains(name); });
+    if (!pending) return;
+    entranceClasses.forEach(function (name) { root.classList.remove(name); });
+    if (introTimer) window.clearTimeout(introTimer);
+    if (lastHero) lastHero.removeEventListener("animationend", clearIntro);
+  };
 
+  if (entranceClasses.some(function (name) { return root.classList.contains(name); })) {
     if (lastHero) lastHero.addEventListener("animationend", clearIntro);
     introTimer = window.setTimeout(clearIntro, 2200);
   }
