@@ -42,10 +42,10 @@ html[data-theme="light"] {
   --accent: #1f4fd8;
   --accent-soft: rgba(31, 79, 216, 0.09);
   --on-accent: #ffffff;
-  --block: #242424;
-  --on-block: #f5f5f5;
-  --on-block-muted: #b6b6b6;
-  --on-block-line: #4a4a4a;
+  --block: #f2f2f0;
+  --on-block: #0b0b0b;
+  --on-block-muted: #5d5d5d;
+  --on-block-line: #d6d6d6;
   --glow: rgba(255, 255, 255, 0.95);
   --progress: #171717;
 }
@@ -63,7 +63,7 @@ html[data-theme="dark"] {
   --accent: #82a6ff;
   --accent-soft: rgba(130, 166, 255, 0.14);
   --on-accent: #0b1220;
-  --block: #0f0f0f;
+  --block: #242424;
   --on-block: #f5f5f5;
   --on-block-muted: #adadad;
   --on-block-line: #3d3d3d;
@@ -702,7 +702,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .experience {
   background: var(--block);
   color: var(--on-block);
-  border: 5px solid var(--paper);
+  border: 1px solid var(--on-block-line);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   padding: clamp(32px, 5vw, 56px) 5.2%;
@@ -786,7 +786,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   border: 1px solid var(--on-block-line);
   border-left: 3px solid #20c56a;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--paper);
 }
 .notice p { color: var(--on-block-muted); font-size: 0.9rem; }
 
@@ -811,7 +811,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   padding: 8px;
   border: 1px solid var(--on-block-line);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.05);
+  /* The widget is a light-mode SVG: #EEEEEE cells and #767676 labels. On a dark
+     plate those labels fall to 3.8:1, so the chart keeps its own light plate. */
+  background: #ffffff;
 }
 .activity-note { margin-top: 14px; font-size: var(--step--1); color: var(--on-block-muted); }
 .activity-note a { color: #20c56a; }
@@ -866,40 +868,6 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 }
 .contact-panel h2 { margin: 22px 0 12px; }
 .contact-panel > p { color: var(--muted); max-width: 54ch; margin-inline: auto; font-size: var(--step-1); }
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 34px;
-  text-align: left;
-}
-.contact-card {
-  display: grid;
-  gap: 4px;
-  padding: 20px 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--panel);
-  color: var(--ink);
-  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
-}
-.contact-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-md); text-decoration: none; }
-.contact-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.contact-value {
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  font-weight: 600;
-  color: var(--heading);
-  word-break: break-word;
-}
 
 /* ---------- Contact form ---------- */
 .contact-form {
@@ -1144,5 +1112,5 @@ html.has-intro .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
 @media print {
   .site-header, .progress, .to-top, .scroll-cue, .page-curtain, .bg-glow, .hero-links, .contact-form { display: none !important; }
   body { background: #fff; }
-  .experience { background: #fff; color: #000; border-color: #000; }
+  .experience { background: #fff; color: #000; border-color: #ccc; }
 }
