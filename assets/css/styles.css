@@ -193,6 +193,17 @@ strong { color: var(--heading); font-weight: 600; }
   transition: width 0.08s linear;
 }
 
+/* On a reload the curtain is skipped, so the entrance would otherwise open on
+   a blank beat. Pulling the delays in keeps the same stagger without the wait. */
+html.has-entrance:not(.has-intro) .hero .availability { animation-delay: 0.05s; }
+html.has-entrance:not(.has-intro) .hero-title { animation-delay: 0.1s; }
+html.has-entrance:not(.has-intro) .hero-title .outline { animation-delay: 0.18s; }
+html.has-entrance:not(.has-intro) .hero-title .solid { animation-delay: 0.3s; }
+html.has-entrance:not(.has-intro) .hero-visual { animation-delay: 0.25s; }
+html.has-entrance:not(.has-intro) .hero-copy { animation-delay: 0.4s; }
+html.has-entrance:not(.has-intro) .hero-links { animation-delay: 0.5s; }
+html.has-entrance:not(.has-intro) .hero-stack { animation-delay: 0.6s; }
+
 /* ---------- Intro curtain ---------- */
 .page-curtain {
   position: fixed;
@@ -421,7 +432,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   justify-content: center;
   align-items: flex-end;
   height: 372px;
-  margin: 14px 0 0;
+  /* The portrait drifts up to 18px above this box, so leave headroom under the
+     title rather than letting the peak crowd it. */
+  margin: 30px 0 0;
 }
 .portrait { display: flex; align-items: flex-end; height: 100%; }
 .portrait img {
@@ -1017,14 +1030,14 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-html.has-intro .hero .availability { animation: fadeUp 0.7s 0.15s var(--ease) both; }
-html.has-intro .hero-title { animation: titleReveal 0.95s 0.25s var(--ease) both; }
-html.has-intro .hero-title .outline { display: inline-block; animation: letterSlide 0.9s 0.35s var(--ease) both; }
-html.has-intro .hero-title .solid { display: inline-block; animation: letterSlide 0.9s 0.5s var(--ease) both; }
-html.has-intro .hero-copy { animation: fadeUp 0.8s 0.6s var(--ease) both; }
-html.has-intro .hero-visual { animation: portraitEnter 1s 0.45s var(--ease) both; }
-html.has-intro .hero-links { animation: fadeUp 0.8s 0.8s var(--ease) both; }
-html.has-intro .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
+html.has-entrance .hero .availability { animation: fadeUp 0.7s 0.15s var(--ease) both; }
+html.has-entrance .hero-title { animation: titleReveal 0.95s 0.25s var(--ease) both; }
+html.has-entrance .hero-title .outline { display: inline-block; animation: letterSlide 0.9s 0.35s var(--ease) both; }
+html.has-entrance .hero-title .solid { display: inline-block; animation: letterSlide 0.9s 0.5s var(--ease) both; }
+html.has-entrance .hero-copy { animation: fadeUp 0.8s 0.6s var(--ease) both; }
+html.has-entrance .hero-visual { animation: portraitEnter 1s 0.45s var(--ease) both; }
+html.has-entrance .hero-links { animation: fadeUp 0.8s 0.8s var(--ease) both; }
+html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
 
 @keyframes titleReveal {
   from { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(22px); }
@@ -1041,11 +1054,11 @@ html.has-intro .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
 
 /* The portrait keeps drifting after the entrance finishes. The entrance runs on
    .hero-visual and this runs on the image inside it, so the two never fight. */
-.portrait img { animation: portraitFloat 7s 1.6s ease-in-out infinite; }
+.portrait img { animation: portraitFloat 7.5s 1.6s ease-in-out infinite; }
 @keyframes portraitFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  35%      { transform: translateY(-11px) rotate(-0.6deg); }
-  70%      { transform: translateY(-4px) rotate(0.5deg); }
+  35%      { transform: translateY(-16px) rotate(-0.9deg); }
+  70%      { transform: translateY(-6px) rotate(0.7deg); }
 }
 
 /* ---------- Responsive ---------- */
@@ -1086,7 +1099,7 @@ html.has-intro .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
   .hero-title { white-space: normal; margin: 30px 0 0; line-height: 0.9; }
   .hero-actions { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-bottom: 26px; }
   .hero-copy { max-width: 100%; }
-  .hero-visual { height: 250px; }
+  .hero-visual { height: 250px; margin-top: 32px; }
   .portrait img { max-height: 250px; }
   .hero-links { justify-content: flex-start; gap: 7px; }
   .hero-links a { min-width: 0; padding: 8px 13px; }
@@ -1096,7 +1109,7 @@ html.has-intro .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
 }
 
 @media (max-width: 560px) {
-  .hero-visual { height: 215px; }
+  .hero-visual { height: 215px; margin-top: 30px; }
   .portrait img { max-height: 215px; }
   .hero-actions { gap: 16px; padding-bottom: 20px; }
   .projects { grid-template-columns: 1fr; gap: 18px; }

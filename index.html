@@ -80,8 +80,11 @@
     })();
   </script>
 
-  <!-- Mark a first visit before paint so the intro plays once per session.
-       main.js removes the class once the entrance finishes. -->
+  <!-- Two separate flags, marked before paint:
+       has-intro    the curtain, on the first visit of a session only, so a
+                    reload does not replay it
+       has-entrance the hero entrance, on every load
+       main.js removes both once their animation finishes. -->
   <script>
     (function () {
       var first = true;
@@ -89,7 +92,9 @@
         first = !sessionStorage.getItem("introSeen");
         sessionStorage.setItem("introSeen", "1");
       } catch (e) {}
-      if (first) document.documentElement.classList.add("has-intro");
+      var root = document.documentElement;
+      if (first) root.classList.add("has-intro");
+      root.classList.add("has-entrance");
     })();
   </script>
 </head>
