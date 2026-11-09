@@ -51,8 +51,18 @@
     "image": "https://shawonhaque.github.io/assets/img/profile.jpg",
     "jobTitle": "Full Stack Developer",
     "email": "mailto:shawon404.141@gmail.com",
-    "sameAs": ["https://github.com/shawonhaque"],
-    "knowsAbout": ["HTML", "CSS", "JavaScript", "React.js", "Next.js", "Node.js"]
+    "sameAs": ["https://github.com/shawonhaque", "https://bd.linkedin.com/in/shawon-haque"],
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "React.js", "Next.js", "Node.js"],
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Input Man",
+      "occupationLocation": { "@type": "Country", "name": "Bangladesh" },
+      "description": "Store department, JKL Embroidery unit, Jinnat Knitwears Ltd. (DBL Group)."
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Jinnat Knitwears Ltd. (DBL Group)"
+    }
   }
   </script>
 
@@ -366,14 +376,22 @@
         <div class="grid-2 background-grid">
           <div>
             <h3 class="subhead">Professional experience</h3>
-            <div class="notice">
-              <p>
-                I'm currently building my professional track record and have no formal
-                employment history to list yet. Rather than fill this space with anything
-                unverified, I'm keeping it honest — the projects above are the record of
-                my work so far.
-              </p>
-            </div>
+            <article class="role-card">
+              <header class="role-head">
+                <h4 class="role-title">Input Man</h4>
+                <p class="role-period">Jan 2025 — Present</p>
+              </header>
+              <p class="role-company">Jinnat Knitwears Ltd. — DBL Group</p>
+              <ul class="role-meta">
+                <li><span>Department</span> Store</li>
+                <li><span>Unit</span> JKL — Embroidery</li>
+                <li><span>Since</span> 07 Jan 2025</li>
+              </ul>
+            </article>
+            <p class="role-note">
+              Alongside this role I design, build and ship web applications — the projects
+              above are the record of that work.
+            </p>
 
             <h3 class="subhead">Education &amp; certifications</h3>
             <div class="notice">
@@ -465,6 +483,10 @@
             <span class="contact-label">GitHub</span>
             <span class="contact-value">github.com/shawonhaque</span>
           </a>
+          <a class="contact-card" href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/shawon-haque</span>
+          </a>
         </div>
       </div>
     </section>
@@ -483,6 +505,7 @@
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
         <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
       </nav>
       <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
     </div>
