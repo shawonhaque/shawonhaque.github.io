@@ -66,6 +66,15 @@ chromium --headless --no-pdf-header-footer \
 `shawon-haque.jpg` sits next to the source, so the `file://` path above resolves it
 without a server. The PDF is a single A4 page; check the page count after editing.
 
+Keep the photo a **baseline** JPEG. Chrome embeds it in the PDF as a `DCTDecode`
+stream, and while Chrome's own viewer renders a progressive JPEG there, several other
+readers do not. Pillow only writes baseline when neither `progressive` nor `optimize`
+is set:
+
+```python
+photo.save('shawon-haque.jpg', 'JPEG', quality=92, subsampling=0)  # -> SOF0
+```
+
 ## Local preview
 
 Any static file server works:
