@@ -11,59 +11,81 @@
   body {
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 9.45pt;
+    font-size: 9.4pt;
     line-height: 1.5;
     color: #1a1d24;
   }
+
   a { color: #1a4fd6; text-decoration: none; }
   h1, h2, h3 { margin: 0; }
-  h1 { font-size: 21pt; letter-spacing: -0.02em; }
-  .role { font-size: 11pt; color: #1a4fd6; font-weight: 600; margin-top: 2pt; }
+  p { margin: 0 0 5pt; }
+  ul { margin: 0; padding-left: 12pt; }
+  li { margin-bottom: 2pt; }
 
-  header { border-bottom: 2px solid #1a1d24; padding-bottom: 6pt; }
-  .contact { margin-top: 7pt; font-size: 9.4pt; color: #3a3f4a; }
+  /* ---------- Header ---------- */
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10pt;
+    padding-bottom: 6pt;
+    border-bottom: 2px solid #1a1d24;
+  }
+  .header-text { min-width: 0; }
+  h1 { font-size: 20.5pt; line-height: 1.1; letter-spacing: -0.02em; }
+  .role { margin-top: 2pt; font-size: 11pt; font-weight: 600; color: #1a4fd6; }
+  .contact { margin-top: 6pt; font-size: 9.2pt; line-height: 1.65; color: #3a3f4a; }
   .contact span { white-space: nowrap; }
-  .contact .sep { color: #b6bcc8; padding: 0 5pt; }
+  .contact .sep { padding: 0 4pt; color: #b6bcc8; }
+  .photo {
+    flex: none;
+    width: 24mm;
+    height: auto;
+    border: 1px solid #d5d9e2;
+    border-radius: 2pt;
+  }
 
-  section { margin-top: 7pt; }
+  /* ---------- Sections ---------- */
+  section { margin-top: 6.5pt; }
   h2 {
-    font-size: 9.6pt;
+    font-size: 9.4pt;
     text-transform: uppercase;
     letter-spacing: 0.09em;
     color: #1a4fd6;
     border-bottom: 1px solid #d5d9e2;
-    padding-bottom: 3pt;
-    margin-bottom: 7pt;
+    padding-bottom: 2.5pt;
+    margin-bottom: 6pt;
   }
-  p { margin: 0 0 5pt; }
-  ul { margin: 0; padding-left: 13pt; }
-  li { margin-bottom: 2pt; }
 
-  .skills { display: grid; grid-template-columns: 32% 1fr; gap: 3pt 10pt; }
-  .skills dt { font-weight: 600; color: #1a1d24; }
+  .skills { display: grid; grid-template-columns: 33% 1fr; gap: 2.5pt 10pt; margin: 0; }
+  .skills dt { font-weight: 600; }
   .skills dd { margin: 0; color: #3a3f4a; }
 
-  .project { margin-bottom: 7pt; }
-  .project:last-child { margin-bottom: 0; }
-  .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
-  .project-head h3 { font-size: 10.6pt; }
-  .project-links { font-size: 8.8pt; color: #5b6270; white-space: nowrap; }
-  .stack { font-size: 8.8pt; color: #5b6270; margin-top: 1pt; }
-  .project p { margin: 3pt 0 0; }
+  .entry { margin-bottom: 7pt; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+  .entry-head h3 { font-size: 10.5pt; }
+  .entry-meta { font-size: 8.8pt; color: #5b6270; white-space: nowrap; }
+  .stack { margin-top: 1pt; font-size: 8.8pt; color: #5b6270; }
+  .entry p { margin: 3pt 0 0; }
+  .links { font-size: 8.8pt; color: #5b6270; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Shawon Haque</h1>
-  <p class="role">Full Stack Developer</p>
-  <p class="contact">
-    <span>shawonhaque141@outlook.com</span><span class="sep">|</span>
-    <span>+880 1318-123867</span><span class="sep">|</span>
-    <span>github.com/shawonhaque</span><span class="sep">|</span>
-    <span>shawonhaque.github.io</span><span class="sep">|</span>
-    <span>linkedin.com/in/shawon-haque</span>
-  </p>
+  <div class="header-text">
+    <h1>Shawon Haque</h1>
+    <p class="role">Full Stack Developer</p>
+    <p class="contact">
+      <span><a href="mailto:shawonhaque141@outlook.com">shawonhaque141@outlook.com</a></span><span class="sep">|</span>
+      <span><a href="tel:+8801318123867">+880 1318-123867</a></span><span class="sep">|</span>
+      <span><a href="https://github.com/shawonhaque">github.com/shawonhaque</a></span><span class="sep">|</span>
+      <span><a href="https://shawonhaque.github.io">shawonhaque.github.io</a></span><span class="sep">|</span>
+      <span><a href="https://bd.linkedin.com/in/shawon-haque">linkedin.com/in/shawon-haque</a></span>
+    </p>
+  </div>
+  <img class="photo" src="shawon-haque.jpg" width="416" height="520" alt="Shawon Haque" />
 </header>
 
 <section>
@@ -90,10 +112,10 @@
 
 <section>
   <h2>Experience</h2>
-  <div class="project">
-    <div class="project-head">
+  <div class="entry">
+    <div class="entry-head">
       <h3>Input Man — Store Department</h3>
-      <span class="project-links">Jan 2025 — Present</span>
+      <span class="entry-meta">Jan 2025 — Present</span>
     </div>
     <p class="stack">Jinnat Knitwears Ltd. (DBL Group) · JKL Embroidery Unit · Since 07 Jan 2025</p>
     <ul>
@@ -107,10 +129,10 @@
 <section>
   <h2>Selected Projects</h2>
 
-  <div class="project">
-    <div class="project-head">
+  <div class="entry">
+    <div class="entry-head">
       <h3>NEXORA — Full Stack Knowledge Platform</h3>
-      <span class="project-links">Live demo · Source on GitHub</span>
+      <span class="links">Live demo · Source on GitHub</span>
     </div>
     <p class="stack">React 18, TypeScript, Vite, Tailwind CSS, Supabase, PostgreSQL</p>
     <ul>
@@ -121,10 +143,10 @@
     </ul>
   </div>
 
-  <div class="project">
-    <div class="project-head">
+  <div class="entry">
+    <div class="entry-head">
       <h3>Personal Portfolio</h3>
-      <span class="project-links">Live site · Source on GitHub</span>
+      <span class="links">Live site · Source on GitHub</span>
     </div>
     <p class="stack">HTML, CSS, JavaScript, SEO, Accessibility</p>
     <ul>
