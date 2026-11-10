@@ -447,18 +447,19 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 372px;
-  /* The portrait drifts up to 18px above this box, so leave headroom under the
+  /* Sized by the portrait's own width, so the box is exactly as tall as the
+     image and the intrinsic 386:474 ratio is never stretched. */
+  height: auto;
+  /* The portrait drifts up to 16px above this box, so leave headroom under the
      title rather than letting the peak crowd it. */
   margin: 30px 0 0;
 }
-.portrait { display: flex; align-items: flex-end; height: 100%; }
+.portrait { display: flex; align-items: flex-end; }
 .portrait img {
   display: block;
-  width: auto;
+  width: 272px;
   height: auto;
   max-width: 100%;
-  max-height: 372px;
   object-fit: contain;
   object-position: center bottom;
   transform-origin: center bottom;
@@ -1465,8 +1466,8 @@ html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
   .hero-title { white-space: normal; margin: 30px 0 0; line-height: 0.9; }
   .hero-actions { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-bottom: 26px; }
   .hero-copy { max-width: 100%; }
-  .hero-visual { height: 250px; margin-top: 32px; }
-  .portrait img { max-height: 250px; }
+  .hero-visual { margin-top: 32px; }
+  .portrait img { width: 210px; }
   .hero-links { justify-content: flex-start; gap: 7px; }
   .hero-links a { min-width: 0; padding: 8px 13px; }
   .hero-stack { padding-bottom: 22px; }
@@ -1475,8 +1476,8 @@ html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
 }
 
 @media (max-width: 560px) {
-  .hero-visual { height: 215px; margin-top: 30px; }
-  .portrait img { max-height: 215px; }
+  .hero-visual { margin-top: 30px; }
+  .portrait img { width: 195px; }
   .hero-actions { gap: 16px; padding-bottom: 20px; }
   .projects { grid-template-columns: 1fr; gap: 18px; }
   .experience { border-width: 3px; }
