@@ -33,6 +33,8 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 ├── robots.txt            # Crawler rules + sitemap reference
 ├── sitemap.xml           # XML sitemap
 ├── favicon.ico           # Browser favicon
+├── tools/
+│   └── build-resume.py   # Renders the resume PDF and fixes its colour space
 └── assets/
     ├── css/styles.css    # Design tokens, layout, components
     ├── js/main.js        # Theme, navigation, scroll behaviour
@@ -58,24 +60,31 @@ Light and dark themes both run off the same token set.
 `assets/resume/resume.html` is the source. Edit it, then regenerate the PDF:
 
 ```bash
-chromium --headless --no-pdf-header-footer \
-  --print-to-pdf=assets/resume/Shawon-Haque-Resume.pdf \
-  file://$PWD/assets/resume/resume.html
+python3 tools/build-resume.py     # needs chromium and pikepdf
 ```
 
-`shawon-haque.png` sits next to the source, so the `file://` path above resolves it
-without a server. The PDF is a single A4 page; check the page count after editing.
+The script prints the page with Chrome and then rewrites the photo's colour space.
+Both steps are needed, and both are about the same thing: the photo must decode in
+every reader, not just the big desktop ones.
 
-Keep the photo a **PNG**. Chrome embeds it in the PDF as a `FlateDecode` stream, which
-every reader decodes; a JPEG becomes a `DCTDecode` stream instead, and a progressive
-JPEG inside one is not rendered by all of them. Flatten any transparency onto white
-first, since the page is white:
+- **Colour space.** Chrome writes the photo as `/ColorSpace [/ICCBased <stream>]`, and
+  a reader needs ICC support to decode that. Small and embedded PDF libraries — inside
+  mobile viewers and chat apps — often have none, so they drop the image and the
+  resume shows a blank photo. The script switches it to `/DeviceRGB`, which every
+  reader decodes. The photo is sRGB, so the picture does not change.
+- **Encoding.** Keep `shawon-haque.png` a **PNG**: Chrome embeds it as a `FlateDecode`
+  stream. A JPEG becomes `DCTDecode` instead, and a progressive JPEG inside one is not
+  rendered by all readers. Flatten any transparency onto white, since the page is
+  white:
 
 ```python
 photo.convert('RGBA')                       # source
 flat = Image.alpha_composite(Image.new('RGBA', photo.size, (255,255,255,255)), photo)
 flat.convert('RGB').save('shawon-haque.png', 'PNG', optimize=True)
 ```
+
+`shawon-haque.png` sits next to the source, so the file path resolves without a
+server. The PDF is a single A4 page; check the page count after editing.
 
 ## Local preview
 
