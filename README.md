@@ -28,6 +28,7 @@ the 404 page are separate documents that share the same stylesheet and tokens.
   additive — the site works the same without them
 - Case studies: a full write-up per project — problem, architecture, security and
   trade-offs — linked from each project card
+- Writing index: the long-form pieces in one place, with measured word counts
 - Process page: the learning path through the stack and the five-stage workflow
 - Custom 404 page
 
@@ -38,6 +39,7 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 ├── index.html            # Home: hero, about, expertise, projects, experience,
 │                         # resume, contact
 ├── journey.html          # Development journey and workflow
+├── writing.html          # Writing index (the long-form pieces)
 ├── 404.html              # Custom not-found page
 ├── projects/
 │   ├── index.html        # Case-study index
