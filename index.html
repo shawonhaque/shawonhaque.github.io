@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="assets/img/portrait-new.webp" type="image/webp" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <script type="application/ld+json">
@@ -133,6 +133,8 @@
           <li><a href="#about">About</a></li>
           <li><a href="#expertise">Expertise</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="projects/">Case studies</a></li>
+          <li><a href="writing.html">Writing</a></li>
           <li><a href="#background">Experience</a></li>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -211,6 +213,13 @@
           <h2 id="about-title">Professional profile</h2>
         </div>
 
+        <ul class="metrics" aria-label="Development at a glance">
+          <li class="metric"><span class="metric-value">16</span><span class="metric-label">Technologies in use</span></li>
+          <li class="metric"><span class="metric-value">2</span><span class="metric-label">Projects shipped</span></li>
+          <li class="metric"><span class="metric-value">17</span><span class="metric-label">Database tables designed</span></li>
+          <li class="metric"><span class="metric-value">20</span><span class="metric-label">Page modules built</span></li>
+        </ul>
+
         <div class="grid-2">
           <div class="prose">
             <p>
@@ -229,7 +238,8 @@
             <p>
               Alongside my professional role in the store department at
               <strong>Jinnat Knitwears Ltd.</strong>, I build and ship web applications — the
-              projects below are the record of that work.
+              projects below are the record of that work. You can read
+              <a href="journey.html">how I learned this stack and how I build</a>.
             </p>
           </div>
 
@@ -330,11 +340,11 @@
               <h3>NEXORA — Full Stack Knowledge Platform</h3>
               <p>
                 A full-stack knowledge platform for news, books, study resources and writing.
-                The frontend is React 18 and TypeScript on Vite with Tailwind CSS — sixteen
-                routed views including full-text search, light/dark theming and an
-                authenticated admin area. The backend is Supabase and Postgres with a
-                thirteen-table schema and Row Level Security on every table, so the database
-                — not the client — decides who may read or write each row.
+                The frontend is React 18 and TypeScript on Vite with Tailwind CSS — twenty
+                page modules across thirty-three routes, with full-text search, light/dark
+                theming and an authenticated admin area. The backend is Supabase and Postgres
+                with a seventeen-table schema and Row Level Security on every table, so the
+                database — not the client — decides who may read or write each row.
               </p>
               <ul class="tag-list">
                 <li>React</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li><li>Supabase</li><li>PostgreSQL</li>
@@ -342,6 +352,7 @@
               <div class="project-links">
                 <a class="link-arrow" href="https://shawonhaque.github.io/Nexora/" target="_blank" rel="noopener">Live demo<span aria-hidden="true"> →</span><span class="sr-only"> (opens in a new tab)</span></a>
                 <a class="link-arrow" href="https://github.com/shawonhaque/Nexora" target="_blank" rel="noopener">Source code<span aria-hidden="true"> →</span><span class="sr-only"> (opens on GitHub)</span></a>
+                <a class="link-arrow" href="projects/nexora.html">Case study<span aria-hidden="true"> →</span></a>
               </div>
             </div>
           </article>
@@ -357,8 +368,8 @@
             <div class="project-body">
               <h3>Personal Portfolio</h3>
               <p>
-                This website: a responsive, accessible, single-page portfolio built with
-                semantic HTML, modern CSS and vanilla JavaScript — no framework overhead and
+                This website: a responsive, accessible portfolio built with semantic
+                HTML, modern CSS and vanilla JavaScript — no framework overhead and
                 no build step. It ships light and dark themes with system detection, full
                 keyboard navigation, visible focus states, reduced-motion support, complete
                 SEO and social metadata, structured data, a sitemap and a custom 404 page.
@@ -369,10 +380,15 @@
               <div class="project-links">
                 <a class="link-arrow" href="https://shawonhaque.github.io/" target="_blank" rel="noopener">Live site<span aria-hidden="true"> →</span><span class="sr-only"> (opens in a new tab)</span></a>
                 <a class="link-arrow" href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">Source code<span aria-hidden="true"> →</span><span class="sr-only"> (opens on GitHub)</span></a>
+                <a class="link-arrow" href="projects/portfolio.html">Case study<span aria-hidden="true"> →</span></a>
               </div>
             </div>
           </article>
         </div>
+
+        <p class="projects-more">
+          <a class="btn" href="projects/">All case studies<span aria-hidden="true"> →</span></a>
+        </p>
       </div>
     </section>
 
@@ -544,8 +560,7 @@
               </a>
             </li>
           </ul>
-
-
+        </div>
       </div>
     </section>
   </main>
@@ -560,6 +575,9 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="projects/">Case studies</a>
+        <a href="writing.html">Writing</a>
+        <a href="journey.html">Journey</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
         <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>

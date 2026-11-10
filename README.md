@@ -5,9 +5,12 @@ Live at **https://shawonhaque.github.io**
 
 ## Overview
 
-A single-page, dependency-free portfolio built with semantic HTML, modern CSS and
-vanilla JavaScript. No framework, no build step — the files are deployed as-is via
-GitHub Pages, which keeps the site fast and the maintenance surface small.
+A dependency-free portfolio built with semantic HTML, modern CSS and vanilla
+JavaScript. No framework, no build step — the files are deployed as-is via GitHub
+Pages, which keeps the site fast and the maintenance surface small.
+
+The home page is a single scrolling page; the case studies, the process page and
+the 404 page are separate documents that share the same stylesheet and tokens.
 
 ## Features
 
@@ -23,14 +26,25 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 - Contact form that composes a prefilled email, plus one-click address copy
 - Optional motion: a WebGL hero constellation and scroll-driven reveals, both
   additive — the site works the same without them
+- Case studies: a full write-up per project — problem, architecture, security and
+  trade-offs — linked from each project card
+- Writing index: the long-form pieces in one place, with measured word counts
+- Process page: the learning path through the stack and the five-stage workflow
 - Custom 404 page
 
 ## Structure
 
 ```
 .
-├── index.html            # Single-page site
+├── index.html            # Home: hero, about, expertise, projects, experience,
+│                         # resume, contact
+├── journey.html          # Development journey and workflow
+├── writing.html          # Writing index (the long-form pieces)
 ├── 404.html              # Custom not-found page
+├── projects/
+│   ├── index.html        # Case-study index
+│   ├── nexora.html       # NEXORA case study
+│   └── portfolio.html    # This site's case study
 ├── site.webmanifest      # Web app manifest
 ├── robots.txt            # Crawler rules + sitemap reference
 ├── sitemap.xml           # XML sitemap
@@ -38,7 +52,7 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 ├── tools/
 │   └── build-resume.py   # Renders the resume PDF and fixes its colour space
 └── assets/
-    ├── css/styles.css    # Design tokens, layout, components
+    ├── css/styles.css    # Design tokens, layout, components, inner pages
     ├── js/main.js        # Theme, navigation, scroll behaviour
     ├── js/motion.js      # Optional motion layer (WebGL hero, scroll effects)
     ├── js/vendor/        # Third-party scripts, committed as-is
