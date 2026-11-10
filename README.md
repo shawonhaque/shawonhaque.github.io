@@ -42,7 +42,7 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
     │   └── portrait-new.*  # Hero portrait, alpha cut-out (WebP + PNG)
     └── resume/
         ├── resume.html       # Source for the PDF (print stylesheet)
-        ├── shawon-haque.jpg  # Headshot used in the resume header
+        ├── shawon-haque.png  # Headshot used in the resume header
         └── Shawon-Haque-Resume.pdf
 ```
 
@@ -63,16 +63,18 @@ chromium --headless --no-pdf-header-footer \
   file://$PWD/assets/resume/resume.html
 ```
 
-`shawon-haque.jpg` sits next to the source, so the `file://` path above resolves it
+`shawon-haque.png` sits next to the source, so the `file://` path above resolves it
 without a server. The PDF is a single A4 page; check the page count after editing.
 
-Keep the photo a **baseline** JPEG. Chrome embeds it in the PDF as a `DCTDecode`
-stream, and while Chrome's own viewer renders a progressive JPEG there, several other
-readers do not. Pillow only writes baseline when neither `progressive` nor `optimize`
-is set:
+Keep the photo a **PNG**. Chrome embeds it in the PDF as a `FlateDecode` stream, which
+every reader decodes; a JPEG becomes a `DCTDecode` stream instead, and a progressive
+JPEG inside one is not rendered by all of them. Flatten any transparency onto white
+first, since the page is white:
 
 ```python
-photo.save('shawon-haque.jpg', 'JPEG', quality=92, subsampling=0)  # -> SOF0
+photo.convert('RGBA')                       # source
+flat = Image.alpha_composite(Image.new('RGBA', photo.size, (255,255,255,255)), photo)
+flat.convert('RGB').save('shawon-haque.png', 'PNG', optimize=True)
 ```
 
 ## Local preview
