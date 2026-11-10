@@ -55,7 +55,8 @@
       { "@type": "TechArticle", "name": "How I learned this stack, and how I build", "url": "https://shawonhaque.github.io/journey.html" },
       { "@type": "BlogPosting", "name": "Row Level Security is the only authorisation I trust", "url": "https://shawonhaque.github.io/blog/row-level-security.html" },
       { "@type": "BlogPosting", "name": "A service layer that never throws", "url": "https://shawonhaque.github.io/blog/typed-service-layer.html" },
-      { "@type": "BlogPosting", "name": "Animation that is safe to remove", "url": "https://shawonhaque.github.io/blog/progressive-enhancement.html" }
+      { "@type": "BlogPosting", "name": "Animation that is safe to remove", "url": "https://shawonhaque.github.io/blog/progressive-enhancement.html" },
+      { "@type": "BlogPosting", "name": "The build is the safest place to call the network", "url": "https://shawonhaque.github.io/blog/build-time-feeds.html" }
     ]
   }
   </script>
@@ -118,16 +119,16 @@
         <p class="eyebrow">Writing</p>
         <h1 id="page-title">How I build, in detail</h1>
         <p class="lede">
-          Six long-form pieces. Each one explains a real decision — an architecture, a
+          Seven long-form pieces. Each one explains a real decision — an architecture, a
           security boundary, a trade-off — and points at the source so you can check it
           rather than take my word for it.
         </p>
       </section>
 
       <ul class="metrics" aria-label="Writing at a glance">
-        <li class="metric"><span class="metric-value">6</span><span class="metric-label">Long-form pieces</span></li>
-        <li class="metric"><span class="metric-value">5,329</span><span class="metric-label">Words written</span></li>
-        <li class="metric"><span class="metric-value">24</span><span class="metric-label">Minutes of reading</span></li>
+        <li class="metric"><span class="metric-value">7</span><span class="metric-label">Long-form pieces</span></li>
+        <li class="metric"><span class="metric-value">6,077</span><span class="metric-label">Words written</span></li>
+        <li class="metric"><span class="metric-value">28</span><span class="metric-label">Minutes of reading</span></li>
         <li class="metric"><span class="metric-value">100%</span><span class="metric-label">Checkable against source</span></li>
       </ul>
 
@@ -233,12 +234,28 @@
           </p>
           <span class="link-arrow">Read the note<span aria-hidden="true"> →</span></span>
         </a>
+
+        <a class="post-card" href="blog/build-time-feeds.html">
+          <p class="post-meta">
+            <span class="post-tag">Build pipelines</span>
+            <span>Node.js · GitHub Actions · RSS</span>
+            <span aria-hidden="true">·</span>
+            <span>748 words, about 3 minutes</span>
+          </p>
+          <h2>The build is the safest place to call the network</h2>
+          <p>
+            Why NEXORA collects 24 publisher feeds at build time instead of in the browser —
+            the CORS constraint that forced it, the allSettled failure handling, and the
+            case that decides whether the deploy can be trusted.
+          </p>
+          <span class="link-arrow">Read the note<span aria-hidden="true"> →</span></span>
+        </a>
       </div>
 
       <section class="article-body" aria-labelledby="writing-note">
         <h2 id="writing-note">A note on this page</h2>
         <p>
-          This is the whole of what I have written so far — six pieces, not a feed padded
+          This is the whole of what I have written so far — seven pieces, not a feed padded
           to look busy. I would rather publish nothing than publish a post I could not stand
           behind. Each of these is a real project, a real process or a real decision from
           the code, and the word counts and read times above are measured, not estimated.

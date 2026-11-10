@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>The build is the safest place to call the network — Shawon Haque</title>
+  <meta name="description" content="How NEXORA collects 24 publisher feeds at build time instead of in the browser: why CORS forced the decision, and how one bad feed can never break the deploy." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/blog/build-time-feeds.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="The build is the safest place to call the network" />
+  <meta property="og:description" content="Collecting 24 publisher feeds at build time instead of in the browser, and failing softly." />
+  <meta property="og:url" content="https://shawonhaque.github.io/blog/build-time-feeds.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The NEXORA news section" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The build is the safest place to call the network" />
+  <meta name="twitter:description" content="Collecting 24 publisher feeds at build time instead of in the browser, and failing softly." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The build is the safest place to call the network",
+    "description": "How NEXORA collects publisher feeds at build time instead of in the browser.",
+    "url": "https://shawonhaque.github.io/blog/build-time-feeds.html",
+    "inLanguage": "en",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "author": { "@type": "Person", "name": "Shawon Haque", "url": "https://shawonhaque.github.io/" },
+    "publisher": { "@type": "Person", "name": "Shawon Haque" },
+    "about": ["Node.js", "Build pipelines", "RSS", "GitHub Actions"]
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../projects/index.html">Case studies</a></li>
+          <li><a href="../writing.html">Writing</a></li>
+          <li><a href="../journey.html">Journey</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../writing.html"><span aria-hidden="true">←</span> All writing</a>
+        <p class="eyebrow">Writing · Build pipelines</p>
+        <h1 id="page-title">The build is the safest place to call the network</h1>
+        <p class="lede">
+          NEXORA shows live news from 24 publishers. None of those requests happen in the
+          visitor's browser. They run once, at build time, and the site loads the result as
+          a static file.
+        </p>
+      </section>
+
+      <ul class="metrics" aria-label="At a glance">
+        <li class="metric"><span class="metric-value">24</span><span class="metric-label">Publisher feeds</span></li>
+        <li class="metric"><span class="metric-value">6</span><span class="metric-label">Categories</span></li>
+        <li class="metric"><span class="metric-value">20</span><span class="metric-label">Second timeout</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Feeds fetched at runtime</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="cors" aria-labelledby="cors-title">
+            <h2 id="cors-title">It started as a constraint, not a plan</h2>
+            <p>
+              The obvious way to show news is to fetch the feeds from the page. It does not
+              work. Browsers cannot read most news RSS feeds directly, because the servers do
+              not send CORS headers — the request is blocked before a byte comes back. That
+              is not a bug to work around; it is the publishers' default posture.
+            </p>
+            <p>
+              The build, however, runs in Node on GitHub Actions with open network access.
+              No CORS, no origin, no browser. So the feeds are fetched there, once, and
+              written to a JSON snapshot the site loads statically.
+            </p>
+            <div class="callout">
+              <p>
+                What looked like a limitation turned out to be the better architecture.
+                <strong>No visitor waits on a publisher's server, and no publisher sees
+                traffic from my site.</strong> The news section is as static and as fast as
+                the rest of the page.
+              </p>
+            </div>
+          </section>
+
+          <section id="shape" aria-labelledby="shape-title">
+            <h2 id="shape-title">What the build does</h2>
+            <p>
+              A single script, <code>scripts/feeds.mjs</code>, holds a registry of 24
+              publisher feeds across six categories — world, technology, science,
+              education, business and AI. Each entry keeps the feed URL, the publisher's
+              homepage for attribution, and the category it maps to on the site.
+            </p>
+            <p>
+              For each source it fetches the feed with a twenty-second timeout and a custom
+              user agent that identifies the bot, parses the items, and keeps at most twenty
+              per feed. Then it de-duplicates by item id, sorts everything by publication
+              date, and writes the whole snapshot to <code>public/data/feeds.json</code>.
+            </p>
+            <p>
+              One detail I care about: <strong>every item is real.</strong> The title, link,
+              source and date all come from the publisher's own feed. Nothing is generated,
+              summarised or invented — a rule that matters when the same project refuses to
+              generate answers elsewhere.
+            </p>
+          </section>
+
+          <section id="failure" aria-labelledby="failure-title">
+            <h2 id="failure-title">One bad feed must not break the deploy</h2>
+            <p>
+              Twenty-four external servers is twenty-four ways to fail, and a publisher
+              having a bad morning is not a reason to ship a broken site. So the fetches run
+              with <code>Promise.allSettled</code>, not <code>Promise.all</code>: every
+              source is attempted, and each one either resolves or is reported — it cannot
+              take the build down with it.
+            </p>
+            <pre><code>const results = await Promise.allSettled(
+  FEEDS.map(async (source) =&gt; {
+    const xml = await fetchWithTimeout(source.url);
+    const parsed = parseFeed(xml, source);
+    if (!parsed.length) throw new Error('no entries found');
+    return { source, parsed };
+  })
+);</code></pre>
+            <p>
+              Sources that worked are listed; sources that did not are recorded in a
+              <code>failures</code> array and named in a warning. The snapshot always
+              reflects what was actually retrieved.
+            </p>
+          </section>
+
+          <section id="empty" aria-labelledby="empty-title">
+            <h2 id="empty-title">The case that decides whether you can trust the deploy</h2>
+            <p>
+              The interesting question is what happens when <em>everything</em> fails — no
+              network on the runner, or every publisher down at once. Writing an empty
+              snapshot would quietly replace a working news page with a blank one. That is
+              the worst outcome, because it looks like a code bug and it destroys good data.
+            </p>
+            <p>
+              So the script handles it explicitly: if no items were fetched but a previous
+              snapshot exists, it leaves that snapshot untouched and warns. The site keeps
+              the last known-good news.
+            </p>
+            <pre><code>if (!unique.length) {
+  if (previous?.items?.length) {
+    console.warn('feeds: every source failed; keeping the previous snapshot untouched.');
+    return;
+  }
+  console.error('feeds: no items fetched and no previous snapshot exists.');
+  process.exitCode = 1;
+  return;
+}</code></pre>
+            <p>
+              Only when there is nothing to fetch <em>and</em> nothing to fall back on does
+              the build fail loudly. That is the one situation where a human should be told,
+              so it is the one situation that exits non-zero.
+            </p>
+          </section>
+
+          <section id="markup" aria-labelledby="markup-title">
+            <h2 id="markup-title">Publisher markup is not consistent</h2>
+            <p>
+              Feed descriptions are messy. Some publishers send real HTML tags; others send
+              entity-escaped tags — the literal text <code>&amp;lt;p&amp;gt;</code> — so that
+              a naive strip leaves visible tag gibberish on the page. The script handles this
+              with a specific sequence: strip, decode, strip again, decode again. Decoding
+              after stripping only once would leave escaped tags exposed; the second pass
+              catches what the first turned into markup.
+            </p>
+            <p>
+              It also strips script blocks outright and guards the entity decoder against
+              invalid code points, so a malformed feed produces plain text rather than
+              broken output. Small defensive choices, made once, that keep the news page
+              clean without anyone watching it.
+            </p>
+          </section>
+
+          <section id="takeaway" aria-labelledby="takeaway-title">
+            <h2 id="takeaway-title">What I took from it</h2>
+            <p>
+              Move network work to where you control the failure. At build time I can set a
+              timeout, retry nothing and keep the previous result, and decide deliberately
+              what "total failure" means. In the browser I would be at the mercy of whichever
+              publisher is slowest, on the visitor's connection, with no fallback.
+            </p>
+            <p>
+              The script is public:
+              <a href="https://github.com/shawonhaque/Nexora/blob/main/scripts/feeds.mjs" target="_blank" rel="noopener">scripts/feeds.mjs</a>.
+              For how it fits the rest of the platform, see the
+              <a href="../projects/nexora.html">NEXORA case study</a>.
+            </p>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#cors">The CORS constraint</a></li>
+            <li><a href="#shape">What the build does</a></li>
+            <li><a href="#failure">Failing softly</a></li>
+            <li><a href="#empty">The empty case</a></li>
+            <li><a href="#markup">Messy markup</a></li>
+            <li><a href="#takeaway">What I took from it</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>The feed script is public.</p>
+            <a href="https://github.com/shawonhaque/Nexora/blob/main/scripts/feeds.mjs" target="_blank" rel="noopener">Read the script <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More writing">
+        <a href="progressive-enhancement.html">
+          <span class="page-nav-dir">Previous</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> Animation that is safe to remove</span>
+        </a>
+        <a class="is-next" href="../writing.html">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All writing <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../projects/index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../journey.html">Journey</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
