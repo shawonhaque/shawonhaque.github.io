@@ -29,6 +29,9 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - Case studies: a full write-up per project — problem, architecture, security and
   trade-offs — linked from each project card
 - Writing index: the long-form pieces in one place, with measured word counts
+- Blog notes: technical write-ups drawn from the source — Row Level Security,
+  a typed service layer, progressive enhancement, and the build-time feed
+  pipeline
 - Process page: the learning path through the stack and the five-stage workflow
 - Custom 404 page
 
@@ -40,6 +43,11 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 │                         # resume, contact
 ├── journey.html          # Development journey and workflow
 ├── writing.html          # Writing index (the long-form pieces)
+├── blog/                 # Technical notes
+│   ├── row-level-security.html
+│   ├── typed-service-layer.html
+│   ├── progressive-enhancement.html
+│   └── build-time-feeds.html
 ├── 404.html              # Custom not-found page
 ├── projects/
 │   ├── index.html        # Case-study index

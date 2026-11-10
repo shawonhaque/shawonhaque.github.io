@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Row Level Security is the only authorisation I trust — Shawon Haque</title>
+  <meta name="description" content="Why NEXORA puts every access rule in Postgres instead of the React client: 17 tables, 27 policies, an is_admin() helper and a trigger that stops a user promoting themselves." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/blog/row-level-security.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Row Level Security is the only authorisation I trust" />
+  <meta property="og:description" content="Why every access rule in NEXORA lives in Postgres, not the React client." />
+  <meta property="og:url" content="https://shawonhaque.github.io/blog/row-level-security.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The NEXORA application" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Row Level Security is the only authorisation I trust" />
+  <meta name="twitter:description" content="Why every access rule in NEXORA lives in Postgres, not the React client." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Row Level Security is the only authorisation I trust",
+    "description": "Why NEXORA puts every access rule in Postgres instead of the React client.",
+    "url": "https://shawonhaque.github.io/blog/row-level-security.html",
+    "inLanguage": "en",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "author": { "@type": "Person", "name": "Shawon Haque", "url": "https://shawonhaque.github.io/" },
+    "publisher": { "@type": "Person", "name": "Shawon Haque" },
+    "about": ["PostgreSQL", "Row Level Security", "Supabase", "Application security"]
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../projects/index.html">Case studies</a></li>
+          <li><a href="../writing.html">Writing</a></li>
+          <li><a href="../journey.html">Journey</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../writing.html"><span aria-hidden="true">←</span> All writing</a>
+        <p class="eyebrow">Writing · Database security</p>
+        <h1 id="page-title">Row Level Security is the only authorisation I trust</h1>
+        <p class="lede">
+          In NEXORA, the React client never decides who may read or write a row. That
+          decision belongs to Postgres, and it holds even if someone opens the browser
+          console and talks to the API directly.
+        </p>
+      </section>
+
+      <ul class="metrics" aria-label="At a glance">
+        <li class="metric"><span class="metric-value">17</span><span class="metric-label">Tables protected</span></li>
+        <li class="metric"><span class="metric-value">27</span><span class="metric-label">RLS policies</span></li>
+        <li class="metric"><span class="metric-value">1</span><span class="metric-label">Escalation trigger</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Rules in the client</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="problem" aria-labelledby="problem-title">
+            <h2 id="problem-title">The problem with client-side rules</h2>
+            <p>
+              The easy way to hide an admin button is a conditional in the component:
+              render it only when the signed-in user's role is <code>admin</code>. It
+              looks like security and it is not. The browser is the visitor's machine.
+              Anything the client can decide, the client can be told to decide
+              differently — and the API will happily answer the request either way.
+            </p>
+            <p>
+              So the rule I set for NEXORA: <strong>the client may decide what to show,
+              never what is allowed.</strong> Visibility is a convenience. Permission is a
+              boundary, and boundaries belong on the server.
+            </p>
+            <div class="callout">
+              <p>
+                Row Level Security is the Postgres feature that makes this practical. Each
+                policy is a condition the database checks on every row, for every query,
+                after authentication. If no policy permits the row, it does not exist as
+                far as that request is concerned.
+              </p>
+            </div>
+          </section>
+
+          <section id="shape" aria-labelledby="shape-title">
+            <h2 id="shape-title">The shape of the answer</h2>
+            <p>
+              Every table in the schema has RLS enabled and at least one policy. Across the
+              seventeen tables there are twenty-seven policies, written in their own
+              migration (<code>0002_rls_policies.sql</code>) so the rules are reviewable in
+              one place rather than scattered through the schema.
+            </p>
+            <p>
+              The policies fall into three shapes, and naming them makes the whole file
+              readable:
+            </p>
+            <ul>
+              <li><strong>Public read, admin write.</strong> Published content — posts, categories, books, study resources — is readable by anyone, and only an admin may insert, update or delete.</li>
+              <li><strong>Owner-only.</strong> A row belongs to one person. Bookmarks, ideas, diary entries and saved items are readable and writable only when <code>auth.uid()</code> matches the row's owner column.</li>
+              <li><strong>Self-service profile.</strong> A profile is public to read, but only its owner may change it.</li>
+            </ul>
+            <p>
+              Nine of the policies lean on <code>auth.uid()</code>, which is the identity of
+              the authenticated request — not a value the client sends. A caller cannot
+              claim to be someone else by passing a different id, because the id is not
+              theirs to pass.
+            </p>
+          </section>
+
+          <section id="admin" aria-labelledby="admin-title">
+            <h2 id="admin-title">Asking "is this user an admin?" safely</h2>
+            <p>
+              Many policies need the same question answered: is the current user an admin?
+              Duplicating that check inside every policy would be a maintenance trap. So it
+              lives in one function, <code>public.is_admin()</code>, defined as
+              <code>SECURITY DEFINER</code> — it runs with the privileges of its owner
+              rather than the caller.
+            </p>
+            <p>
+              That matters for a specific reason. Without it, a policy that reads the
+              profiles table to check a role would itself be subject to the profiles
+              policies, and the check could recurse. Running the helper with elevated
+              rights, in a narrow and auditable function, breaks the loop.
+            </p>
+            <pre><code>-- one place decides what "admin" means
+create function public.is_admin()
+returns boolean
+language sql
+security definer
+stable
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
+  );
+$$;</code></pre>
+            <p>
+              Every admin-only policy then reads the same way, and there is exactly one
+              place to change if the definition of "admin" ever changes.
+            </p>
+          </section>
+
+          <section id="escalation" aria-labelledby="escalation-title">
+            <h2 id="escalation-title">The hole RLS alone does not close</h2>
+            <p>
+              Here is the subtle part, and the reason I am glad I wrote it down. RLS
+              controls <em>which rows</em> a request may touch. It does not, by itself,
+              stop a user from updating a column they are allowed to reach — including the
+              very <code>role</code> column the admin check depends on.
+            </p>
+            <p>
+              A user who can update their own profile could try to set
+              <code>role = 'admin'</code> on themselves. If that succeeded, they would pass
+              every admin policy. The row-level rule was satisfied; the privilege
+              escalation happened anyway.
+            </p>
+            <p>
+              The fix is a trigger, <code>prevent_role_self_escalation</code>, that rejects
+              any change to the role column unless the request is already coming from an
+              admin. Row security and column protection are two different jobs, and this
+              is the second one.
+            </p>
+            <pre><code>-- RLS says which rows you may touch.
+-- This says which columns you may change.
+create trigger profiles_guard_role
+before update on public.profiles
+for each row execute function public.prevent_role_self_escalation();</code></pre>
+          </section>
+
+          <section id="verifying" aria-labelledby="verifying-title">
+            <h2 id="verifying-title">How I convinced myself it works</h2>
+            <p>
+              A policy file is easy to write and easy to get subtly wrong, so I did not
+              trust it on reading. I checked it the way an attacker would:
+            </p>
+            <ul>
+              <li>Signed in as a normal user and queried another user's private rows — the API returned nothing, not an error with data attached.</li>
+              <li>Attempted to update my own <code>role</code> to <code>admin</code> — the trigger rejected it.</li>
+              <li>Called an admin-only write as a non-admin — refused at the database, even though the client had no way to hide the button it never rendered.</li>
+              <li>Confirmed the anon key alone (no session) can read only what the public-read policies allow.</li>
+            </ul>
+            <div class="callout">
+              <p>
+                The test that taught me the most was the boring one: open the browser
+                console, grab the public key, and call the API by hand. Every rule that
+                lived in the client evaporated. The ones in Postgres held.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway" aria-labelledby="takeaway-title">
+            <h2 id="takeaway-title">What I would tell another developer</h2>
+            <p>
+              Put the rule where the data is. RLS plus a single admin helper plus one
+              escalation guard is not much code — but it means the security of the whole
+              application no longer depends on every component remembering to check
+              something. That is the difference between a rule and a hope.
+            </p>
+            <p>
+              The policies are public, in
+              <a href="https://github.com/shawonhaque/Nexora/blob/main/supabase/migrations/0002_rls_policies.sql" target="_blank" rel="noopener">0002_rls_policies.sql</a>,
+              so you can read them rather than take my word for it. For the wider build,
+              see the <a href="../projects/nexora.html">NEXORA case study</a>.
+            </p>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#shape">The shape of the answer</a></li>
+            <li><a href="#admin">The admin helper</a></li>
+            <li><a href="#escalation">The escalation hole</a></li>
+            <li><a href="#verifying">How I verified it</a></li>
+            <li><a href="#takeaway">What I would tell you</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>Every policy is public and reviewable.</p>
+            <a href="https://github.com/shawonhaque/Nexora/blob/main/supabase/migrations/0002_rls_policies.sql" target="_blank" rel="noopener">Read the policies <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More writing">
+        <a href="../writing.html">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> All writing</span>
+        </a>
+        <a class="is-next" href="typed-service-layer.html">
+          <span class="page-nav-dir">Next</span>
+          <span class="page-nav-title">A service layer that never throws <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../projects/index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../journey.html">Journey</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

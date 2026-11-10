@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Writing — Shawon Haque</title>
-  <meta name="description" content="Long-form writing by Shawon Haque: how NEXORA and this portfolio were built, and how he learned the stack — architecture, security decisions and trade-offs, with the source to check against." />
+  <meta name="description" content="Long-form writing by Shawon Haque: case studies, a process account, and technical notes on database security, typed service layers and progressive enhancement — each with the source to check against." />
   <meta name="author" content="Shawon Haque" />
   <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
@@ -52,7 +52,11 @@
     "hasPart": [
       { "@type": "TechArticle", "name": "NEXORA — a knowledge platform that respects its sources", "url": "https://shawonhaque.github.io/projects/nexora.html" },
       { "@type": "TechArticle", "name": "This portfolio — no framework, no build step", "url": "https://shawonhaque.github.io/projects/portfolio.html" },
-      { "@type": "TechArticle", "name": "How I learned this stack, and how I build", "url": "https://shawonhaque.github.io/journey.html" }
+      { "@type": "TechArticle", "name": "How I learned this stack, and how I build", "url": "https://shawonhaque.github.io/journey.html" },
+      { "@type": "BlogPosting", "name": "Row Level Security is the only authorisation I trust", "url": "https://shawonhaque.github.io/blog/row-level-security.html" },
+      { "@type": "BlogPosting", "name": "A service layer that never throws", "url": "https://shawonhaque.github.io/blog/typed-service-layer.html" },
+      { "@type": "BlogPosting", "name": "Animation that is safe to remove", "url": "https://shawonhaque.github.io/blog/progressive-enhancement.html" },
+      { "@type": "BlogPosting", "name": "The build is the safest place to call the network", "url": "https://shawonhaque.github.io/blog/build-time-feeds.html" }
     ]
   }
   </script>
@@ -115,19 +119,20 @@
         <p class="eyebrow">Writing</p>
         <h1 id="page-title">How I build, in detail</h1>
         <p class="lede">
-          Three long-form pieces. Each one explains a real decision — an architecture, a
+          Seven long-form pieces. Each one explains a real decision — an architecture, a
           security boundary, a trade-off — and points at the source so you can check it
           rather than take my word for it.
         </p>
       </section>
 
       <ul class="metrics" aria-label="Writing at a glance">
-        <li class="metric"><span class="metric-value">3</span><span class="metric-label">Long-form pieces</span></li>
-        <li class="metric"><span class="metric-value">3,111</span><span class="metric-label">Words written</span></li>
-        <li class="metric"><span class="metric-value">14</span><span class="metric-label">Minutes of reading</span></li>
+        <li class="metric"><span class="metric-value">7</span><span class="metric-label">Long-form pieces</span></li>
+        <li class="metric"><span class="metric-value">6,077</span><span class="metric-label">Words written</span></li>
+        <li class="metric"><span class="metric-value">28</span><span class="metric-label">Minutes of reading</span></li>
         <li class="metric"><span class="metric-value">100%</span><span class="metric-label">Checkable against source</span></li>
       </ul>
 
+      <h2 class="writing-group">Case studies and process</h2>
       <div class="post-list">
         <a class="post-card" href="projects/nexora.html">
           <p class="post-meta">
@@ -180,13 +185,80 @@
         </a>
       </div>
 
+      <h2 class="writing-group">Notes</h2>
+      <div class="post-list">
+        <a class="post-card" href="blog/row-level-security.html">
+          <p class="post-meta">
+            <span class="post-tag">Database security</span>
+            <span>PostgreSQL · Row Level Security · Supabase</span>
+            <span aria-hidden="true">·</span>
+            <span>867 words, about 4 minutes</span>
+          </p>
+          <h2>Row Level Security is the only authorisation I trust</h2>
+          <p>
+            Why the client may decide what to show but never what is allowed — 17 tables,
+            27 policies, one is_admin() helper, and the privilege-escalation hole that row
+            security alone does not close.
+          </p>
+          <span class="link-arrow">Read the note<span aria-hidden="true"> →</span></span>
+        </a>
+
+        <a class="post-card" href="blog/typed-service-layer.html">
+          <p class="post-meta">
+            <span class="post-tag">Architecture</span>
+            <span>TypeScript · Error handling · React</span>
+            <span aria-hidden="true">·</span>
+            <span>674 words, about 3 minutes</span>
+          </p>
+          <h2>A service layer that never throws</h2>
+          <p>
+            Every call returns a typed Result instead of raising, so a database error
+            becomes a value the UI must handle rather than a crash it might miss. Plus the
+            four-line filter escape that prevents a real search bug.
+          </p>
+          <span class="link-arrow">Read the note<span aria-hidden="true"> →</span></span>
+        </a>
+
+        <a class="post-card" href="blog/progressive-enhancement.html">
+          <p class="post-meta">
+            <span class="post-tag">Frontend craft</span>
+            <span>Reduced motion · WebGL · Performance</span>
+            <span aria-hidden="true">·</span>
+            <span>677 words, about 3 minutes</span>
+          </p>
+          <h2>Animation that is safe to remove</h2>
+          <p>
+            This site has a WebGL hero, smooth scrolling and scroll reveals — and every
+            page is complete without them. The guards that skip the expensive effects on
+            reduced motion, small screens and slow devices, and how I test that it holds.
+          </p>
+          <span class="link-arrow">Read the note<span aria-hidden="true"> →</span></span>
+        </a>
+
+        <a class="post-card" href="blog/build-time-feeds.html">
+          <p class="post-meta">
+            <span class="post-tag">Build pipelines</span>
+            <span>Node.js · GitHub Actions · RSS</span>
+            <span aria-hidden="true">·</span>
+            <span>748 words, about 3 minutes</span>
+          </p>
+          <h2>The build is the safest place to call the network</h2>
+          <p>
+            Why NEXORA collects 24 publisher feeds at build time instead of in the browser —
+            the CORS constraint that forced it, the allSettled failure handling, and the
+            case that decides whether the deploy can be trusted.
+          </p>
+          <span class="link-arrow">Read the note<span aria-hidden="true"> →</span></span>
+        </a>
+      </div>
+
       <section class="article-body" aria-labelledby="writing-note">
         <h2 id="writing-note">A note on this page</h2>
         <p>
-          This is the whole of what I have written so far — three pieces, not a feed padded
+          This is the whole of what I have written so far — seven pieces, not a feed padded
           to look busy. I would rather publish nothing than publish a post I could not stand
-          behind. Each of these is a real project or a real process, and the word counts and
-          read times above are measured, not estimated.
+          behind. Each of these is a real project, a real process or a real decision from
+          the code, and the word counts and read times above are measured, not estimated.
         </p>
         <p>
           If you would like to see the code behind any claim here, it is public:
@@ -195,9 +267,9 @@
       </section>
 
       <nav class="page-nav" aria-label="More pages">
-        <a href="projects/index.html">
-          <span class="page-nav-dir">Selected work</span>
-          <span class="page-nav-title">All case studies <span aria-hidden="true">→</span></span>
+        <a href="blog/row-level-security.html">
+          <span class="page-nav-dir">Latest note</span>
+          <span class="page-nav-title">Row Level Security <span aria-hidden="true">→</span></span>
         </a>
         <a class="is-next" href="index.html#contact">
           <span class="page-nav-dir">Get in touch</span>
