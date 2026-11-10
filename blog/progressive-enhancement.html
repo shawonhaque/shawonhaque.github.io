@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Animation that is safe to remove — Shawon Haque</title>
+  <meta name="description" content="The rule behind this site's motion: every effect is additive. The WebGL hero, smooth scrolling and scroll reveals all skip themselves on reduced motion, small screens or slow devices — and the page is complete without them." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/blog/progressive-enhancement.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Animation that is safe to remove" />
+  <meta property="og:description" content="Every effect on this site is additive. Remove it and the page is still complete." />
+  <meta property="og:url" content="https://shawonhaque.github.io/blog/progressive-enhancement.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-portfolio.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The Shawon Haque portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Animation that is safe to remove" />
+  <meta name="twitter:description" content="Every effect on this site is additive. Remove it and the page is still complete." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-portfolio.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Animation that is safe to remove",
+    "description": "Why every motion effect on this site is additive, and how it degrades.",
+    "url": "https://shawonhaque.github.io/blog/progressive-enhancement.html",
+    "inLanguage": "en",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "author": { "@type": "Person", "name": "Shawon Haque", "url": "https://shawonhaque.github.io/" },
+    "publisher": { "@type": "Person", "name": "Shawon Haque" },
+    "about": ["Web accessibility", "Reduced motion", "Progressive enhancement", "Core Web Vitals"]
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../projects/index.html">Case studies</a></li>
+          <li><a href="../writing.html">Writing</a></li>
+          <li><a href="../journey.html">Journey</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../writing.html"><span aria-hidden="true">←</span> All writing</a>
+        <p class="eyebrow">Writing · Frontend craft</p>
+        <h1 id="page-title">Animation that is safe to remove</h1>
+        <p class="lede">
+          This site has a WebGL hero, smooth scrolling and scroll reveals. Turn any of
+          them off — or turn off JavaScript entirely — and every page is still complete.
+          That is the whole design rule.
+        </p>
+      </section>
+
+      <ul class="metrics" aria-label="At a glance">
+        <li class="metric"><span class="metric-value">3</span><span class="metric-label">Motion layers</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Required by content</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Build steps</span></li>
+        <li class="metric"><span class="metric-value">100%</span><span class="metric-label">Works without JS</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="rule" aria-labelledby="rule-title">
+            <h2 id="rule-title">The rule I set myself</h2>
+            <p>
+              It is easy to build a site that depends on its effects. The animations run,
+              the content fades in, and it looks finished — until the JavaScript fails to
+              load, the visitor has reduced motion turned on, or the device is too slow to
+              keep up. Then the site does not degrade. It breaks.
+            </p>
+            <div class="callout">
+              <p>
+                <strong>Nothing on the page may depend on an effect that might not
+                run.</strong> Every motion layer is additive. Remove any of them and the
+                page is still readable, navigable and complete.
+              </p>
+            </div>
+            <p>
+              That single sentence decides most of the implementation questions before
+              they come up: where the content lives, what the CSS does by default, and
+              what the script is allowed to assume.
+            </p>
+          </section>
+
+          <section id="css-first" aria-labelledby="css-first-title">
+            <h2 id="css-first-title">Content is visible before any script runs</h2>
+            <p>
+              The reveals animate elements <em>from</em> a state, they do not leave the page
+              hidden waiting for script. The markup ships visible; the animation, when it
+              runs, moves things into place. If the script never loads, nothing was ever
+              hidden — there is no "content appears only after JS" failure mode.
+            </p>
+            <p>
+              I verified this the blunt way: load every page with JavaScript disabled and
+              check that the text is present and at full opacity. It is. That test is part
+              of how I check the site, not an afterthought.
+            </p>
+          </section>
+
+          <section id="hero" aria-labelledby="hero-title">
+            <h2 id="hero-title">The WebGL hero earns its place or does not appear</h2>
+            <p>
+              The constellation behind the hero is the most expensive thing on the page, so
+              it has the most guards. Before it is even considered, the code checks three
+              things and bails out on any of them:
+            </p>
+            <ul>
+              <li><strong>Reduced motion.</strong> If the visitor asked for less motion, the scene is skipped entirely — not slowed down, skipped.</li>
+              <li><strong>Small screens.</strong> On a phone the scene would be off-screen work and a large download for a decoration that adds little at that size.</li>
+              <li><strong>No WebGL.</strong> A cheap canvas probe runs first, so the library is never fetched on a device that cannot use it.</li>
+            </ul>
+            <p>
+              Only then, and only once the hero is close to the viewport, is the renderer
+              fetched — and that fetch is a dynamic import, so it is not part of the initial
+              payload.
+            </p>
+            <pre><code>// Fetch the renderer only once the hero is close to the viewport.
+var loader = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (!entry.isIntersecting) return;
+    loader.disconnect();
+    import(sibling("vendor/three.module.min.js"))
+      .then(function (module) { initHeroScene(canvas, module); })
+      .catch(function () { canvas.remove(); });
+  });
+}, { rootMargin: "200px" });</code></pre>
+            <p>
+              Notice the <code>.catch</code>. If the import fails — offline, blocked, or
+              unsupported — the canvas is removed and the hero simply has no constellation.
+              Nothing else on the page depends on it, so nothing else changes.
+            </p>
+          </section>
+
+          <section id="smooth" aria-labelledby="smooth-title">
+            <h2 id="smooth-title">Smooth scrolling that does not break the page</h2>
+            <p>
+              Smooth wheel scrolling is the kind of feature that quietly breaks other
+              things — anchor links, the sticky header, scroll-linked effects — if it is
+              implemented by transforming a wrapper element. So the library used here eases
+              the real scroll position instead. The scrollbar, the sticky header, the
+              progress bar and the reveal observer all keep reading the same
+              <code>window.scrollY</code>, and nothing else has to know.
+            </p>
+            <p>
+              It is also skipped when the visitor prefers reduced motion, and the page
+              scrolls normally if the library failed to load — the code checks that the
+              constructor exists before it uses it.
+            </p>
+            <pre><code>if (!reduceMotion &amp;&amp; typeof window.Lenis === "function") {
+  lenis = new window.Lenis({ /* … */ });
+}</code></pre>
+            <p>
+              Two conditions, and the page is correct with or without the result.
+            </p>
+          </section>
+
+          <section id="checking" aria-labelledby="checking-title">
+            <h2 id="checking-title">How I check it actually degrades</h2>
+            <p>
+              "It should degrade gracefully" is a claim, so I test it like one:
+            </p>
+            <ul>
+              <li>Load each page with JavaScript disabled and confirm the full content is present and visible.</li>
+              <li>Emulate <code>prefers-reduced-motion: reduce</code> and confirm the hero canvas is not rendered and the content is untouched.</li>
+              <li>Watch the console for errors on every page in both themes — a failed optional effect should be silent, not noisy.</li>
+              <li>Check the layout at 1440, 820, 560 and 390 pixels wide for anything that depends on a script to stop overflowing.</li>
+            </ul>
+            <p>
+              Motion is a nice thing to have. It should never be the thing that makes the
+              page work. See the
+              <a href="../projects/portfolio.html">portfolio case study</a> for the rest of
+              the decisions behind this site.
+            </p>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#rule">The rule</a></li>
+            <li><a href="#css-first">Content first</a></li>
+            <li><a href="#hero">The WebGL hero</a></li>
+            <li><a href="#smooth">Smooth scrolling</a></li>
+            <li><a href="#checking">How I check it</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>Every page works with JavaScript off.</p>
+            <a href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">See the source <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More writing">
+        <a href="typed-service-layer.html">
+          <span class="page-nav-dir">Previous</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> A service layer that never throws</span>
+        </a>
+        <a class="is-next" href="../writing.html">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All writing <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../projects/index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../journey.html">Journey</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

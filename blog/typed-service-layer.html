@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>A service layer that never throws — Shawon Haque</title>
+  <meta name="description" content="How NEXORA's 14 service modules return a typed Result instead of throwing, so a database error becomes a value the UI must handle rather than a crash it might miss." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/blog/typed-service-layer.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="A service layer that never throws" />
+  <meta property="og:description" content="Returning a typed Result instead of throwing, so errors cannot be ignored by accident." />
+  <meta property="og:url" content="https://shawonhaque.github.io/blog/typed-service-layer.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The NEXORA application" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="A service layer that never throws" />
+  <meta name="twitter:description" content="Returning a typed Result instead of throwing, so errors cannot be ignored by accident." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "A service layer that never throws",
+    "description": "How NEXORA's service modules return a typed Result instead of throwing exceptions.",
+    "url": "https://shawonhaque.github.io/blog/typed-service-layer.html",
+    "inLanguage": "en",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "author": { "@type": "Person", "name": "Shawon Haque", "url": "https://shawonhaque.github.io/" },
+    "publisher": { "@type": "Person", "name": "Shawon Haque" },
+    "about": ["TypeScript", "Error handling", "React", "Architecture"]
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../projects/index.html">Case studies</a></li>
+          <li><a href="../writing.html">Writing</a></li>
+          <li><a href="../journey.html">Journey</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../writing.html"><span aria-hidden="true">←</span> All writing</a>
+        <p class="eyebrow">Writing · Architecture</p>
+        <h1 id="page-title">A service layer that never throws</h1>
+        <p class="lede">
+          Every call in NEXORA comes back as a value, never as a thrown exception. The
+          database can fail, the network can fail, and none of it can crash a component
+          that forgot a <code>try</code> block.
+        </p>
+      </section>
+
+      <ul class="metrics" aria-label="At a glance">
+        <li class="metric"><span class="metric-value">12</span><span class="metric-label">Domain services</span></li>
+        <li class="metric"><span class="metric-value">1</span><span class="metric-label">Result type</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Thrown exceptions</span></li>
+        <li class="metric"><span class="metric-value">12</span><span class="metric-label">Default page size</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="why" aria-labelledby="why-title">
+            <h2 id="why-title">Why exceptions were the wrong tool here</h2>
+            <p>
+              Throwing is the default way to signal failure, and it has a quiet problem: a
+              thrown error is invisible in the type system. A function that returns
+              <code>Promise&lt;Post[]&gt;</code> tells the caller nothing about the way it
+              can fail. Forgetting the <code>try</code> block compiles cleanly, ships, and
+              breaks in front of a user.
+            </p>
+            <p>
+              In a data-heavy application like NEXORA, most calls can fail for ordinary
+              reasons — no session, no network, a row the policy does not permit. Those are
+              not exceptional. They are part of the contract, and the contract should say
+              so.
+            </p>
+            <div class="callout">
+              <p>
+                The rule: <strong>an expected failure is a return value, not an
+                exception.</strong> If the caller can do something sensible about it, the
+                type should force the caller to notice it.
+              </p>
+            </div>
+          </section>
+
+          <section id="result" aria-labelledby="result-title">
+            <h2 id="result-title">One result type for every call</h2>
+            <p>
+              The whole layer funnels through a single wrapper in
+              <code>src/services/base.ts</code>. Its job is to turn any outcome — success,
+              a thrown error, or an unconfigured backend — into the same
+              <code>Result</code> shape.
+            </p>
+            <pre><code>export async function run&lt;T&gt;(fn: () =&gt; Promise&lt;T&gt;): Promise&lt;Result&lt;T&gt;&gt; {
+  if (!isSupabaseConfigured) {
+    return fail&lt;T&gt;(
+      'Supabase is not connected yet. Add your project URL and anon key to enable live data.',
+      'NOT_CONFIGURED',
+      true
+    );
+  }
+  try {
+    return ok(await fn());
+  } catch (error) {
+    return fail&lt;T&gt;(toServiceError(error).message, toServiceError(error).code);
+  }
+}</code></pre>
+            <p>
+              Two things are worth pointing out. First, the <code>try/catch</code> exists
+              in exactly one place, so no individual service has to remember it. Second,
+              <code>isSupabaseConfigured</code> is checked before the call: running the
+              app without a backend is a normal state, and it produces a readable message
+              rather than a crash. That third argument marks the failure as retryable,
+              which is the kind of detail a plain <code>catch</code> would lose.
+            </p>
+          </section>
+
+          <section id="barrel" aria-labelledby="barrel-title">
+            <h2 id="barrel-title">Twelve services, one entry point</h2>
+            <p>
+              There are twelve domain services — authentication, profiles, posts, books,
+              study material, bookmarks, diary, search, storage and so on — and all of them
+              sit on the shared base module. The rest of the app imports from a single
+              barrel file, <code>services/index.ts</code>; a component never reaches into a
+              domain module directly.
+            </p>
+            <p>
+              That keeps the boundary honest. If a service needs to move or split, the
+              change stays inside the layer; the pages that use it are untouched. And
+              because every function returns the same <code>Result</code>, calling code
+              looks the same whichever domain it is talking to.
+            </p>
+            <ul>
+              <li><strong>Typed requests.</strong> Query options are typed too — <code>PostQuery</code>, <code>BookQuery</code>, <code>StudyQuery</code> — so a filter cannot be assembled from a loose object.</li>
+              <li><strong>Typed responses.</strong> List endpoints return <code>Paginated&lt;T&gt;</code> with <code>items</code>, <code>total</code>, <code>page</code>, <code>pageSize</code> and <code>hasMore</code> — the shape a UI actually needs to render pagination.</li>
+              <li><strong>One page size.</strong> <code>DEFAULT_PAGE_SIZE</code> is a single constant, so pagination is consistent across every list in the app.</li>
+            </ul>
+          </section>
+
+          <section id="injection" aria-labelledby="injection-title">
+            <h2 id="injection-title">A small function that prevents a real bug</h2>
+            <p>
+              Full-text search builds a PostgREST filter from user input, which is exactly
+              the kind of place a character like <code>%</code> or a comma can change the
+              meaning of a query. Rather than trust the caller, the base module exposes one
+              helper and every search goes through it.
+            </p>
+            <pre><code>/** Escapes characters that have meaning inside a PostgREST `or`/`ilike` filter. */
+export function escapeFilter(value: string): string {
+  return value.replace(/[%_,()\\]/g, (match) =&gt; `\\${match}`);
+}</code></pre>
+            <p>
+              It is four lines, and it is the difference between searching for what the
+              user typed and searching for something the user crafted. Small, boring,
+              load-bearing — the pattern I keep coming back to.
+            </p>
+          </section>
+
+          <section id="cost" aria-labelledby="cost-title">
+            <h2 id="cost-title">What it costs</h2>
+            <p>
+              I will be honest that this is not free. Every call site has to handle the
+              failure case, because the type will not let it ignore one. There is more code
+              at the edges than a bare <code>await</code> would need.
+            </p>
+            <p>
+              What it buys is that failure is handled on purpose, in one consistent shape,
+              instead of being forgotten until production. For an application where a
+              missing session or an unconfigured backend is a normal Tuesday, that trade is
+              worth it. Where it would not be — a purely local utility with no I/O — I would
+              not reach for it.
+            </p>
+            <p>
+              The full layer is public:
+              <a href="https://github.com/shawonhaque/Nexora/tree/main/src/services" target="_blank" rel="noopener">src/services</a>.
+              For how it fits the wider application, see the
+              <a href="../projects/nexora.html">NEXORA case study</a>.
+            </p>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#why">Why not exceptions</a></li>
+            <li><a href="#result">One result type</a></li>
+            <li><a href="#barrel">Twelve services</a></li>
+            <li><a href="#injection">Filter escaping</a></li>
+            <li><a href="#cost">What it costs</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>The service layer is public.</p>
+            <a href="https://github.com/shawonhaque/Nexora/tree/main/src/services" target="_blank" rel="noopener">Read the code <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More writing">
+        <a href="row-level-security.html">
+          <span class="page-nav-dir">Previous</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> Row Level Security</span>
+        </a>
+        <a class="is-next" href="progressive-enhancement.html">
+          <span class="page-nav-dir">Next</span>
+          <span class="page-nav-title">Animation that is safe to remove <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../projects/index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../journey.html">Journey</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
