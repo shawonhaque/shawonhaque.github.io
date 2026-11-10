@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>My development journey and how I build — Shawon Haque</title>
+  <meta name="description" content="The path from HTML and CSS to React, Node.js and Postgres — and the workflow I follow on every project, from planning and design through testing, deployment and verification." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/journey.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="My development journey and how I build" />
+  <meta property="og:description" content="From HTML and CSS to React, Node.js and Postgres — and the workflow I follow on every project." />
+  <meta property="og:url" content="https://shawonhaque.github.io/journey.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Shawon Haque — Full Stack Developer" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="My development journey and how I build" />
+  <meta name="twitter:description" content="From HTML and CSS to React, Node.js and Postgres — and the workflow I follow on every project." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="assets/img/icon-180.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "My development journey and how I build",
+    "description": "The path from HTML and CSS to React, Node.js and Postgres, and the workflow followed on every project.",
+    "url": "https://shawonhaque.github.io/journey.html",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    }
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <picture>
+          <source srcset="assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#expertise">Expertise</a></li>
+          <li><a href="projects/index.html">Projects</a></li>
+          <li><a href="#journey">Journey</a></li>
+          <li><a href="#workflow">Workflow</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="index.html"><span aria-hidden="true">←</span> Home</a>
+        <p class="eyebrow">Process</p>
+        <h1 id="page-title">How I got here, and how I build now</h1>
+        <p class="lede">
+          Two related things: the order I learned the stack in, and the method I follow on
+          every project. Neither is a list of job titles — it is the record of what I have
+          actually built and the habits that came out of it.
+        </p>
+      </section>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="journey" aria-labelledby="journey-title">
+            <h2 id="journey-title">The development journey</h2>
+            <p>
+              I learned this stack in one direction: foundations first, then the layers built
+              on top of them. Each stage below is here because I built something with it, not
+              because I read about it.
+            </p>
+
+            <ol class="timeline">
+              <li>
+                <p class="step-stage">Stage 01</p>
+                <h3>HTML and CSS — the structure underneath everything</h3>
+                <p>
+                  I started with semantic markup and modern layout: real landmarks, heading
+                  levels that mean something, flexbox and grid instead of floats and tables.
+                  Learning CSS custom properties changed how I think about a stylesheet —
+                  colours, spacing and the type scale became tokens, so a theme is a set of
+                  values rather than a second copy of the CSS.
+                </p>
+                <p><strong>Built:</strong> the markup and full design system behind this portfolio.</p>
+              </li>
+
+              <li>
+                <p class="step-stage">Stage 02</p>
+                <h3>JavaScript — making the page behave</h3>
+                <p>
+                  Then behaviour: the DOM, events, and the parts people get wrong — async
+                  flow, error handling, and knowing when <em>not</em> to reach for a
+                  library. I write progressive enhancement by default now: the page works
+                  without JavaScript, and the script only adds to it.
+                </p>
+                <p><strong>Built:</strong> the theme system, navigation, scroll behaviour and contact form on this site — every one of them guarded, so a missing element never throws.</p>
+              </li>
+
+              <li>
+                <p class="step-stage">Stage 03</p>
+                <h3>React — interfaces as components</h3>
+                <p>
+                  React was the shift from thinking about a page to thinking about state.
+                  Components, props, hooks, and lifting state to the right place. The
+                  habit I carried over from plain CSS turned out to matter here: reusable
+                  pieces and a clear separation between presentation and data access.
+                </p>
+                <p><strong>Built:</strong> NEXORA, a React application with twenty page modules — see the <a href="projects/nexora.html">case study</a>.</p>
+              </li>
+
+              <li>
+                <p class="step-stage">Stage 04</p>
+                <h3>TypeScript — making the compiler do the checking</h3>
+                <p>
+                  Types stopped being documentation and became a test that runs on every
+                  save. Strict mode, typed service boundaries, and a database schema typed
+                  all the way through to the components that read it.
+                </p>
+                <p><strong>Built:</strong> NEXORA's service layer, where every call returns a typed result instead of throwing.</p>
+              </li>
+
+              <li>
+                <p class="step-stage">Stage 05</p>
+                <h3>Node.js and Next.js — the direction I'm working in</h3>
+                <p>
+                  My current focus: server-side JavaScript, REST APIs and the rendering and
+                  routing model Next.js brings. This is where I am building now, and I would
+                  rather say that plainly than present it as years of experience.
+                </p>
+                <p><strong>Working on:</strong> server routes and API design, applying the same habits from the layers below.</p>
+              </li>
+
+              <li class="is-current">
+                <p class="step-stage">Stage 06 · now</p>
+                <h3>Postgres and Supabase — data that enforces its own rules</h3>
+                <p>
+                  The stage that changed my thinking most. A database is not just storage:
+                  it is the one place a rule cannot be bypassed. Writing Row Level Security
+                  policies taught me that authorisation belongs next to the data, not in the
+                  client — and that a schema is a design decision, not an afterthought.
+                </p>
+                <p><strong>Built:</strong> a seventeen-table schema, five migrations and RLS on every table in NEXORA.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section id="workflow" aria-labelledby="workflow-title">
+            <h2 id="workflow-title">How I build: my workflow</h2>
+            <p>
+              The same five stages every time. It is deliberately boring — the point is that
+              nothing reaches the end without being checked.
+            </p>
+
+            <ol class="steps">
+              <li>
+                <h3>Planning — decide what "done" means</h3>
+                <p>
+                  Before any code: who is this for, what is the smallest version that is
+                  genuinely useful, and what will I check to know it works? On NEXORA the
+                  planning step is where I decided search would be extractive rather than
+                  generated, because a static front end cannot keep an API key secret. That
+                  one decision shaped the whole feature.
+                </p>
+                <div class="step-tools">
+                  <ul class="tag-list"><li>Scope</li><li>Acceptance criteria</li><li>Data sources</li></ul>
+                </div>
+              </li>
+
+              <li>
+                <h3>UI design — the structure before the decoration</h3>
+                <p>
+                  I work from a small set of design tokens — colour, spacing, radius and a
+                  type scale — and lay out with grid and flexbox. Accessibility is decided
+                  here, not added later: heading order, focus states, contrast and what
+                  happens at 320px wide are all structural choices.
+                </p>
+                <div class="step-tools">
+                  <ul class="tag-list"><li>Design tokens</li><li>Responsive layout</li><li>Contrast</li><li>Keyboard order</li></ul>
+                </div>
+              </li>
+
+              <li>
+                <h3>Development — small changes on a branch</h3>
+                <p>
+                  One concern per branch, one clear commit message. I keep the separation
+                  from the design step intact: markup, styles and behaviour stay in their
+                  own files, and reusable pieces become components rather than copies. Every
+                  new script checks for the elements it needs before using them.
+                </p>
+                <div class="step-tools">
+                  <ul class="tag-list"><li>Git branches</li><li>Semantic HTML</li><li>Reusable components</li><li>Typed boundaries</li></ul>
+                </div>
+              </li>
+
+              <li>
+                <h3>Testing — check it where it will actually run</h3>
+                <p>
+                  This is the stage I have tightened most. I test at several viewport widths,
+                  in both themes, with reduced motion on, and with JavaScript disabled — and
+                  I compare the enhanced page against the plain one. I check the console, I
+                  follow every link, and I scroll the whole page to make sure no animation
+                  has left content invisible.
+                </p>
+                <p>
+                  When something is hard to check by eye, I measure it. The resume photo
+                  looked fine to me and was blank for other people, so the fix was verified
+                  in five independent PDF renderers instead of one.
+                </p>
+                <div class="step-tools">
+                  <ul class="tag-list"><li>Multiple viewports</li><li>Both themes</li><li>Reduced motion</li><li>JavaScript off</li><li>Console clean</li></ul>
+                </div>
+              </li>
+
+              <li>
+                <h3>Deployment — publish, then verify the live result</h3>
+                <p>
+                  Changes go through a pull request, which is where I write down what changed
+                  and why — including what I decided not to do. After the merge I re-check the
+                  live site rather than assuming the deploy worked: the assets return 200, the
+                  console is clean, and the feature is actually running.
+                </p>
+                <p>
+                  I only claim something is shipped once I have seen it working at the real
+                  URL. "It works locally" is a statement about my machine.
+                </p>
+                <div class="step-tools">
+                  <ul class="tag-list"><li>Pull requests</li><li>GitHub Pages</li><li>GitHub Actions</li><li>Live verification</li></ul>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section id="principles" aria-labelledby="principles-title">
+            <h2 id="principles-title">What the workflow is protecting</h2>
+            <p>
+              Five habits that the process above exists to enforce:
+            </p>
+            <div class="keypoints">
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">01</span>
+                <div>
+                  <h3>Nothing depends on an effect that might not run</h3>
+                  <p>Animation and enhancement are additive. Remove them and the page is still complete.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">02</span>
+                <div>
+                  <h3>Never invent content</h3>
+                  <p>If the data is missing, say so. A clear empty state beats a plausible fake one.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">03</span>
+                <div>
+                  <h3>Enforce rules where they cannot be bypassed</h3>
+                  <p>Access control belongs in the database, not in the interface that happens to call it.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">04</span>
+                <div>
+                  <h3>Verify where it runs, not where you built it</h3>
+                  <p>Different renderers, different browsers, the live URL. Measure when you cannot see.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">05</span>
+                <div>
+                  <h3>Ship less, but finish it</h3>
+                  <p>A smaller feature that is complete, accessible and tested beats a larger one that is nearly there.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#journey">Development journey</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#principles">Principles</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>See the workflow applied in practice, from the problem to the trade-offs.</p>
+            <a href="projects/index.html">Read the case studies <span aria-hidden="true">→</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More pages">
+        <a href="projects/index.html">
+          <span class="page-nav-dir">Projects</span>
+          <span class="page-nav-title">Case studies <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="is-next" href="index.html#contact">
+          <span class="page-nav-dir">Get in touch</span>
+          <span class="page-nav-title">Contact me <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#about">About</a>
+        <a href="projects/index.html">Projects</a>
+        <a href="#journey">Journey</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/vendor/lenis.min.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

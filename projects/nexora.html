@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>NEXORA case study — Shawon Haque</title>
+  <meta name="description" content="How NEXORA was built: a React 18 and TypeScript knowledge platform on Supabase and Postgres, with a seventeen-table schema, Row Level Security on every table and a build-time news pipeline." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/projects/nexora.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="NEXORA case study — a full-stack knowledge platform" />
+  <meta property="og:description" content="React 18 and TypeScript on the front, Supabase and Postgres behind it: seventeen tables, Row Level Security on every one, and a build-time pipeline for publisher feeds." />
+  <meta property="og:url" content="https://shawonhaque.github.io/projects/nexora.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The NEXORA news dashboard" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NEXORA case study — a full-stack knowledge platform" />
+  <meta name="twitter:description" content="React 18 and TypeScript on the front, Supabase and Postgres behind it, with Row Level Security on every table." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-nexora.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "NEXORA case study — a full-stack knowledge platform",
+    "description": "How NEXORA was built: a React 18 and TypeScript knowledge platform on Supabase and Postgres, with Row Level Security on every table.",
+    "url": "https://shawonhaque.github.io/projects/nexora.html",
+    "image": "https://shawonhaque.github.io/assets/img/project-nexora.jpg",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "NEXORA",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Web",
+      "url": "https://shawonhaque.github.io/Nexora/",
+      "programmingLanguage": ["TypeScript", "React", "SQL"],
+      "codeRepository": "https://github.com/shawonhaque/Nexora"
+    }
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="index.html">Case studies</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+        <p class="eyebrow">Case study · Full stack</p>
+        <h1 id="page-title">NEXORA — a knowledge platform that respects its sources</h1>
+        <p class="lede">
+          A multi-page React application that gathers reporting from established publishers,
+          ranks it against a question, and keeps a personal library of what you save. The
+          interesting part is not the interface — it is what the project refuses to do.
+        </p>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="https://shawonhaque.github.io/Nexora/" target="_blank" rel="noopener">Live demo<span aria-hidden="true"> ↗</span></a>
+          <a class="btn" href="https://github.com/shawonhaque/Nexora" target="_blank" rel="noopener">Source code<span aria-hidden="true"> ↗</span></a>
+        </div>
+      </section>
+
+      <ul class="metrics" aria-label="Project at a glance">
+        <li class="metric"><span class="metric-value">17</span><span class="metric-label">Postgres tables</span></li>
+        <li class="metric"><span class="metric-value">5</span><span class="metric-label">SQL migrations</span></li>
+        <li class="metric"><span class="metric-value">20</span><span class="metric-label">Page modules</span></li>
+        <li class="metric"><span class="metric-value">14</span><span class="metric-label">Service modules</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">Overview</h2>
+            <p>
+              NEXORA is a knowledge platform with three jobs: show a live news dashboard,
+              answer a question by searching what has been collected, and keep a private
+              library of the articles, books and notes a person saves.
+            </p>
+            <p>
+              It is a real multi-page application, not a landing page. There are twenty page modules across
+              thirty-three routes — home, explore, search, books, study, ideas, writing, profile,
+              settings, an authenticated admin area and the rest — each one lazy-loaded so
+              the first paint does not carry the whole application.
+            </p>
+            <p>
+              It is <strong>not</strong> a news organisation. It does not write, rewrite or
+              editorialise. Every article links to the publisher's own page, and the source
+              and timestamp shown come from that publisher's feed unchanged.
+            </p>
+          </section>
+
+          <section id="problem" aria-labelledby="problem-title">
+            <h2 id="problem-title">Problem and solution</h2>
+            <h3>The problem</h3>
+            <p>
+              Reading across many publishers means opening many tabs, and every one of them
+              wants to keep you there. Meanwhile a "smart summary" feature is easy to fake:
+              bolt a language model onto the front end, print something confident, and hope
+              nobody checks the citation.
+            </p>
+            <h3>The solution</h3>
+            <p>
+              One dashboard with two honest data paths. Publisher feeds are fetched at build
+              time into a static snapshot, because most news servers do not allow a browser
+              to read their feeds directly. CORS-enabled APIs — Hacker News, Hugging Face,
+              GitHub, Wikipedia — are called live in the browser, cached briefly, and spaced
+              out to respect each provider's rate limit.
+            </p>
+            <p>
+              Search summaries are <strong>extractive</strong>: the sentences shown already
+              exist in the retrieved articles, and each carries a numbered citation back to
+              its source. Nothing is generated, so nothing can be invented.
+            </p>
+            <div class="callout">
+              <p>
+                Search does not call a language model, and the interface says so. That would
+                need an API key, and an API key cannot be kept secret in a static front end.
+                Adding a generation backend later means replacing one function,
+                <code>buildExtractiveSummary</code>.
+              </p>
+            </div>
+          </section>
+
+          <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Key features</h2>
+            <div class="keypoints">
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">01</span>
+                <div>
+                  <h3>Live news dashboard</h3>
+                  <p>Ten publisher feeds in a build-time snapshot, plus four live APIs, with the collection time shown rather than implying second-by-second freshness.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">02</span>
+                <div>
+                  <h3>Extractive search with citations</h3>
+                  <p>Sentences are selected from retrieved articles and each one carries a numbered reference to the source it came from.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">03</span>
+                <div>
+                  <h3>Personal library</h3>
+                  <p>Saved articles, reading history, books and study material. Signed in, it is stored in Postgres under the reader's own identity; signed out, the same features run against <code>localStorage</code> and the interface states which mode is active.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">04</span>
+                <div>
+                  <h3>Admin area behind Row Level Security</h3>
+                  <p>An authenticated dashboard for content, gated in the client for experience and enforced in the database for real.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">05</span>
+                <div>
+                  <h3>Light and dark themes</h3>
+                  <p>Tailwind design tokens with a context provider, following the system preference until the reader chooses otherwise.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="architecture" aria-labelledby="architecture-title">
+            <h2 id="architecture-title">Architecture</h2>
+            <p>
+              A single-page React application with real routes, talking to Postgres through
+              Supabase. Every layer has one responsibility, and the boundaries are typed.
+            </p>
+            <pre><code>scripts/
+  feeds.mjs      Fetch publisher RSS at build time → public/data/feeds.json
+  postbuild.mjs  Copy index.html → 404.html for GitHub Pages deep links
+src/
+  components/    layout · news · ui · content — presentation only
+  context/       ThemeContext, AuthContext (session + admin role)
+  hooks/         useLiveData, usePersonalization, useAsyncData
+  lib/           env, supabase client, typed schema, API cache, errors
+  pages/         one file per route, lazy-loaded from router.tsx
+  services/      typed data access; every call returns a Result
+supabase/
+  migrations/    0001 schema · 0002 RLS · 0003 storage · 0004 first admin
+                 0005 personalisation
+</code></pre>
+            <h3>Two decisions that shaped the codebase</h3>
+            <p>
+              <strong>Every service call returns a <code>Result</code>.</strong> Nothing throws
+              across a module boundary. A failure comes back as
+              <code>{ data: null, error: { … } }</code>, so a page can render an error state
+              without wrapping every call in a try/catch. Backend calls also race a
+              twelve-second timeout, so an unreachable project can never leave a page on a
+              loading skeleton forever.
+            </p>
+            <p>
+              <strong>No placeholder records exist.</strong> The app previously fell back to
+              hardcoded demo data when no backend was configured. That has been removed. An
+              unconfigured or unreachable backend now produces a clear explanation — never
+              invented content.
+            </p>
+          </section>
+
+          <section id="security" aria-labelledby="security-title">
+            <h2 id="security-title">Security: the database is the control</h2>
+            <p>
+              Row Level Security is enabled on every table, and the policies are written so
+              that access follows identity rather than trusting the client.
+            </p>
+            <ul>
+              <li><strong>Admin checks are a database function.</strong> <code>public.is_admin()</code> reads <code>request.jwt.claims</code>, so a forged client-side flag means nothing.</li>
+              <li><strong>Roles cannot be self-granted.</strong> A trigger rejects any role change unless the caller is already an admin <em>and</em> is editing someone else's row.</li>
+              <li><strong>Personal data is private by construction.</strong> Interests, saved articles, reading history and notifications live in tables whose policies are scoped to <code>auth.uid()</code>.</li>
+              <li><strong>Untrusted text is never rendered as markup.</strong> Publisher summaries are stripped and decoded at build time, and links pass through a <code>safeUrl</code> helper that allows only <code>http(s)</code>.</li>
+            </ul>
+            <p>
+              The client-side <code>ProtectedRoute</code> hides the dashboard from non-admins.
+              It is there for experience, not for security — the policies are what actually
+              stop an unauthorised read or write.
+            </p>
+          </section>
+
+          <section id="challenges" aria-labelledby="challenges-title">
+            <h2 id="challenges-title">Challenges and what I learned</h2>
+            <h3>Feeds a browser is not allowed to read</h3>
+            <p>
+              The obvious design — fetch the news in the browser — fails, because most news
+              servers send no CORS headers. Moving the fetch to build time solved it and
+              taught me to be explicit about freshness: the interface shows the collection
+              time instead of implying the data is live when it is a snapshot.
+            </p>
+            <h3>Deciding not to fake a feature</h3>
+            <p>
+              The easiest way to ship "AI search" would have been a prompt and a spinner. But
+              a static front end cannot hold a secret, so the honest move was extractive
+              search with citations — and to say in the interface that this is what it is.
+              Learning to cut a feature rather than misrepresent it was the most useful thing
+              in the project.
+            </p>
+            <h3>Where to enforce a rule</h3>
+            <p>
+              My first instinct was to guard the admin area in React. That is a UI
+              convenience, not a control: anyone can call the API directly. Writing the real
+              rule as a Postgres policy — and the client guard as a second, cosmetic layer —
+              changed how I think about authorisation.
+            </p>
+          </section>
+
+          <section id="stack" aria-labelledby="stack-title">
+            <h2 id="stack-title">Stack</h2>
+            <ul class="tag-list">
+              <li>React 18</li><li>TypeScript</li><li>Vite 5</li><li>React Router 6</li>
+              <li>Tailwind CSS 3</li><li>Supabase</li><li>PostgreSQL</li><li>Row Level Security</li>
+              <li>GitHub Actions</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem and solution</a></li>
+            <li><a href="#features">Key features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#stack">Stack</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>See the code, the migrations and the security policies in full.</p>
+            <a href="https://github.com/shawonhaque/Nexora" target="_blank" rel="noopener">Open the repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More case studies">
+        <a href="../index.html#projects">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All projects</span>
+        </a>
+        <a class="is-next" href="portfolio.html">
+          <span class="page-nav-dir">Next case study</span>
+          <span class="page-nav-title">Personal Portfolio <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Case studies</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

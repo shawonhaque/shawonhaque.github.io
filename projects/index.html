@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Projects and case studies — Shawon Haque</title>
+  <meta name="description" content="Case studies of the web applications Shawon Haque has built — the problem, the architecture, the security decisions and the trade-offs, with source code for each." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/projects/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Projects and case studies — Shawon Haque" />
+  <meta property="og:description" content="How each project was built: the problem, the architecture, the security decisions and the trade-offs." />
+  <meta property="og:url" content="https://shawonhaque.github.io/projects/" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Shawon Haque — Full Stack Developer" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects and case studies — Shawon Haque" />
+  <meta name="twitter:description" content="How each project was built: the problem, the architecture, the security decisions and the trade-offs." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Projects and case studies",
+    "url": "https://shawonhaque.github.io/projects/",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    },
+    "hasPart": [
+      { "@type": "TechArticle", "name": "NEXORA — a full-stack knowledge platform", "url": "https://shawonhaque.github.io/projects/nexora.html" },
+      { "@type": "TechArticle", "name": "Personal Portfolio", "url": "https://shawonhaque.github.io/projects/portfolio.html" }
+    ]
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../journey.html">Journey</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../index.html"><span aria-hidden="true">←</span> Home</a>
+        <p class="eyebrow">Selected work</p>
+        <h1 id="page-title">Case studies</h1>
+        <p class="lede">
+          Two projects, written up in full — the problem each one solves, how it is put
+          together, the security decisions behind it, and what I would do differently.
+          Every claim here can be checked against the source.
+        </p>
+      </section>
+
+      <ul class="metrics" aria-label="Portfolio at a glance">
+        <li class="metric"><span class="metric-value">2</span><span class="metric-label">Projects shipped</span></li>
+        <li class="metric"><span class="metric-value">3</span><span class="metric-label">Public repositories</span></li>
+        <li class="metric"><span class="metric-value">16</span><span class="metric-label">Technologies used</span></li>
+        <li class="metric"><span class="metric-value">5</span><span class="metric-label">SQL migrations written</span></li>
+      </ul>
+
+      <div class="post-list">
+        <a class="post-card" href="nexora.html">
+          <p class="post-meta"><span class="post-tag">Full stack</span><span>React · TypeScript · Supabase · PostgreSQL</span></p>
+          <h2>NEXORA — a knowledge platform that respects its sources</h2>
+          <p>
+            A twenty-page-module React application for news, books, study material and writing.
+            Publisher feeds are collected at build time; search returns extractive answers
+            with citations rather than generated text. Seventeen Postgres tables with Row
+            Level Security on every one, five migrations, and a typed service layer where
+            nothing throws across a module boundary.
+          </p>
+          <span class="link-arrow">Read the case study<span aria-hidden="true"> →</span></span>
+        </a>
+
+        <a class="post-card" href="portfolio.html">
+          <p class="post-meta"><span class="post-tag">Frontend</span><span>HTML · CSS · JavaScript · Accessibility</span></p>
+          <h2>This portfolio — no framework, no build step</h2>
+          <p>
+            The site you are reading: semantic HTML, modern CSS and vanilla JavaScript, with
+            no runtime dependencies. It covers the accessibility and SEO work, the contact
+            form that cannot silently lose a message, and the resume PDF that needed its
+            colour space rewritten before every reader would show the photo.
+          </p>
+          <span class="link-arrow">Read the case study<span aria-hidden="true"> →</span></span>
+        </a>
+      </div>
+
+      <nav class="page-nav" aria-label="More pages">
+        <a href="../journey.html">
+          <span class="page-nav-dir">Process</span>
+          <span class="page-nav-title">My journey and workflow <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="is-next" href="../index.html#contact">
+          <span class="page-nav-dir">Get in touch</span>
+          <span class="page-nav-title">Contact me <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Case studies</a>
+        <a href="../journey.html">Journey</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

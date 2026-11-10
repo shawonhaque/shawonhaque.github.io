@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Personal Portfolio case study — Shawon Haque</title>
+  <meta name="description" content="How this site was built: semantic HTML, modern CSS and vanilla JavaScript with no framework and no build step — plus the accessibility, SEO and PDF work behind it." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/projects/portfolio.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Personal Portfolio case study — no framework, no build step" />
+  <meta property="og:description" content="Semantic HTML, modern CSS and vanilla JavaScript. The accessibility, SEO and PDF work that made it hold up." />
+  <meta property="og:url" content="https://shawonhaque.github.io/projects/portfolio.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-portfolio.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The Shawon Haque portfolio home page" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Personal Portfolio case study — no framework, no build step" />
+  <meta name="twitter:description" content="Semantic HTML, modern CSS and vanilla JavaScript, with accessibility, SEO and a PDF that renders in every reader." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-portfolio.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Personal Portfolio case study — no framework, no build step",
+    "description": "How this site was built: semantic HTML, modern CSS and vanilla JavaScript, plus the accessibility, SEO and PDF work behind it.",
+    "url": "https://shawonhaque.github.io/projects/portfolio.html",
+    "image": "https://shawonhaque.github.io/assets/img/project-portfolio.jpg",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Shawon Haque — Personal Portfolio",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Web",
+      "url": "https://shawonhaque.github.io/",
+      "programmingLanguage": ["HTML", "CSS", "JavaScript"],
+      "codeRepository": "https://github.com/shawonhaque/shawonhaque.github.io"
+    }
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="index.html">Case studies</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+        <p class="eyebrow">Case study · Frontend</p>
+        <h1 id="page-title">This portfolio — no framework, no build step</h1>
+        <p class="lede">
+          A single-page site in semantic HTML, modern CSS and vanilla JavaScript. The
+          interesting problems were not the layout — they were the details that decide
+          whether a site actually works for everyone who opens it.
+        </p>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="https://shawonhaque.github.io/" target="_blank" rel="noopener">Live site<span aria-hidden="true"> ↗</span></a>
+          <a class="btn" href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">Source code<span aria-hidden="true"> ↗</span></a>
+        </div>
+      </section>
+
+      <ul class="metrics" aria-label="Project at a glance">
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Runtime dependencies</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Build steps</span></li>
+        <li class="metric"><span class="metric-value">~16 KB</span><span class="metric-label">First paint, gzipped</span></li>
+        <li class="metric"><span class="metric-value">5</span><span class="metric-label">PDF renderers tested</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">Overview</h2>
+            <p>
+              The site is one page — hero, about, expertise, projects, experience, resume
+              and contact — plus a custom 404 and this set of inner pages. There is no
+              framework and no build step: what is in the repository is what the browser
+              receives.
+            </p>
+            <p>
+              That was a deliberate choice, not a limitation. A portfolio is mostly static
+              content with a small amount of interaction. A framework would have added a
+              build pipeline, a dependency tree to keep patched, and a bundle to download —
+              all to render text and a few cards.
+            </p>
+          </section>
+
+          <section id="problem" aria-labelledby="problem-title">
+            <h2 id="problem-title">Problem and solution</h2>
+            <h3>The problem</h3>
+            <p>
+              A developer portfolio has to do a specific job: convince a stranger, in under a
+              minute, that the person behind it is careful. That makes the failure modes
+              unusually costly — a broken link, a layout that collapses on a phone, a theme
+              that flashes white before it loads, or a resume that will not open all
+              undercut the claim the site is making.
+            </p>
+            <h3>The solution</h3>
+            <p>
+              Treat the unglamorous details as the feature. Every interactive element is
+              keyboard reachable, both themes ship with system detection, the resume is a
+              real PDF that renders in every reader, and the whole thing works with
+              JavaScript switched off.
+            </p>
+            <div class="callout">
+              <p>
+                The rule I set myself: <strong>nothing on the page may depend on an effect
+                that might not run.</strong> Animation, WebGL and smooth scrolling are all
+                additive. Remove any of them and the site is still complete.
+              </p>
+            </div>
+          </section>
+
+          <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Key features</h2>
+            <div class="keypoints">
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">01</span>
+                <div>
+                  <h3>Light and dark themes</h3>
+                  <p>Applied before the first paint by a small inline script, so there is no flash of the wrong theme. The choice persists, and falls back to the system preference.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">02</span>
+                <div>
+                  <h3>Accessible by default</h3>
+                  <p>Skip link, one <code>h1</code> per page, semantic landmarks, visible focus states, ARIA labels on icon-only controls, and a full <code>prefers-reduced-motion</code> path.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">03</span>
+                <div>
+                  <h3>Complete SEO and social metadata</h3>
+                  <p>Descriptive titles, canonical URLs, Open Graph and Twitter cards, JSON-LD structured data, <code>robots.txt</code> and a sitemap.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">04</span>
+                <div>
+                  <h3>A contact form that cannot silently lose a message</h3>
+                  <p>It posts to a relay service; if that is unreachable, it opens the visitor's mail client with the message already written.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">05</span>
+                <div>
+                  <h3>A resume PDF that renders everywhere</h3>
+                  <p>Generated from an HTML source, then post-processed — see the note on colour space below.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="architecture" aria-labelledby="architecture-title">
+            <h2 id="architecture-title">Architecture</h2>
+            <p>
+              Three layers, kept separate: markup, a token-driven stylesheet, and a small
+              progressive-enhancement script.
+            </p>
+            <pre><code>index.html               One page: hero, about, expertise, projects,
+                         experience, resume, contact
+404.html                 Custom not-found page
+projects/                Case studies (this page)
+assets/
+  css/styles.css         Design tokens, layout, components, print styles
+  js/main.js             Theme, navigation, scroll, form — all guarded
+  js/motion.js           Optional WebGL hero and scroll effects
+  js/vendor/             Lenis, GSAP, ScrollTrigger, Three.js — committed
+  img/                   WebP with JPEG or PNG fallbacks
+  resume/                resume.html source → Shawon-Haque-Resume.pdf
+tools/build-resume.py    Renders the resume and fixes its colour space
+</code></pre>
+            <h3>One stylesheet, driven by tokens</h3>
+            <p>
+              Colours, spacing, radii and the type scale are CSS custom properties. The two
+              themes are just two sets of values for the same tokens, so a component never
+              needs to know which theme is active. Adding the case-study pages you are
+              reading meant adding new components that consume the existing tokens — not a
+              second design system.
+            </p>
+            <h3>JavaScript as an enhancement</h3>
+            <p>
+              Every script is <code>defer</code>red, and every feature checks for the element
+              it needs before touching it. The page is readable and navigable with
+              JavaScript disabled; the script only adds smooth scrolling, the reveal
+              animation, the theme toggle and the form handling.
+            </p>
+          </section>
+
+          <section id="challenges" aria-labelledby="challenges-title">
+            <h2 id="challenges-title">Challenges and what I learned</h2>
+
+            <h3>A resume photo that vanished in some readers</h3>
+            <p>
+              The resume PDF showed the photo on my machine and a blank space on others.
+              The cause was not the image — it was the colour space. Chrome had written it
+              as <code>/ColorSpace [/ICCBased …]</code> with a Chrome-specific profile and no
+              alternate, and small PDF engines, including the one in many mobile viewers,
+              have no ICC support. They do not approximate the image; they drop it.
+            </p>
+            <p>
+              The fix was to rewrite the colour space as <code>/DeviceRGB</code> in a
+              post-processing step, and to verify the result in five independent renderers
+              rather than one. The lesson was that "it works on my machine" is a statement
+              about my renderer, not about the file.
+            </p>
+
+            <h3>An animation that hid the page</h3>
+            <p>
+              When I added scroll-driven animation, the first version set elements to
+              <code>opacity: 0</code> as the tween was created and revealed them when a
+              scroll trigger fired. If a trigger never fired, the content simply stayed
+              invisible. Setting <code>immediateRender: false</code> fixed it: the element
+              keeps its normal appearance until its animation actually starts.
+            </p>
+            <p>
+              The way I caught it was by rendering the page with JavaScript disabled and
+              comparing. That is now a habit — the enhanced page must look the same as the
+              plain one.
+            </p>
+
+            <h3>Deciding what not to ship</h3>
+            <p>
+              An alternative version of this site used CSS-drawn shapes as project
+              thumbnails. They looked tidy and meant nothing: they were illustrations of
+              projects rather than the projects. I replaced them with real screenshots.
+              The same reasoning removed a decorative statistic and a certification section
+              I could not yet back up.
+            </p>
+          </section>
+
+          <section id="stack" aria-labelledby="stack-title">
+            <h2 id="stack-title">Stack</h2>
+            <ul class="tag-list">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Web accessibility</li>
+              <li>SEO</li><li>Core Web Vitals</li><li>GitHub Pages</li><li>GitHub Actions</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem and solution</a></li>
+            <li><a href="#features">Key features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#stack">Stack</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>The whole site is public — markup, stylesheet and scripts.</p>
+            <a href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">Open the repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More case studies">
+        <a href="nexora.html">
+          <span class="page-nav-dir">Previous case study</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> NEXORA</span>
+        </a>
+        <a class="is-next" href="../index.html#projects">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All projects</span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Case studies</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
