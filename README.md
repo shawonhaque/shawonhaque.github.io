@@ -21,6 +21,8 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
   WebP with JPEG fallback, lazy loading below the fold
 - Resume: one-page PDF, viewable in the browser or downloadable from the Resume section
 - Contact form that composes a prefilled email, plus one-click address copy
+- Optional motion: a WebGL hero constellation and scroll-driven reveals, both
+  additive — the site works the same without them
 - Custom 404 page
 
 ## Structure
@@ -38,8 +40,12 @@ GitHub Pages, which keeps the site fast and the maintenance surface small.
 └── assets/
     ├── css/styles.css    # Design tokens, layout, components
     ├── js/main.js        # Theme, navigation, scroll behaviour
+    ├── js/motion.js      # Optional motion layer (WebGL hero, scroll effects)
     ├── js/vendor/        # Third-party scripts, committed as-is
-    │   └── lenis.min.js  # Smooth wheel scrolling (MIT, v1.3.27)
+    │   ├── lenis.min.js      # Smooth wheel scrolling (MIT, v1.3.27)
+    │   ├── gsap.min.js       # GSAP core (standard licence)
+    │   ├── ScrollTrigger.min.js
+    │   └── three.module.min.js  # Three.js, ES module (MIT, r160)
     ├── img/              # Optimised images, icons, social card
     │   └── portrait-new.*  # Hero portrait, alpha cut-out (WebP + PNG)
     └── resume/
@@ -54,6 +60,30 @@ An editorial layout: a greige canvas behind white panels, near-black type set in
 Inter, and a single restrained accent. The hero pairs a large outlined name with an
 alpha cut-out portrait, and the experience block inverts to near-black for contrast.
 Light and dark themes both run off the same token set.
+
+## Motion
+
+Everything animated is optional. The site is complete and readable with JavaScript
+off, with motion turned down, and on a device that cannot run WebGL — the layers
+below only add to what is already there.
+
+- **Hero constellation** — a Three.js point field, drawn behind the hero. It is
+  loaded as an ES module only after the hero nears the viewport, only on screens
+  wider than 720px, and only when WebGL is available. It pauses when scrolled out
+  of view or when the tab is hidden, and re-tints itself when the theme changes.
+- **Scroll effects** — GSAP with ScrollTrigger drives the section headings, the
+  ghost watermark, the experience blocks and the hero copy. Every tween sets
+  `immediateRender: false`, so nothing is hidden until its animation actually
+  starts; if ScrollTrigger never fires, the page looks exactly like the plain
+  version.
+- **Reduced motion** — when `prefers-reduced-motion: reduce` is set, the canvas is
+  hidden in CSS, the hero scene is never fetched, and no scroll tweens are created.
+  The reveal-on-scroll in `main.js` still runs on IntersectionObserver, which is
+  the same behaviour the site had before GSAP was added.
+
+Three.js (MIT), GSAP and ScrollTrigger (GreenSock standard licence) and Lenis (MIT)
+are committed under `assets/js/vendor/` and loaded from there, so the site has no
+runtime dependency on a CDN.
 
 ## Editing the resume
 
