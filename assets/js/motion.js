@@ -256,11 +256,12 @@
      target different elements and never fight it.
      ============================================================ */
   function initScrollMotion() {
-    if (typeof window.gsap !== "function") return;
-    var ScrollTrigger = window.ScrollTrigger;
-    if (!ScrollTrigger) return;
-
+    /* gsap is an object, not a function — check for the methods we call. */
     var gsap = window.gsap;
+    var ScrollTrigger = window.ScrollTrigger;
+    if (!gsap || typeof gsap.from !== "function" || typeof gsap.registerPlugin !== "function") return;
+    if (!ScrollTrigger || typeof ScrollTrigger.create !== "function") return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     /* Every tween below sets immediateRender: false. Without it GSAP hides the
