@@ -19,7 +19,9 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - Accessible: skip link, keyboard navigation, visible focus states, ARIA-labelled
   controls, reduced-motion support
 - SEO: descriptive title and meta description, canonical URL, Open Graph and
-  Twitter cards, JSON-LD `Person` structured data, `robots.txt` and `sitemap.xml`
+  Twitter cards, JSON-LD structured data (`Person` and `WebSite` on the home
+  page, `BlogPosting`/`TechArticle` plus `BreadcrumbList` on inner pages),
+  an RSS feed, `robots.txt` and `sitemap.xml` with `lastmod` dates
 - Performance: system font fallbacks, `font-display: swap`, preloaded hero image,
   WebP with JPEG fallback, lazy loading below the fold
 - Resume: one-page PDF, viewable in the browser or downloadable from the Resume section
@@ -64,6 +66,7 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 ├── site.webmanifest      # Web app manifest
 ├── robots.txt            # Crawler rules + sitemap reference
 ├── sitemap.xml           # XML sitemap
+├── feed.xml              # RSS feed of the writing
 ├── favicon.ico           # Browser favicon
 ├── tools/
 │   └── build-resume.py   # Renders the resume PDF and fixes its colour space

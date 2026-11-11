@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shawon Haque — Writing</title>
+    <link>https://shawonhaque.github.io/writing.html</link>
+    <description>Long-form notes on React, TypeScript, Postgres and the web — by Shawon Haque, Full Stack Developer.</description>
+    <language>en</language>
+    <managingEditor>shawonhaque141@outlook.com (Shawon Haque)</managingEditor>
+    <webMaster>shawonhaque141@outlook.com (Shawon Haque)</webMaster>
+    <lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://shawonhaque.github.io/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Row Level Security is the only authorisation I trust</title>
+      <link>https://shawonhaque.github.io/blog/row-level-security.html</link>
+      <guid isPermaLink="true">https://shawonhaque.github.io/blog/row-level-security.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0000</pubDate>
+      <category>Database security</category>
+      <description>Why NEXORA puts every access rule in Postgres instead of the React client: 17 tables, 27 policies, an is_admin() helper and a trigger that stops a user promoting themselves.</description>
+    </item>
+
+    <item>
+      <title>A service layer that never throws</title>
+      <link>https://shawonhaque.github.io/blog/typed-service-layer.html</link>
+      <guid isPermaLink="true">https://shawonhaque.github.io/blog/typed-service-layer.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0000</pubDate>
+      <category>Architecture</category>
+      <description>How NEXORA's 14 service modules return a typed Result instead of throwing, so a database error becomes a value the UI must handle rather than a crash it might miss.</description>
+    </item>
+
+    <item>
+      <title>Animation that is safe to remove</title>
+      <link>https://shawonhaque.github.io/blog/progressive-enhancement.html</link>
+      <guid isPermaLink="true">https://shawonhaque.github.io/blog/progressive-enhancement.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0000</pubDate>
+      <category>Frontend</category>
+      <description>The rule behind this site's motion: every effect is additive. The WebGL hero, smooth scrolling and scroll reveals all skip themselves on reduced motion, small screens or slow devices — and the page is complete without them.</description>
+    </item>
+
+    <item>
+      <title>The build is the safest place to call the network</title>
+      <link>https://shawonhaque.github.io/blog/build-time-feeds.html</link>
+      <guid isPermaLink="true">https://shawonhaque.github.io/blog/build-time-feeds.html</guid>
+      <pubDate>Tue, 10 Nov 2026 00:00:00 +0000</pubDate>
+      <category>Build tooling</category>
+      <description>How NEXORA collects 24 publisher feeds at build time instead of in the browser: why CORS forced the decision, and how one bad feed can never break the deploy.</description>
+    </item>
+  </channel>
+</rss>
