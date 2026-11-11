@@ -36,10 +36,15 @@
   }
 
   /* ---------- Parallax ---------- */
-  /* A small counter-movement between the background glow and the hero
-     portrait. Both are driven from the existing scroll rAF loop. */
+  /* Depth between the background glow and the hero portrait. The glow sits
+     far back, so it drifts down with the page; the portrait is the nearest
+     layer, so it rises as you scroll — the two move in opposite directions,
+     which is what reads as depth rather than everything sliding together.
+     The transform lands on .portrait, a different element from the one that
+     carries the entrance animation (.hero-visual) and the idle float
+     (.portrait img), so the three never fight over the same property. */
   var parallaxGlow = document.querySelector(".bg-glow");
-  var parallaxVisual = document.querySelector(".hero-visual");
+  var parallaxVisual = document.querySelector(".portrait");
   var parallaxOn = !reduceMotion && !!(parallaxGlow || parallaxVisual);
 
   var scrollCue = document.querySelector(".scroll-cue");
@@ -149,10 +154,16 @@
     if (scrollCue) scrollCue.classList.toggle("is-hidden", y > 60);
 
     if (parallaxOn) {
+      /* Far layer: the glow sinks gently as the page moves. */
       var shift = Math.min(y * 0.06, 34);
       if (parallaxGlow) parallaxGlow.style.transform = "translate3d(0," + shift.toFixed(2) + "px,0)";
+      /* Near layer: the portrait rises faster than the page, so it lifts away
+         from the copy as you scroll. The 0.08 factor keeps the rise well below
+         the scroll itself, so the figure never catches the name above it while
+         the two are still on screen. */
       if (parallaxVisual && y < window.innerHeight) {
-        parallaxVisual.style.transform = "translate3d(0," + (y * 0.05).toFixed(2) + "px,0)";
+        var rise = Math.min(y * 0.08, 72);
+        parallaxVisual.style.transform = "translate3d(0," + (-rise).toFixed(2) + "px,0)";
       }
     }
   };
@@ -302,6 +313,23 @@
   if (entranceClasses.some(function (name) { return root.classList.contains(name); })) {
     if (lastHero) lastHero.addEventListener("animationend", clearIntro);
     introTimer = window.setTimeout(clearIntro, 2200);
+  }
+
+  /* ---------- Lazy loading with animation ---------- */
+  /* The pre-paint script hides the hero portrait while its bytes are still in
+     flight, so on a slow connection it fades in as it arrives instead of
+     popping in after the entrance has finished. The class is cleared on load,
+     on error, and on a short timeout, so the image is never left hidden. */
+  var portraitImg = document.querySelector(".portrait img");
+  if (root.classList.contains("has-img-pending") && portraitImg) {
+    var revealPortrait = function () { root.classList.remove("has-img-pending"); };
+    if (portraitImg.complete) {
+      revealPortrait();
+    } else {
+      portraitImg.addEventListener("load", revealPortrait);
+      portraitImg.addEventListener("error", revealPortrait);
+      window.setTimeout(revealPortrait, 2500);
+    }
   }
 
   /* ---------- In-page anchor navigation ---------- */
