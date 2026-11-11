@@ -106,7 +106,11 @@
        has-intro    the curtain, on the first visit of a session only, so a
                     reload does not replay it
        has-entrance the hero entrance, on every load
-       main.js removes both once their animation finishes. -->
+       has-img-pending keeps the hero portrait hidden until its bytes decode,
+                    so a slow image fades in instead of popping in mid-entrance.
+                    It is only set when motion is welcome; without JS, or with
+                    reduced motion, the image simply shows straight away.
+       main.js removes the entrance flags once their animation finishes. -->
   <script>
     (function () {
       var first = true;
@@ -117,6 +121,14 @@
       var root = document.documentElement;
       if (first) root.classList.add("has-intro");
       root.classList.add("has-entrance");
+      try {
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          root.classList.add("has-img-pending");
+          /* Safety net: main.js clears this as soon as the image is ready, but
+             if that script never runs the portrait must still appear. */
+          window.setTimeout(function () { root.classList.remove("has-img-pending"); }, 1400);
+        }
+      } catch (e) {}
     })();
   </script>
 </head>
