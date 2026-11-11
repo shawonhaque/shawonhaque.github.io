@@ -69,7 +69,7 @@ the 404 page are separate documents that share the same stylesheet and tokens.
     │   ├── ScrollTrigger.min.js
     │   └── three.module.min.js  # Three.js, ES module (MIT, r160)
     ├── img/              # Optimised images, icons, social card
-    │   └── portrait-new.*  # Hero portrait, alpha cut-out (WebP + PNG)
+    │   └── portrait-3d.*   # Hero 3D render, alpha cut-out (WebP + PNG)
     └── resume/
         ├── resume.html       # Source for the PDF (print stylesheet)
         ├── shawon-haque.png  # Headshot used in the resume header

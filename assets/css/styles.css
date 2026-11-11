@@ -447,8 +447,8 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  /* Sized by the portrait's own width, so the box is exactly as tall as the
-     image and the intrinsic 386:474 ratio is never stretched. */
+  /* Sized by the 3D figure's height; the box grows with it so the intrinsic
+     363:941 ratio is never stretched. */
   height: auto;
   /* The portrait drifts up to 16px above this box, so leave headroom under the
      title rather than letting the peak crowd it. */
@@ -457,8 +457,8 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .portrait { display: flex; align-items: flex-end; }
 .portrait img {
   display: block;
-  width: 280px;
-  height: auto;
+  height: clamp(300px, 42vh, 430px);
+  width: auto;
   max-width: 100%;
   object-fit: contain;
   object-position: center bottom;
@@ -1467,7 +1467,7 @@ html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
   .hero-actions { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-bottom: 26px; }
   .hero-copy { max-width: 100%; }
   .hero-visual { margin-top: 32px; }
-  .portrait img { width: 220px; }
+  .portrait img { height: 300px; }
   .hero-links { justify-content: flex-start; gap: 7px; }
   .hero-links a { min-width: 0; padding: 8px 13px; }
   .hero-stack { padding-bottom: 22px; }
@@ -1477,7 +1477,7 @@ html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
 
 @media (max-width: 560px) {
   .hero-visual { margin-top: 30px; }
-  .portrait img { width: 215px; }
+  .portrait img { height: 260px; }
   .hero-actions { gap: 16px; padding-bottom: 20px; }
   .projects { grid-template-columns: 1fr; gap: 18px; }
   .experience { border-width: 3px; }
