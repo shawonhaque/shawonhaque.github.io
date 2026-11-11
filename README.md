@@ -35,6 +35,13 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - Process page: the learning path through the stack and the five-stage workflow
 - Custom 404 page
 
+## Related repositories
+
+- **[shawonhaque.github.io](https://github.com/shawonhaque/shawonhaque.github.io)** — this site
+- **[Nexora](https://github.com/shawonhaque/Nexora)** — full-stack knowledge platform · [live](https://shawonhaque.github.io/Nexora/)
+- **[Shawon-](https://github.com/shawonhaque/Shawon-)** — talking-video portfolio, TanStack Start · [live](https://shawonhaque.github.io/Shawon-/)
+- **[shawonhaque](https://github.com/shawonhaque/shawonhaque)** — GitHub profile README
+
 ## Structure
 
 ```
@@ -52,7 +59,8 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 ├── projects/
 │   ├── index.html        # Case-study index
 │   ├── nexora.html       # NEXORA case study
-│   └── portfolio.html    # This site's case study
+│   ├── portfolio.html    # This site's case study
+│   └── shawon.html       # Talking-video portfolio case study
 ├── site.webmanifest      # Web app manifest
 ├── robots.txt            # Crawler rules + sitemap reference
 ├── sitemap.xml           # XML sitemap
