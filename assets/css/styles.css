@@ -457,7 +457,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .portrait { display: flex; align-items: flex-end; }
 .portrait img {
   display: block;
-  height: clamp(300px, 42vh, 430px);
+  height: clamp(320px, 46vh, 520px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
