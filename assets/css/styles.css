@@ -276,46 +276,88 @@ html.has-intro .curtain-mark { animation: fadeUp 0.7s 0.05s var(--ease) forwards
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
   color: var(--heading);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   flex-shrink: 0;
 }
-.brand:hover { text-decoration: none; color: var(--accent); }
-.brand-mark { width: 34px; height: 34px; border-radius: 10px; display: block; }
+.brand:hover { text-decoration: none; }
+
+/* Circular monogram: an outlined ring that fills with ink once the page
+   scrolls, echoing the app's navigation mark. */
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--heading);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease), transform 0.9s var(--ease);
+}
+.brand:hover .brand-mark { transform: rotate(360deg); }
+.site-header.is-stuck .brand-mark { background: var(--ink); color: var(--bg); }
 .brand-text { font-size: 0.98rem; }
 
-.primary-nav { display: flex; align-items: center; gap: 26px; }
-.primary-nav ul {
+.primary-nav { display: flex; align-items: center; gap: 10px; }
+
+/* The links sit in a pill whose surface fades in on scroll; a single ink
+   pill slides underneath the active link. */
+.nav-pill {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 24px;
+  padding: 5px;
+  border-radius: var(--radius-pill);
+  transition: background-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.nav-pill ul {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .primary-nav a {
   position: relative;
-  color: var(--ink);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: 36px;
+  padding: 0 15px;
+  border-radius: var(--radius-pill);
+  color: var(--muted);
   font-size: 0.86rem;
   letter-spacing: -0.01em;
-  padding-block: 4px;
+  white-space: nowrap;
+  transition: color 0.4s var(--ease);
 }
-.primary-nav a:hover { color: var(--accent); text-decoration: none; }
-.primary-nav a::after {
-  content: "";
+.primary-nav a:hover { color: var(--heading); text-decoration: none; }
+.primary-nav a.is-active { color: var(--bg); }
+
+.nav-indicator {
   position: absolute;
+  top: 5px;
+  bottom: 5px;
   left: 0;
-  right: 100%;
-  bottom: -3px;
-  height: 1px;
-  background: currentColor;
-  transition: right 0.3s var(--ease);
+  z-index: 0;
+  width: 0;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  opacity: 0;
+  transition: transform 0.5s var(--ease), width 0.5s var(--ease), opacity 0.3s var(--ease);
 }
-.primary-nav a:hover::after,
-.primary-nav a.is-active::after { right: 0; }
-.primary-nav a.is-active { color: var(--accent); }
+
+.site-header.is-stuck .nav-pill {
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--line);
+}
 
 .theme-toggle {
   display: grid;
@@ -582,6 +624,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   color: var(--muted);
 }
 .ghost b { color: var(--heading); font-weight: 500; }
+.ghost.on-block { color: var(--on-block-muted); }
+.ghost.on-block b { color: var(--on-block); }
+.accent.on-block { color: var(--on-block-muted); }
 .section-head h2 { position: relative; z-index: 1; }
 .section-lede {
   color: var(--muted);
@@ -1451,7 +1496,7 @@ html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 10px 0 18px;
+    padding: 12px 0 18px;
     background: var(--paper);
     border-bottom: 1px solid var(--line);
     box-shadow: var(--shadow-md);
@@ -1461,14 +1506,22 @@ html.has-entrance .hero-stack { animation: fadeUp 0.8s 0.95s var(--ease) both; }
     transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
   }
   .primary-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
-  .primary-nav ul { flex-direction: column; align-items: stretch; gap: 0; }
+  /* On small screens the pill becomes a plain stacked list; the sliding
+     indicator and the glassy surface are desktop-only. */
+  .nav-pill { display: block; padding: 0; background: none; box-shadow: none; }
+  .site-header.is-stuck .nav-pill { background: none; box-shadow: none; backdrop-filter: none; }
+  .nav-indicator { display: none; }
+  .nav-pill ul { flex-direction: column; align-items: stretch; gap: 0; }
   .primary-nav a {
     display: block;
+    height: auto;
     padding: 13px clamp(22px, 5vw, 32px);
+    border-radius: 0;
     font-size: 0.95rem;
+    color: var(--ink);
     border-bottom: 1px solid var(--line);
   }
-  .primary-nav a::after { display: none; }
+  .primary-nav a.is-active { color: var(--accent); }
   .theme-toggle { margin: 14px clamp(22px, 5vw, 32px) 0; }
   .nav-toggle { display: flex; }
   .header-inner { position: relative; }

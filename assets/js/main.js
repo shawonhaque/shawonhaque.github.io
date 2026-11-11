@@ -175,7 +175,22 @@
     });
   }
 
-  /* ---------- Active section highlighting ---------- */
+  /* ---------- Navigation: active link + sliding indicator ---------- */
+  var navIndicator = document.getElementById("navIndicator");
+
+  /* Slide the ink pill under a link. The offset comes from bounding rects so it
+     holds no matter how the link list is laid out. */
+  var moveIndicator = function (link) {
+    if (!navIndicator) return;
+    if (!link) { navIndicator.style.opacity = "0"; return; }
+    var pill = navIndicator.parentNode;
+    var pillRect = pill.getBoundingClientRect();
+    var linkRect = link.getBoundingClientRect();
+    navIndicator.style.width = linkRect.width + "px";
+    navIndicator.style.transform = "translateX(" + (linkRect.left - pillRect.left) + "px)";
+    navIndicator.style.opacity = "1";
+  };
+
   var navLinks = Array.prototype.slice.call(
     document.querySelectorAll('#primary-nav a[href^="#"]')
   );
@@ -191,12 +206,14 @@
       .filter(Boolean);
 
     var setActive = function (id) {
+      var activeLink = null;
       navLinks.forEach(function (link) {
         var isActive = link === linkFor[id];
         link.classList.toggle("is-active", isActive);
-        if (isActive) link.setAttribute("aria-current", "true");
+        if (isActive) { activeLink = link; link.setAttribute("aria-current", "true"); }
         else link.removeAttribute("aria-current");
       });
+      moveIndicator(activeLink);
     };
 
     var visible = {};
@@ -213,6 +230,32 @@
 
     sections.forEach(function (section) { observer.observe(section); });
   }
+
+  /* Subpages have no section anchors, so the current page link takes the ink
+     pill instead. Section pages link home for their anchors, so they skip it. */
+  if (!navLinks.length) {
+    var here = location.pathname.replace(/index\.html$/, "");
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".nav-pill a:not([href^='#'])"),
+      function (link) {
+        var target = link.getAttribute("href").replace(/^(\.\.\/)+/, "");
+        if (here.length >= target.length && here.slice(-target.length) === target) {
+          link.classList.add("is-active");
+          link.setAttribute("aria-current", "page");
+          moveIndicator(link);
+        }
+      }
+    );
+  }
+
+  /* Link widths shift when the font swaps in or the viewport changes, so
+     re-measure the active link to keep the ink pill aligned. */
+  var remeasure = function () {
+    var activeLink = document.querySelector(".nav-pill a.is-active");
+    if (activeLink) moveIndicator(activeLink);
+  };
+  window.addEventListener("resize", remeasure, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
 
   /* ---------- Reveal on scroll ---------- */
   var revealTargets = document.querySelectorAll(".card, .project-card, .notice, .contact-card, .philosophy, .resume-card");

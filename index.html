@@ -113,12 +113,8 @@
 
   <header class="site-header" id="top">
     <div class="wrap header-inner">
-      <a class="brand" href="#top">
-        <picture>
-          <source srcset="assets/img/brand-102.webp" type="image/webp" />
-          <img class="brand-mark" src="assets/img/brand-102.png" width="102" height="102"
-               alt="" fetchpriority="high" decoding="async" />
-        </picture>
+      <a class="brand" href="#top" aria-label="Shawon Haque — back to top">
+        <span class="brand-mark" aria-hidden="true">SH</span>
         <span class="brand-text">Shawon Haque</span>
       </a>
 
@@ -129,16 +125,19 @@
       </button>
 
       <nav class="primary-nav" id="primary-nav" aria-label="Primary">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="projects/">Case studies</a></li>
-          <li><a href="writing.html">Writing</a></li>
-          <li><a href="#background">Experience</a></li>
-          <li><a href="#resume">Resume</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-pill">
+          <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="projects/">Case studies</a></li>
+            <li><a href="writing.html">Writing</a></li>
+            <li><a href="#background">Experience</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
           <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
@@ -210,7 +209,7 @@
       <div class="wrap">
         <div class="section-head">
           <p class="ghost" aria-hidden="true"><b>01</b> — Profile</p>
-          <h2 id="about-title">Professional profile</h2>
+          <h2 id="about-title">Professional <span class="accent">profile</span></h2>
         </div>
 
         <ul class="metrics" aria-label="Development at a glance">
@@ -262,7 +261,7 @@
       <div class="wrap">
         <div class="section-head">
           <p class="ghost" aria-hidden="true"><b>02</b> — Stack</p>
-          <h2 id="expertise-title">Technical expertise</h2>
+          <h2 id="expertise-title">Technical <span class="accent">expertise</span></h2>
           <p class="section-lede">
             The stack I build with, grouped by where it sits in an application.
           </p>
@@ -321,7 +320,7 @@
       <div class="wrap">
         <div class="section-head">
           <p class="ghost" aria-hidden="true"><b>03</b> — Work</p>
-          <h2 id="projects-title">Selected work</h2>
+          <h2 id="projects-title">Selected <span class="accent">work</span></h2>
           <p class="section-lede">
             A short, honest list — these are real repositories you can open and review today.
           </p>
@@ -430,8 +429,9 @@
 
     <!-- EXPERIENCE -->
     <section class="wrap experience" id="background" aria-labelledby="background-title">
+      <p class="ghost on-block" aria-hidden="true"><b>04</b> — Experience</p>
       <div class="exp-top">
-        <h2 id="background-title">Experience</h2>
+        <h2 id="background-title">The path <span class="accent on-block">so far.</span></h2>
         <p>Professional &amp; project record</p>
       </div>
 
@@ -504,8 +504,8 @@
     <section class="section" id="resume" aria-labelledby="resume-title">
       <div class="wrap">
         <div class="section-head">
-          <p class="ghost" aria-hidden="true"><b>04</b> — Résumé</p>
-          <h2 id="resume-title">Resume</h2>
+          <p class="ghost" aria-hidden="true"><b>05</b> — Résumé</p>
+          <h2 id="resume-title">My <span class="accent">résumé</span></h2>
           <p class="section-lede">
             A concise, one-page overview of my stack, experience and the projects I have
             shipped. View it in the browser or download it as a PDF.
@@ -538,6 +538,7 @@
     <section class="section" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
         <div class="contact-panel">
+          <p class="ghost" aria-hidden="true"><b>06</b> — Contact</p>
           <p class="availability"><span class="dot" aria-hidden="true"></span> Available for new projects</p>
           <h2 id="contact-title">Have a project <span class="accent">in mind?</span></h2>
           <p>
