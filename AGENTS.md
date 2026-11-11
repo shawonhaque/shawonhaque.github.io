@@ -40,7 +40,28 @@ heads) keep both in sync.
 python3 -m http.server 12001
 # JS syntax check
 node --check assets/js/main.js
+# regenerate the resume PDF (needs chromium + pikepdf)
+python3 tools/build-resume.py
+# regenerate the per-post social cards (needs chromium)
+python3 tools/build-og-images.py
 ```
+
+## SEO and metadata
+
+- `feed.xml` is the RSS 2.0 feed for the writing; every page links it with
+  `<link rel="alternate" type="application/rss+xml">` (path is `feed.xml` from
+  the root, `../feed.xml` from `blog/` and `projects/`).
+- `sitemap.xml` carries a `<lastmod>` per URL — the post date for writing, the
+  content date for the rest.
+- JSON-LD: `Person` + `WebSite` on the home page, `BlogPosting` (with `image`,
+  `wordCount`, `timeRequired`, `keywords`, `articleSection`) or `TechArticle`
+  plus `BreadcrumbList` on inner pages.
+- Social cards are generated, one per post (`assets/img/og-<slug>.png`,
+  1200×630). Add a card to `CARDS` in `tools/build-og-images.py`, run it, then
+  point that post's `og:image` / `twitter:image` at the new file.
+- Every page applies the saved/system theme with an inline pre-paint script
+  (reads `localStorage.theme`, falls back to `prefers-color-scheme`) to avoid a
+  flash; `404.html` does the same.
 
 ## Workflow
 
