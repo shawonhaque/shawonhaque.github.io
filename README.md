@@ -69,7 +69,8 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 ├── feed.xml              # RSS feed of the writing
 ├── favicon.ico           # Browser favicon
 ├── tools/
-│   └── build-resume.py   # Renders the resume PDF and fixes its colour space
+│   ├── build-resume.py   # Renders the resume PDF and fixes its colour space
+│   └── build-og-images.py # Renders a social card per blog post
 └── assets/
     ├── css/styles.css    # Design tokens, layout, components, inner pages
     ├── js/main.js        # Theme, navigation, scroll behaviour
@@ -148,6 +149,16 @@ flat.convert('RGB').save('shawon-haque.png', 'PNG', optimize=True)
 
 `shawon-haque.png` sits next to the source, so the file path resolves without a
 server. The PDF is a single A4 page; check the page count after editing.
+
+## Social cards
+
+Each writing post has its own 1200×630 Open Graph image under `assets/img/`
+(`og-<slug>.png`). They are generated, not hand-drawn — edit the card list in
+`tools/build-og-images.py` and regenerate:
+
+```bash
+python3 tools/build-og-images.py  # needs chromium
+```
 
 ## Local preview
 
