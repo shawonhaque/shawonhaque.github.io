@@ -254,16 +254,19 @@ html.has-intro .curtain-mark { animation: fadeUp 0.7s 0.05s var(--ease) forwards
 @keyframes curtainOut { to { opacity: 0; visibility: hidden; } }
 
 /* ---------- Header ---------- */
+/* Transparent floating bar: no surface of its own, so the page scrolls
+   beneath it and only the monogram and the glass nav pill stay legible —
+   the same behaviour as the app's navigation. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 80;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+  background: transparent;
+  pointer-events: none;
 }
-.site-header.is-stuck { border-bottom-color: var(--line); }
+.site-header .brand,
+.site-header .primary-nav,
+.site-header .nav-toggle { pointer-events: auto; }
 
 .header-inner {
   display: flex;
@@ -271,6 +274,8 @@ html.has-intro .curtain-mark { animation: fadeUp 0.7s 0.05s var(--ease) forwards
   justify-content: space-between;
   gap: 18px;
   min-height: 76px;
+  padding-top: 16px;
+  padding-bottom: 10px;
 }
 
 .brand {
@@ -301,7 +306,14 @@ html.has-intro .curtain-mark { animation: fadeUp 0.7s 0.05s var(--ease) forwards
 }
 .brand:hover .brand-mark { transform: rotate(360deg); }
 .site-header.is-stuck .brand-mark { background: var(--ink); color: var(--bg); }
-.brand-text { font-size: 0.98rem; }
+
+/* The name collapses away once the header is stuck, so only the monogram
+   remains — the app does the same. */
+.brand-text {
+  font-size: 0.98rem;
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.site-header.is-stuck .brand-text { opacity: 0; transform: translateX(-8px); }
 
 .primary-nav { display: flex; align-items: center; gap: 10px; }
 
