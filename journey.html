@@ -71,12 +71,8 @@
 
   <header class="site-header" id="top">
     <div class="wrap header-inner">
-      <a class="brand" href="index.html">
-        <picture>
-          <source srcset="assets/img/brand-102.webp" type="image/webp" />
-          <img class="brand-mark" src="assets/img/brand-102.png" width="102" height="102"
-               alt="" fetchpriority="high" decoding="async" />
-        </picture>
+      <a class="brand" href="index.html" aria-label="Shawon Haque — back to top">
+        <span class="brand-mark" aria-hidden="true">SH</span>
         <span class="brand-text">Shawon Haque</span>
       </a>
 
@@ -87,15 +83,18 @@
       </button>
 
       <nav class="primary-nav" id="primary-nav" aria-label="Primary">
-        <ul>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#expertise">Expertise</a></li>
-          <li><a href="projects/index.html">Projects</a></li>
-          <li><a href="writing.html">Writing</a></li>
-          <li><a href="#journey">Journey</a></li>
-          <li><a href="#workflow">Workflow</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
+        <div class="nav-pill">
+          <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#expertise">Expertise</a></li>
+            <li><a href="projects/index.html">Projects</a></li>
+            <li><a href="writing.html">Writing</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
           <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
