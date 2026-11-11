@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Talking-Video Portfolio case study — Shawon Haque</title>
+  <meta name="description" content="How the talking-video portfolio was built: a TanStack Start app with a talking 3D avatar hero, a physics lanyard ID card and a periodic-table skill inspector, prerendered to static HTML and deployed to GitHub Pages." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#e7e7e5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/projects/shawon.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Talking-Video Portfolio case study — a talking 3D avatar hero" />
+  <meta property="og:description" content="A TanStack Start app with a talking 3D avatar hero, prerendered to static HTML and deployed to GitHub Pages." />
+  <meta property="og:url" content="https://shawonhaque.github.io/projects/shawon.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-shawon.jpg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The Shawon Haque talking-video portfolio home page" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Talking-Video Portfolio case study — a talking 3D avatar hero" />
+  <meta name="twitter:description" content="A TanStack Start app with a talking 3D avatar hero, prerendered to static HTML and deployed to GitHub Pages." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-shawon.jpg" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Talking-Video Portfolio case study — a talking 3D avatar hero",
+    "description": "How the talking-video portfolio was built with TanStack Start, a talking 3D avatar hero, a physics lanyard ID card and a periodic-table skill inspector, then prerendered to static HTML and deployed to GitHub Pages.",
+    "url": "https://shawonhaque.github.io/projects/shawon.html",
+    "image": "https://shawonhaque.github.io/assets/img/project-shawon.jpg",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Shawon Haque — Talking-Video Portfolio",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Web",
+      "url": "https://shawonhaque.github.io/Shawon-/",
+      "programmingLanguage": ["TypeScript", "React", "CSS"],
+      "codeRepository": "https://github.com/shawonhaque/Shawon-"
+    }
+  }
+  </script>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">
+        <picture>
+          <source srcset="../assets/img/brand-102.webp" type="image/webp" />
+          <img class="brand-mark" src="../assets/img/brand-102.png" width="102" height="102"
+               alt="" fetchpriority="high" decoding="async" />
+        </picture>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#expertise">Expertise</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="index.html">Case studies</a></li>
+          <li><a href="../writing.html">Writing</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+        <p class="eyebrow">Case study · Frontend</p>
+        <h1 id="page-title">Talking-Video Portfolio — a hero that introduces me</h1>
+        <p class="lede">
+          A second take on this portfolio, built as a TanStack Start application. The
+          hero is a talking 3D avatar with a synced voice track; the rest is a set of
+          small, self-contained interactions that make the page feel alive without
+          getting in the way.
+        </p>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="https://shawonhaque.github.io/Shawon-/" target="_blank" rel="noopener">Live site<span aria-hidden="true"> ↗</span></a>
+          <a class="btn" href="https://github.com/shawonhaque/Shawon-" target="_blank" rel="noopener">Source code<span aria-hidden="true"> ↗</span></a>
+        </div>
+      </section>
+
+      <ul class="metrics" aria-label="Project at a glance">
+        <li class="metric"><span class="metric-value">1</span><span class="metric-label">Talking avatar hero</span></li>
+        <li class="metric"><span class="metric-value">21</span><span class="metric-label">Skills in the table</span></li>
+        <li class="metric"><span class="metric-value">3</span><span class="metric-label">Projects linked</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Manual deploy steps</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">Overview</h2>
+            <p>
+              This is the same content as the static portfolio, rebuilt on a modern stack
+              so I could try ideas the no-build version could not carry: a video hero, a
+              physics-driven ID card, and a skills table that behaves like the periodic
+              table. It is a TanStack Start application — React with a typed router and
+              server-side rendering — but it ships as plain static HTML to GitHub Pages.
+            </p>
+            <p>
+              The reason it is a separate repository rather than a replacement is
+              deliberate. The static site is the dependable one: it has no dependencies to
+              patch and nothing to build. This one is where the experiments live, and it is
+              free to be the more ambitious of the two.
+            </p>
+          </section>
+
+          <section id="problem" aria-labelledby="problem-title">
+            <h2 id="problem-title">Problem and solution</h2>
+            <h3>The problem</h3>
+            <p>
+              A portfolio that only lists skills is easy to skim past. I wanted a first
+              impression that a visitor cannot get from a paragraph — something that shows
+              the work by being the work. The obvious answer is a video, but a raw video
+              fights every rule of a good landing page: it is heavy, it does not autoplay
+              with sound, and it distracts from the content underneath.
+            </p>
+            <h3>The solution</h3>
+            <p>
+              A single talking-avatar clip that loops seamlessly, tries to autoplay with
+              sound, falls back to muted when the browser refuses, and offers one clear
+              control to turn the voice back on. Everything below the fold stays quiet:
+              the ID card swings from a fixed point like a real lanyard, and the skills
+              table only reacts when you point at it.
+            </p>
+            <div class="callout">
+              <p>
+                The rule carried over from the static site: <strong>the page must be
+                complete before any of it runs.</strong> The video, the pendulum and the
+                glows are all enhancements. Turn off JavaScript and the content is still
+                there and still readable.
+              </p>
+            </div>
+          </section>
+
+          <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Key features</h2>
+            <div class="keypoints">
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">01</span>
+                <div>
+                  <h3>A talking 3D avatar hero</h3>
+                  <p>The hero is a 9-second clip of a 3D character introducing me in his own voice. It loops with no visible jump, and the voice is behind a single button so it never surprises a visitor.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">02</span>
+                <div>
+                  <h3>Audio that waits for consent</h3>
+                  <p>The clip first tries to play with sound; if the browser blocks it, it falls back to muted and unlocks the voice on the visitor's first interaction — unless they have already chosen to mute it.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">03</span>
+                <div>
+                  <h3>A physics lanyard ID card</h3>
+                  <p>The developer badge hangs from a damped pendulum, so it swings when you drag it and settles naturally instead of snapping back.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">04</span>
+                <div>
+                  <h3>A periodic table of skills</h3>
+                  <p>Each technology is a tile in the table of the stack. Point at one and a panel shows where it was actually used, so the list is evidence rather than decoration.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">05</span>
+                <div>
+                  <h3>Server-rendered, statically hosted</h3>
+                  <p>TanStack Start renders the page on the server and prerenders it to HTML, so it is fast on first paint — then a GitHub Actions workflow publishes the static output to GitHub Pages.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="architecture" aria-labelledby="architecture-title">
+            <h2 id="architecture-title">Architecture</h2>
+            <p>
+              One application, split into routes, components and a small data layer, built
+              by Vite and prerendered by TanStack Start.
+            </p>
+            <pre><code>src/
+  routes/                File-based routes — one page per section
+  components/portfolio/  Hero, About, Skills, Work, Experience, Contact
+  lib/data.ts            Every string and link, in one place
+  assets/hero/           The avatar clip and its still, referenced by manifest
+public/                  favicon, the résumé PDF and the hero clip
+.github/workflows/       Build, test and deploy to GitHub Pages
+vite.config.ts           BASE_PATH lets the same code run at / and /Shawon-/
+</code></pre>
+            <h3>One data file, no copy in components</h3>
+            <p>
+              Every fact the site states — the name, the roles, the project links, the
+              résumé path — lives in <code>src/lib/data.ts</code>. Components read from it
+              and never hard-code a string. Changing a job title is a one-line edit in one
+              file, and nothing can drift out of sync with itself.
+            </p>
+            <h3>The same code, two base paths</h3>
+            <p>
+              A GitHub Pages project site is served from a subdirectory
+              (<code>/Shawon-/</code>), not from the root. The build reads a
+              <code>BASE_PATH</code> environment variable and threads it through the router
+              and every asset URL, so the identical code runs at <code>/</code> in
+              development and at <code>/Shawon-/</code> in production.
+            </p>
+          </section>
+
+          <section id="challenges" aria-labelledby="challenges-title">
+            <h2 id="challenges-title">Challenges and what I learned</h2>
+
+            <h3>Autoplay with sound, without being obnoxious</h3>
+            <p>
+              Browsers will not let a page start talking on its own, and they are right not
+              to. The first version simply muted the video when autoplay was refused and
+              left it that way, which threw away the whole point of a talking avatar.
+            </p>
+            <p>
+              The fix was to treat the sound as a state machine: try unmuted, fall back to
+              muted, and then listen for the visitor's first deliberate interaction to
+              restore the voice — but only if they have not already pressed mute themselves.
+              The button is the single source of truth for that choice.
+            </p>
+
+            <h3>A looping clip that does not visibly jump</h3>
+            <p>
+              A talking-head clip cut to a hard loop shows a jump every time it restarts.
+              Rather than accept it, the loop is built in a preprocessing step: the last
+              half-second cross-fades into the first half-second, for the picture and for
+              the audio, so the seam is invisible and inaudible.
+            </p>
+
+            <h3>Static hosting for a server-rendered app</h3>
+            <p>
+              TanStack Start is built for a server. GitHub Pages only serves files. The
+              answer is prerendering: the build renders the page to plain HTML at build
+              time, and the deploy workflow publishes that HTML plus the assets. The result
+              is a modern, typed codebase that still costs nothing to host.
+            </p>
+          </section>
+
+          <section id="stack" aria-labelledby="stack-title">
+            <h2 id="stack-title">Stack</h2>
+            <ul class="tag-list">
+              <li>React</li><li>TypeScript</li><li>TanStack Start</li><li>TanStack Router</li>
+              <li>Tailwind CSS</li><li>Vite</li><li>GitHub Actions</li><li>GitHub Pages</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem and solution</a></li>
+            <li><a href="#features">Key features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#stack">Stack</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>The whole project is public — the app, the assets and the deploy workflow.</p>
+            <a href="https://github.com/shawonhaque/Shawon-" target="_blank" rel="noopener">Open the repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More case studies">
+        <a href="portfolio.html">
+          <span class="page-nav-dir">Previous case study</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> Personal Portfolio</span>
+        </a>
+        <a class="is-next" href="../index.html#projects">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All projects</span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
