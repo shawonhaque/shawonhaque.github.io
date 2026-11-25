@@ -29,8 +29,8 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - Optional motion: a WebGL hero constellation and scroll-driven reveals, both
   additive — the site works the same without them
 - Case studies: a full write-up per project — problem, architecture, security and
-  trade-offs — linked from each project card, four in total (NEXORA, this site,
-  the talking-video portfolio and Islamic Life)
+  trade-offs — linked from each project card, five in total (NEXORA, this site,
+  the talking-video portfolio, Islamic Life and Hawa Computer)
 - Writing index: the long-form pieces in one place, with measured word counts
 - Blog notes: technical write-ups drawn from the source — Row Level Security,
   a typed service layer, progressive enhancement, and the build-time feed

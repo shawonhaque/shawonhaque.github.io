@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480" role="img" aria-label="Hawa Computer — bilingual storefront and management platform">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="0.55" stop-color="#12233d"/>
+      <stop offset="1" stop-color="#0d3b3a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <rect width="800" height="480" fill="url(#grid)"/>
+
+  <g font-family="Inter Tight, Segoe UI, Helvetica, Arial, sans-serif" fill="#e5eefb">
+    <text x="56" y="150" font-size="26" letter-spacing="6" fill="#8fb6e8">HAWA COMPUTER</text>
+    <text x="56" y="215" font-size="52" font-weight="700">Bilingual storefront</text>
+    <text x="56" y="272" font-size="52" font-weight="700" fill="url(#accent)">&amp; management platform</text>
+    <text x="56" y="330" font-size="22" fill="#9fb3c8">Bangla / English · shop · services · applications · training</text>
+    <text x="56" y="364" font-size="22" fill="#9fb3c8">Next.js 15 · TypeScript · Prisma · PostgreSQL</text>
+  </g>
+
+  <g transform="translate(560 96)">
+    <rect x="0" y="0" width="184" height="288" rx="18" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.16"/>
+    <rect x="18" y="24" width="148" height="12" rx="6" fill="#34d399" fill-opacity="0.9"/>
+    <rect x="18" y="52" width="104" height="10" rx="5" fill="#ffffff" fill-opacity="0.35"/>
+    <rect x="18" y="84" width="148" height="44" rx="10" fill="#60a5fa" fill-opacity="0.25"/>
+    <rect x="18" y="140" width="148" height="44" rx="10" fill="#ffffff" fill-opacity="0.12"/>
+    <rect x="18" y="196" width="148" height="44" rx="10" fill="#ffffff" fill-opacity="0.12"/>
+    <rect x="18" y="252" width="80" height="12" rx="6" fill="#34d399" fill-opacity="0.75"/>
+  </g>
+</svg>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Hawa Computer case study — Shawon Haque</title>
+  <meta name="description" content="How Hawa Computer was built: a bilingual Bangla/English storefront and management platform for a Bangladeshi computer business — Next.js 15, TypeScript, Prisma and PostgreSQL, with a customer account area and a staff admin panel behind role-based permissions." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/projects/hawa-computer.html" />
+  <link rel="alternate" type="application/rss+xml" title="Shawon Haque — Writing" href="../feed.xml" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Hawa Computer case study — a bilingual business platform" />
+  <meta property="og:description" content="A bilingual Bangla/English storefront, service orders, applications, payments and a staff admin panel — a Next.js 15 app on Prisma and PostgreSQL." />
+  <meta property="og:url" content="https://shawonhaque.github.io/projects/hawa-computer.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="Shawon Haque — Full Stack Developer" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hawa Computer case study — a bilingual business platform" />
+  <meta name="twitter:description" content="The whole Quran, prayer times computed on the device, and a mosque finder that works anywhere in the world." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Shawon Haque — Full Stack Developer" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Hawa Computer case study — a bilingual business platform",
+    "description": "How Hawa Computer was built: a bilingual Bangla/English storefront and management platform on Next.js 15, Prisma and PostgreSQL, with a customer account area and a staff admin panel behind role-based permissions.",
+    "url": "https://shawonhaque.github.io/projects/hawa-computer.html",
+    "image": "https://shawonhaque.github.io/assets/img/project-islamic-life.jpg",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Hawa Computer",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "programmingLanguage": ["TypeScript", "SQL"],
+      "codeRepository": "https://github.com/shawonhaque/Hawa-Computer-"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shawonhaque.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Case studies", "item": "https://shawonhaque.github.io/projects/" },
+      { "@type": "ListItem", "position": 3, "name": "Hawa Computer", "item": "https://shawonhaque.github.io/projects/hawa-computer.html" }
+    ]
+  }
+  </script>
+
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html" aria-label="Shawon Haque — back to top">
+        <span class="brand-mark" aria-hidden="true">SH</span>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <div class="nav-pill">
+          <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+          <ul>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#expertise">Expertise</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li><a href="index.html">Case studies</a></li>
+            <li><a href="../writing.html">Writing</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+        <p class="eyebrow">Case study · Full stack</p>
+        <h1 id="page-title">Hawa Computer — a bilingual business platform</h1>
+        <p class="lede">
+          A shop, a service desk, an application desk and a training institute in one
+          codebase: a Bangla/English storefront for a Bangladeshi computer business, a
+          customer account area, and a staff admin panel where every action is checked
+          against a permission and written to an audit log.
+        </p>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="https://github.com/shawonhaque/Hawa-Computer-" target="_blank" rel="noopener">Source code<span aria-hidden="true"> ↗</span></a>
+          <a class="btn" href="#architecture">How it is built<span aria-hidden="true"> ↓</span></a>
+        </div>
+      </section>
+
+      <ul class="metrics" aria-label="Project at a glance">
+        <li class="metric"><span class="metric-value">48</span><span class="metric-label">Database tables</span></li>
+        <li class="metric"><span class="metric-value">71</span><span class="metric-label">Routes across three areas</span></li>
+        <li class="metric"><span class="metric-value">54</span><span class="metric-label">Granular permissions</span></li>
+        <li class="metric"><span class="metric-value">2</span><span class="metric-label">Languages, one layout</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">Overview</h2>
+            <p>
+              Hawa Computer is a computer and IT-services business in Bangladesh. The work it
+              does is not one thing: it sells hardware, fills in government applications for
+              customers who find the forms difficult, runs computer courses, lends books from
+              a small library, and takes payment by bKash, Nagad or Rocket. Each of those is
+              normally its own product with its own admin screen.
+            </p>
+            <p>
+              This platform puts them behind one account. A customer signs in once and sees
+              their shop orders, service orders, application status, course enrolments, library
+              loans, invoices and support tickets in the same place. Staff sign in to a
+              separate admin panel where the same records are worked, and where the system
+              knows which parts of the business each person is allowed to touch.
+            </p>
+          </section>
+
+          <section id="problem" aria-labelledby="problem-title">
+            <h2 id="problem-title">Problem and solution</h2>
+            <h3>The problem</h3>
+            <p>
+              The business ran on paper, phone calls and a WhatsApp thread. An application's
+              status lived in whoever last spoke to the customer. Payment proofs were
+              screenshots in a chat, reconciled by memory. Nothing could be counted at the end
+              of the month without asking four people, and a customer had no way to check
+              anything without calling during shop hours.
+            </p>
+            <p>
+              The second problem was language. The people who most need help with a passport or
+              NID application are the least comfortable in an English-only interface, and the
+              staff who process those applications work in Bangla all day. A single-language
+              admin would have been abandoned in a week.
+            </p>
+            <h3>The solution</h3>
+            <p>
+              Model the whole business once, in one schema, and let three interfaces read from
+              it: the public site, the customer account area and the staff panel. Every record
+              — an order, a service order, an application, a payment, a loan — gets an owner, a
+              status and a history, so the answer to "where is this?" is a page, not a phone
+              call.
+            </p>
+            <div class="callout">
+              <p>
+                The rule that shaped the build: <strong>every business fact lives in the
+                database, and every change to it goes through a server action that checks a
+                permission first</strong>. The UI is a view of that state, never the source of
+                it.
+              </p>
+            </div>
+          </section>
+
+          <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Key features</h2>
+            <div class="keypoints">
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">01</span>
+                <div>
+                  <h3>Bilingual by construction</h3>
+                  <p>Every page, label, status and validation message has a Bangla and an English form, resolved on the server from a cookie so the first paint is already in the right language. There is no flash of the wrong one, and no client-side dictionary download.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">02</span>
+                <div>
+                  <h3>Shop, services and applications in one flow</h3>
+                  <p>Cart checkout for hardware; service orders with structured detail fields; and long-form government applications with per-service form schemas, document uploads and a tracking ID the customer can follow without signing in.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">03</span>
+                <div>
+                  <h3>Payments that match how people pay</h3>
+                  <p>Manual bKash, Nagad and Rocket transfers: the customer submits a transaction ID and a screenshot, staff verify or reject each one, and the order's payment status, invoice and audit trail follow automatically.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">04</span>
+                <div>
+                  <h3>A staff panel with real boundaries</h3>
+                  <p>Nine staff roles and fifty-four permissions, from viewing an order to refunding a payment to publishing a page. The navigation hides what a role cannot reach, the server action re-checks it, and the write is recorded in the audit log either way.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">05</span>
+                <div>
+                  <h3>Institute and library, not afterthoughts</h3>
+                  <p>Courses with batches and enrolments, attendance, certificates verifiable by number, book loans with due dates and fines, and a downloads library — all attached to the same customer record, all visible in the account area.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="architecture" aria-labelledby="architecture-title">
+            <h2 id="architecture-title">Architecture</h2>
+            <p>
+              Next.js 15 with the App Router, TypeScript end to end, Tailwind CSS v4 for
+              styling, Prisma 6 over PostgreSQL, and server actions as the only write path.
+              The app is split into three route groups so the layout, the navigation and the
+              auth gate are decided once per area.
+            </p>
+            <pre><code>src/app/
+  (site)/         public storefront, services, applications, library, training
+  (account)/      customer area: orders, invoices, tickets, files, profile
+  (admin)/        staff panel: work queues, catalogue, finance, CMS, settings
+src/lib/          auth, permissions, validation, rate-limit, audit, payments, i18n
+src/actions/      server actions — the only place that writes
+prisma/           schema (48 models), migrations, seed
+</code></pre>
+            <h3>One schema for the whole business</h3>
+            <p>
+              Forty-eight models and nine enums cover identity and roles, the catalogue, stock
+              movements, orders and payments, service orders and applications with their status
+              history, courses, batches and certificates, books and loans, suppliers and
+              purchases, expenses, CMS content and the audit log. Migrations are committed, so
+              a fresh database is one command away and a deploy is a migration, not a manual
+              step.
+            </p>
+            <h3>Server actions, validated twice</h3>
+            <p>
+              Every mutation is a server action that starts with the same three checks: who is
+              calling, may they do this, and is the input well-formed. Session lookup and the
+              permission check happen on the server against the database, and the payload is
+              parsed with Zod before it reaches Prisma — so a request that skips the form
+              entirely still meets the same wall.
+            </p>
+            <h3>Read models shaped for the page</h3>
+            <p>
+              List screens fetch exactly what they render — order plus items plus customer, or
+              application plus service plus assignee — instead of loading a record and walking
+              relations in the template. On a shared host that is the difference between a page
+              that opens and a page that waits.
+            </p>
+          </section>
+
+          <section id="security" aria-labelledby="security-title">
+            <h2 id="security-title">Security</h2>
+            <p>
+              The platform handles personal documents — NID numbers, passport details,
+              payment screenshots — so the defaults had to be right before the features were.
+            </p>
+            <ul>
+              <li><strong>Ownership checks on every read.</strong> A customer's order page filters by the session's user id. Signing in as someone else does not widen the query; it returns 404.</li>
+              <li><strong>Permissions, not roles, at the boundary.</strong> Roles are bundles of permissions, and the permission is what the server action checks — so a new role is a data change, not a code change.</li>
+              <li><strong>Passwords with bcrypt, sessions in the database.</strong> Session tokens are httpOnly, sameSite and revocable server-side, so signing out actually ends the session.</li>
+              <li><strong>Rate limiting on the doors.</strong> Login, registration, contact and payment submission are rate limited, so a script cannot grind passwords or flood the desk.</li>
+              <li><strong>Uploads that are checked, not trusted.</strong> Type and size are validated, files are stored outside the web root and served through an authenticated route.</li>
+              <li><strong>Headers and audit.</strong> Content Security Policy, HSTS in production, frame and referrer rules — plus an audit entry for every privileged action, with the actor, the target and the time.</li>
+            </ul>
+          </section>
+
+          <section id="challenges" aria-labelledby="challenges-title">
+            <h2 id="challenges-title">Challenges and what I learned</h2>
+
+            <h3>Two languages are a data problem, not a translation problem</h3>
+            <p>
+              The first attempt stored one string per field and swapped it with JavaScript.
+              It broke in three places at once: search results, PDF invoices and the page
+              title. The fix was to treat language as a property of the content — every
+              human-readable field has a Bangla and an English column, the locale is resolved
+              on the server from a cookie, and the document is rendered in the right language
+              the first time.
+            </p>
+
+            <h3>A missing page is a silent failure</h3>
+            <p>
+              Halfway through, a batch of route files failed to write and the build still
+              succeeded — Next.js is happy to compile a site with holes in it. The only thing
+              that caught it was crawling every internal link and asserting a 200. That crawl
+              is now part of how I verify a release: 145 links, zero 404s, and the same check
+              on the admin panel behind a session.
+            </p>
+
+            <h3>Manual payments need a paper trail</h3>
+            <p>
+              Mobile-money transfers are real money and they are irreversible. The design had
+              to answer "who said this was paid?" before it answered "how does the customer
+              pay". Every payment carries the payer, the transaction id, the screenshot, the
+              staff member who verified it and the time — and a rejected payment keeps its
+              reason instead of disappearing.
+            </p>
+
+            <h3>Admin panels are where scope hides</h3>
+            <p>
+              "Just a dashboard" turned into inventory, suppliers, purchases, expenses,
+              refunds, certificates and a CMS. The thing that kept it manageable was refusing
+              to give any of them a special case: a new area is a route group, a permission,
+              a server action and a list view, and it inherits the same guard rails as
+              everything else.
+            </p>
+          </section>
+
+          <section id="stack" aria-labelledby="stack-title">
+            <h2 id="stack-title">Stack</h2>
+            <ul class="tag-list">
+              <li>Next.js 15</li><li>TypeScript</li><li>Tailwind CSS</li><li>Prisma</li>
+              <li>PostgreSQL</li><li>Zod</li><li>React Hook Form</li><li>bcryptjs</li>
+              <li>Recharts</li><li>Docker</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem and solution</a></li>
+            <li><a href="#features">Key features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#stack">Stack</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>The whole platform is public — schema, migrations, seed data and deploy files.</p>
+            <a href="https://github.com/shawonhaque/Hawa-Computer-" target="_blank" rel="noopener">Open the repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More case studies">
+        <a href="islamic-life.html">
+          <span class="page-nav-dir">Previous case study</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> Islamic Life</span>
+        </a>
+        <a class="is-next" href="../index.html#projects">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All projects</span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
