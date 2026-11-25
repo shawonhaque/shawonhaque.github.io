@@ -29,7 +29,8 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - Optional motion: a WebGL hero constellation and scroll-driven reveals, both
   additive — the site works the same without them
 - Case studies: a full write-up per project — problem, architecture, security and
-  trade-offs — linked from each project card
+  trade-offs — linked from each project card, four in total (NEXORA, this site,
+  the talking-video portfolio and Islamic Life)
 - Writing index: the long-form pieces in one place, with measured word counts
 - Blog notes: technical write-ups drawn from the source — Row Level Security,
   a typed service layer, progressive enhancement, and the build-time feed
@@ -42,6 +43,7 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - **[shawonhaque.github.io](https://github.com/shawonhaque/shawonhaque.github.io)** — this site
 - **[Nexora](https://github.com/shawonhaque/Nexora)** — full-stack knowledge platform · [live](https://shawonhaque.github.io/Nexora/)
 - **[Shawon-](https://github.com/shawonhaque/Shawon-)** — talking-video portfolio, TanStack Start · [live](https://shawonhaque.github.io/Shawon-/)
+- **[Islamic-Life](https://github.com/shawonhaque/Islamic-Life)** — Bengali-first Islamic companion, React + Vite · [live](https://shawonhaque.github.io/Islamic-Life/)
 - **[shawonhaque](https://github.com/shawonhaque/shawonhaque)** — GitHub profile README
 
 ## Structure
@@ -62,7 +64,8 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 │   ├── index.html        # Case-study index
 │   ├── nexora.html       # NEXORA case study
 │   ├── portfolio.html    # This site's case study
-│   └── shawon.html       # Talking-video portfolio case study
+│   ├── shawon.html       # Talking-video portfolio case study
+│   └── islamic-life.html # Islamic Life case study
 ├── site.webmanifest      # Web app manifest
 ├── robots.txt            # Crawler rules + sitemap reference
 ├── sitemap.xml           # XML sitemap

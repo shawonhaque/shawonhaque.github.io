@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Islamic Life case study — Shawon Haque</title>
+  <meta name="description" content="How Islamic Life was built: a Bengali-first Islamic companion with the whole Quran, locally computed prayer times, and a worldwide mosque finder on OpenStreetMap — a React 19 and TypeScript app shipped as a static bundle to GitHub Pages." />
+  <meta name="author" content="Shawon Haque" />
+  <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://shawonhaque.github.io/projects/islamic-life.html" />
+  <link rel="alternate" type="application/rss+xml" title="Shawon Haque — Writing" href="../feed.xml" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Shawon Haque" />
+  <meta property="og:title" content="Islamic Life case study — a Bengali-first worship companion" />
+  <meta property="og:description" content="The whole Quran, prayer times computed on the device, and a mosque finder that works anywhere in the world — a React 19 app shipped as a static bundle." />
+  <meta property="og:url" content="https://shawonhaque.github.io/projects/islamic-life.html" />
+  <meta property="og:image" content="https://shawonhaque.github.io/assets/img/project-islamic-life.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:image:alt" content="The Islamic Life home page" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Islamic Life case study — a Bengali-first worship companion" />
+  <meta name="twitter:description" content="The whole Quran, prayer times computed on the device, and a mosque finder that works anywhere in the world." />
+  <meta name="twitter:image" content="https://shawonhaque.github.io/assets/img/project-islamic-life.jpg" />
+  <meta name="twitter:image:alt" content="The Islamic Life home page" />
+
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../assets/img/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Islamic Life case study — a Bengali-first worship companion",
+    "description": "How Islamic Life was built: a Bengali-first Islamic companion with the whole Quran, prayer times computed on the device, and a worldwide mosque finder on OpenStreetMap, shipped as a static bundle to GitHub Pages.",
+    "url": "https://shawonhaque.github.io/projects/islamic-life.html",
+    "image": "https://shawonhaque.github.io/assets/img/project-islamic-life.jpg",
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": "Shawon Haque",
+      "url": "https://shawonhaque.github.io/"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Islamic Life",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Web",
+      "url": "https://shawonhaque.github.io/Islamic-Life/",
+      "programmingLanguage": ["TypeScript", "React", "CSS"],
+      "codeRepository": "https://github.com/shawonhaque/Islamic-Life"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shawonhaque.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Case studies", "item": "https://shawonhaque.github.io/projects/" },
+      { "@type": "ListItem", "position": 3, "name": "Islamic Life", "item": "https://shawonhaque.github.io/projects/islamic-life.html" }
+    ]
+  }
+  </script>
+
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html" aria-label="Shawon Haque — back to top">
+        <span class="brand-mark" aria-hidden="true">SH</span>
+        <span class="brand-text">Shawon Haque</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <div class="nav-pill">
+          <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+          <ul>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#expertise">Expertise</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li><a href="index.html">Case studies</a></li>
+            <li><a href="../writing.html">Writing</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light theme" title="Toggle colour theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2.6" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.4"/><line x1="2.6" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.4" y2="12"/><line x1="5.4" y1="5.4" x2="7.2" y2="7.2"/><line x1="16.8" y1="16.8" x2="18.6" y2="18.6"/><line x1="5.4" y1="18.6" x2="7.2" y2="16.8"/><line x1="16.8" y1="7.2" x2="18.6" y2="5.4"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="page-head panel" aria-labelledby="page-title">
+        <a class="page-back" href="../index.html#projects"><span aria-hidden="true">←</span> All projects</a>
+        <p class="eyebrow">Case study · Product</p>
+        <h1 id="page-title">Islamic Life — a Bengali-first worship companion</h1>
+        <p class="lede">
+          One page that holds the whole Quran, prayer times computed on the device, qibla,
+          tafsir, hadith, zakat and a worldwide mosque finder — written in Bengali first,
+          working offline once loaded, and served as static files with no backend at all.
+        </p>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="https://shawonhaque.github.io/Islamic-Life/" target="_blank" rel="noopener">Live site<span aria-hidden="true"> ↗</span></a>
+          <a class="btn" href="https://github.com/shawonhaque/Islamic-Life" target="_blank" rel="noopener">Source code<span aria-hidden="true"> ↗</span></a>
+        </div>
+      </section>
+
+      <ul class="metrics" aria-label="Project at a glance">
+        <li class="metric"><span class="metric-value">114</span><span class="metric-label">Surahs bundled</span></li>
+        <li class="metric"><span class="metric-value">6</span><span class="metric-label">Calculation methods</span></li>
+        <li class="metric"><span class="metric-value">0</span><span class="metric-label">Backend calls in production</span></li>
+        <li class="metric"><span class="metric-value">700+</span><span class="metric-label">Mosques found in one city</span></li>
+      </ul>
+
+      <div class="article-grid">
+        <div class="article-body">
+          <section id="overview" aria-labelledby="overview-title">
+            <h2 id="overview-title">Overview</h2>
+            <p>
+              Islamic Life is a Bengali-first Islamic companion for the browser. It gathers
+              what a practising Muslim reaches for through the day — the Quran, prayer times,
+              qibla, tafsir, hadith, a tasbih counter, zakat, the hijri calendar, Ramadan and
+              Hajj guides — into a single page that needs no account and no install.
+            </p>
+            <p>
+              The constraint that shaped everything else was hosting. The app is deployed to
+              GitHub Pages, which serves files and nothing more. So the design question was
+              never "which backend do I add", it was "how much of this can the browser do on
+              its own". The answer turned out to be nearly all of it.
+            </p>
+          </section>
+
+          <section id="problem" aria-labelledby="problem-title">
+            <h2 id="problem-title">Problem and solution</h2>
+            <h3>The problem</h3>
+            <p>
+              Most Islamic apps in this space are either English-first with Bengali bolted on,
+              or they lean on a server for things that do not need one: prayer times that
+              could be arithmetic, Quran text that never changes, and a mosque list that is
+              already public data. Each server dependency is a bill, an outage and a privacy
+              question attached to a daily habit.
+            </p>
+            <h3>The solution</h3>
+            <p>
+              Push the work into the client. Prayer times are computed from coordinates with
+              the standard astronomical formulas, so they are correct offline and in any
+              timezone. The Quran is converted from its source snapshots at build time into
+              static JSON, so reading it is a file fetch, not a query. And the mosque finder
+              asks OpenStreetMap — a public dataset — for whatever the map is currently
+              showing.
+            </p>
+            <div class="callout">
+              <p>
+                The rule for the whole app: <strong>if the browser can compute it, the server
+                should not</strong>. That is what makes a static deploy of this size possible,
+                and it is why the app still works on a weak connection once the first load
+                has landed.
+              </p>
+            </div>
+          </section>
+
+          <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Key features</h2>
+            <div class="keypoints">
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">01</span>
+                <div>
+                  <h3>The whole Quran, in Bengali</h3>
+                  <p>All 114 surahs with Bengali translation and transliteration, shipped as static JSON and read straight from the bundle. Per-ayah audio plays through a single shared player.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">02</span>
+                <div>
+                  <h3>Prayer times computed locally</h3>
+                  <p>Times come from the device's coordinates and a chosen calculation method — Karachi, MWL, ISNA, Umm al-Qura, Egyptian or Tehran — so they work with no network and no API key.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">03</span>
+                <div>
+                  <h3>A mosque finder that works anywhere</h3>
+                  <p>The map viewport is the query. Pan to Cairo or London and the list refills from OpenStreetMap, with clustered markers, distances, Jumu'ah and phone filters, and one-tap directions.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">04</span>
+                <div>
+                  <h3>Qibla, tasbih, zakat, hijri</h3>
+                  <p>A compass bearing to the Kaaba, a tap counter with presets and session history, a zakat calculator across gold, silver, cash and liabilities, and a hijri calendar with observances.</p>
+                </div>
+              </div>
+              <div class="keypoint">
+                <span class="keypoint-mark" aria-hidden="true">05</span>
+                <div>
+                  <h3>Optional cloud, honest fallback</h3>
+                  <p>Google sign-in adds cloud backup for settings and reading progress. Without it everything stays in <code>localStorage</code>, and a JSON export keeps the data portable.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="architecture" aria-labelledby="architecture-title">
+            <h2 id="architecture-title">Architecture</h2>
+            <p>
+              A React 19 and TypeScript single-page app, built by Vite into a static bundle.
+              Heavy surfaces are code-split so the first paint stays small.
+            </p>
+            <pre><code>src/
+  components/    31 views and shared UI, heavy pages behind React.lazy
+  contexts/      AuthContext, SettingsContext
+  data/          seed content: knowledge, modules, curriculum
+  utils/         prayer maths, qibla, search, mosque data, safe fetch
+  three/         globe and qibla scenes, loaded on demand
+  types/         shared domain types
+data/quran/      114 surah snapshots, converted at build time
+scripts/         build-time generators: Quran, brand, SEO, search index
+server.ts        Express API for local development only
+firestore.rules  rules so a user can only touch their own documents
+</code></pre>
+            <h3>Build-time conversion, not runtime work</h3>
+            <p>
+              The Quran snapshots are large and never change at runtime, so a build script
+              converts them into the shape the reader wants and writes them to
+              <code>public/quran/</code>. The app then fetches plain JSON. The same idea
+              covers the brand assets, the SEO tags and the search index: work that would
+              otherwise repeat on every visit happens once, at build time.
+            </p>
+            <h3>One dev server, no production server</h3>
+            <p>
+              <code>server.ts</code> is an Express process that proxies Vite in development so
+              the AI endpoints can be exercised locally. It is never deployed. The production
+              build knows it has no backend — a build flag switches the client off the
+              <code>/api</code> paths and onto bundled data, so the same code runs in both
+              places without branching across the components.
+            </p>
+            <h3>Code splitting by weight</h3>
+            <p>
+              Three.js, Leaflet and the AI studio are the expensive parts, and none of them
+              belong in the entry bundle. Each sits behind <code>React.lazy</code> with a
+              shared suspense fallback, so a visitor reading the Quran never downloads a 3D
+              globe they will not open.
+            </p>
+          </section>
+
+          <section id="challenges" aria-labelledby="challenges-title">
+            <h2 id="challenges-title">Challenges and what I learned</h2>
+
+            <h3>A mosque finder that was quietly local</h3>
+            <p>
+              The first version searched a fixed five-kilometre radius around the user. It
+              looked correct in Dhaka and was useless everywhere else: stand in London and the
+              app insisted there were no mosques. The bug was not in the rendering, it was in
+              the question being asked.
+            </p>
+            <p>
+              The fix was to make the map the source of truth. The finder now takes the
+              viewport's bounding box, queries that, and refetches when you move. Two details
+              mattered: Overpass times out on continent-sized boxes, so an oversized viewport
+              asks you to zoom in rather than hanging; and a mosque is often mapped twice in
+              OpenStreetMap — once as a node for the point of interest and once as a way for
+              the building — so entries sharing a name within 150 m are collapsed into one.
+            </p>
+
+            <h3>Public data sources fail in confusing ways</h3>
+            <p>
+              The Overpass API is free, which means it is busy. Mirrors answer 502 "at
+              capacity" for minutes at a time, and some regional extracts answer 200 with an
+              empty set for the rest of the world — indistinguishable, to the UI, from "there
+              are no mosques here". That second one is the dangerous failure: a wrong answer
+              looks exactly like a right one.
+            </p>
+            <p>
+              So the mirrors are raced rather than tried in turn, only planet-wide mirrors are
+              allowed in the list, and the two empty states are kept separate: "nothing mapped
+              here" is a different message from "the server is busy", with a retry button for
+              the second.
+            </p>
+
+            <h3>Two languages, one layout</h3>
+            <p>
+              Bengali sets wider than English at the same font size, and its line breaking
+              rules are its own. Every shared component is built with that in mind — flexible
+              widths, no fixed heights on text blocks, and a language switch that changes copy
+              without reflowing the page into a different shape.
+            </p>
+          </section>
+
+          <section id="stack" aria-labelledby="stack-title">
+            <h2 id="stack-title">Stack</h2>
+            <ul class="tag-list">
+              <li>React</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li>
+              <li>Leaflet</li><li>Three.js</li><li>Firebase</li><li>GitHub Actions</li>
+              <li>GitHub Pages</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="article-aside" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem and solution</a></li>
+            <li><a href="#features">Key features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#stack">Stack</a></li>
+          </ul>
+          <div class="aside-card">
+            <p>The whole project is public — the app, the build scripts and the deploy workflow.</p>
+            <a href="https://github.com/shawonhaque/Islamic-Life" target="_blank" rel="noopener">Open the repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="page-nav" aria-label="More case studies">
+        <a href="shawon.html">
+          <span class="page-nav-dir">Previous case study</span>
+          <span class="page-nav-title"><span aria-hidden="true">←</span> Talking-Video Portfolio</span>
+        </a>
+        <a class="is-next" href="../index.html#projects">
+          <span class="page-nav-dir">Back</span>
+          <span class="page-nav-title">All projects</span>
+        </a>
+      </nav>
+    </div>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Shawon Haque</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="index.html">Case studies</a>
+        <a href="../writing.html">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+        <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bd.linkedin.com/in/shawon-haque" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <p class="footer-meta">© <span id="year">2026</span> Shawon Haque. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/vendor/lenis.min.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

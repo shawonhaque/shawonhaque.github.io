@@ -59,6 +59,12 @@ python3 tools/build-og-images.py
 - Social cards are generated, one per post (`assets/img/og-<slug>.png`,
   1200×630). Add a card to `CARDS` in `tools/build-og-images.py`, run it, then
   point that post's `og:image` / `twitter:image` at the new file.
+- Project thumbs are 800×480, one `.jpg` plus one `.webp` per project
+  (`assets/img/project-<slug>.*`), referenced through `<picture>`. A new project
+  also needs: a card in `index.html` under `#projects`, a row in the
+  `.repo-list`, a card in `projects/index.html`, a page in `projects/`, a
+  `sitemap.xml` entry, and the previous case study's "Next case study" link
+  pointed at it.
 - Every page applies the saved/system theme with an inline pre-paint script
   (reads `localStorage.theme`, falls back to `prefers-color-scheme`) to avoid a
   flash; `404.html` does the same.
