@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "verified_at": "2026-11-28T10:12:17Z",
+  "verified_at": "2026-11-28T10:27:51Z",
   "verified_by": "OpenHands agent (central engineering session)",
   "status_values": [
     "HEALTHY",
@@ -51,7 +51,7 @@
       "checks": {
         "build": "next build plus scripts/mirror.py crawl - pass",
         "tests": "tsc --noEmit, eslint, prisma migrate deploy and seed against Postgres 17 - pass",
-        "live": "HTTP 200, 86 sitemap URLs, canonical and og:image absolute, no console errors"
+        "live": "HTTP 200, 86 sitemap URLs, each page and locale emits its own canonical with hreflang pairs, no console errors"
       },
       "open_issues": []
     },

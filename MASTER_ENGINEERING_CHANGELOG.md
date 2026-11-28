@@ -22,6 +22,21 @@ not what was intended.
 
 ### Hawa-Computer-
 
+- `Give every page its own canonical URL` (`b2e35db`)
+  - The root layout declared `alternates.canonical = "/"`. Pages that did not override it
+    inherited that, so all 86 sitemap URLs told Google the home page was their canonical.
+  - A relative `"./"` resolves against the route being rendered, which covers static, dynamic
+    and `/en` routes in one line. `/admin` and `/account` now send `robots: noindex`.
+  - Verified on the running server and then live: `/tools`, `/shop/scissors-medium`, `/verify`,
+    `/training` and `/en/tools` each emit their own absolute canonical.
+
+- `Pair the two locales with hreflang in the static mirror` (`c9e8d40`)
+  - The mirror writes an `/en` copy of every page, but the app's relative canonical resolved those
+    copies to the Bengali route, so the English tree had no page of its own.
+  - The mirror now rewrites the tag per file: each locale declares itself, the pair points at the
+    other, and Bengali is `x-default`. Checked across all 180 generated pages: exactly one
+    canonical and one `bn` alternate each.
+
 - `Fix the CI image build: seed the prisma schema before npm ci` (`9785057`)
   - The Docker deps stage copied only `package.json` and the lockfile, so the `postinstall`
     `prisma generate` hook ran without a schema and the image job failed on every push.
@@ -83,6 +98,13 @@ not what was intended.
     `npm ci` refused to install on npm 11/12 while npm 10 in CI happened to pass. Regenerated
     with `npm install`; verified from a clean tree with `npm ci`, `npm test` and the
     `BASE_PATH` build.
+
+### All six repositories
+
+- `Use checkout@v5 and setup-node@v5` (`2706af8`, `71498be`, `c34c1d6`, `152a255`, `2e07d29`, `4f6e3cd`)
+  - The v4 actions run on Node 20, which GitHub has deprecated on hosted runners; every job
+    printed a warning that it was being forced onto Node 24.
+  - Verified by the deploy runs that followed: Pages, Vercel and CI all green on the new majors.
 
 ### shawonhaque (profile)
 

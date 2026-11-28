@@ -42,11 +42,20 @@ health-check workflow. No visual redesign.
 | sitemap.xml / robots.txt | **FAIL** — same localhost origin in `<loc>` and `Sitemap:` |
 | Open Graph image | MISSING (title, description and site_name were present) |
 | Loading screen | Rendered the icon mark only, not the brand lockup (fixed earlier in the session) |
+| Canonical coverage | **FAIL** — the root layout declared `alternates.canonical = "/"`, so all 86 sitemap URLs advertised `/Hawa-Computer-/` as their canonical; the English mirror inherited the Bengali route |
+| Dashboard indexing | **FAIL** — `/admin` and `/account` sent `robots: index, follow` |
 
 Fixes: schema seeded before `npm ci` in the Dockerfile; new `siteUrl()` helper that ignores
 localhost values and falls back to the Pages origin plus the route prefix, used by the layout,
 `sitemap.ts` and `robots.ts`; a 1200x630 `og-cover.jpg` wired into Open Graph and Twitter cards;
 loader now shows the full logo. All verified against a fresh build and the live site.
+
+Canonical pass, later in the same session: the single `/` canonical became a relative `"./"`,
+which Next resolves against the route being rendered, so static, dynamic and `/en` routes each
+declare their own URL; the dashboards now send `robots: noindex`; the mirror overrides the tag
+per file so each locale canonicalises to itself and the pair carries `hreflang` plus `x-default`.
+Checked live: `/tools`, `/shop/scissors-medium`, `/en/tools` and `/en/shop/scissors-medium` each
+return their own canonical, and all 180 generated pages carry exactly one canonical.
 
 ### Islamic-Life
 
