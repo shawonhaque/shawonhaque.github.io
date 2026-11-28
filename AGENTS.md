@@ -74,3 +74,13 @@ python3 tools/build-og-images.py
 - Branch from `main`, open a PR, squash-merge. Pages deploys automatically on
   push to `main`; verify with the Actions run and by fetching the live CSS/JS.
 - `.site-header` is hidden in print (`@media print`).
+
+## Engineering records
+
+- `engineering-status.json` is the single source of truth for the status dashboard. Edit it, then run
+  `python3 scripts/render-status.py`, which rewrites both `status.html` and `MASTER_PROJECT_STATUS.md`
+  so the page and the markdown cannot drift. Never hand-edit either generated file.
+- `.github/workflows/health-check.yml` runs weekly and on demand: it validates the status file and
+  fetches every live URL, sitemap, robots file and cover. It reports only; it never commits.
+- `status.html` reuses `assets/css/styles.css` and carries its own header markup. When the shared
+  header changes, update it there too, or the nav pill and theme toggle will not appear on that page.
