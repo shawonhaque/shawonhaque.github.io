@@ -4,7 +4,7 @@ Single source of truth for the health of every repository. This file is
 generated from `engineering-status.json` by `scripts/render-status.py`; edit the
 JSON and re-run the script instead of editing this document by hand.
 
-- Verified at: **2026-11-28T10:05:00Z**
+- Verified at: **2026-11-28T10:12:17Z**
 - Verified by: OpenHands agent (central engineering session)
 - Status values: `HEALTHY`, `NEEDS ATTENTION`, `CRITICAL`, `NOT VERIFIED`
 
@@ -50,7 +50,7 @@ Bengali-first Islamic companion: the full Quran with translations, prayer times 
 - Stack: React 19, TypeScript, Vite, Tailwind CSS, Firebase (Firestore, Auth)
 - Deploy: GitHub Actions builds with GITHUB_PAGES=true and publishes dist/ to gh-pages
 - Live: https://shawonhaque.github.io/Islamic-Life/
-- Build: npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass
+- Build: npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass; Quran reader split into its own chunk (entry 413 -> 385 kB gzip)
 - Tests: tsc --noEmit via npm run lint - pass
 - Live: HTTP 200, canonical correct, social cover served, Firestore rules deny by default
 - Open issues: none recorded
@@ -74,7 +74,7 @@ The interactive talking-video portfolio: React 19, TanStack Start and Tailwind 4
 - Stack: React 19, TanStack Start, TypeScript, Tailwind CSS 4, Vite
 - Deploy: GitHub Actions runs vitest, builds with BASE_PATH and deploys via the Pages artifact API
 - Live: https://shawonhaque.github.io/Shawon-/
-- Build: npm run build with BASE_PATH - pass (single page prerendered)
+- Build: npm run build with BASE_PATH - pass (single page prerendered); npm ci verified against a freshly regenerated lockfile
 - Tests: vitest run - 1 file, 1 test, pass
 - Live: HTTP 200, canonical, og:image, robots.txt and sitemap.xml all served
 - Open issues:

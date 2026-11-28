@@ -51,6 +51,17 @@ not what was intended.
     `twitter:image` and `summary_large_image`.
   - Verified: the file lands in `dist/` and is served live with `image/jpeg`.
 
+- `Split the Quran page out of the initial bundle` (`f435807`)
+  - The reader was the only heavy section imported eagerly; every other one was
+    already lazy. Entry chunk 1428 kB → 1327 kB raw, 413 kB → 385 kB gzipped.
+  - Checked in the built output: all 114 surahs render, chapter switching works,
+    no console errors.
+  - Evaluated and rejected: splitting React, Firebase and the rest into vendor
+    chunks. Measured first load rose to 475 kB gzipped (+62 kB) because chunk
+    boundaries duplicate runtime helpers, so caching would have been bought with
+    a slower first visit. Firebase could be deferred later; that needs the auth
+    context rewritten, not a build tweak.
+
 ### Nexora
 
 - `Add canonical, Open Graph and Twitter metadata` (`b17891e`)
@@ -66,6 +77,12 @@ not what was intended.
   - The comment forbidding a root preview image was replaced by the rule that actually applies:
     the site prerenders one page, so the root owns the preview.
   - Verified: `npm test` and the `BASE_PATH=/Shawon-/` build pass; all three files are live.
+
+- `Sync package-lock.json so npm ci works on current npm` (`46b720d`)
+  - The lockfile was missing optional platform binaries for the Tailwind and oxc parsers, so
+    `npm ci` refused to install on npm 11/12 while npm 10 in CI happened to pass. Regenerated
+    with `npm install`; verified from a clean tree with `npm ci`, `npm test` and the
+    `BASE_PATH` build.
 
 ### shawonhaque (profile)
 

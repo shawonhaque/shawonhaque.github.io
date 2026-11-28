@@ -203,7 +203,7 @@
       <section class="panel status-table-panel" aria-labelledby="table-title">
         <h2 id="table-title" class="sr-only">Repository overview</h2>
         <table class="status-table">
-          <caption>Last verification: 2026-11-28T10:05:00Z</caption>
+          <caption>Last verification: 2026-11-28T10:12:17Z</caption>
           <thead>
             <tr><th scope="col">Repository</th><th scope="col">Status</th><th scope="col">Stack</th><th scope="col">CI</th><th scope="col">Live</th></tr>
           </thead>
@@ -281,7 +281,7 @@
           <h2>Islamic-Life <span class="status-pill ok">HEALTHY</span></h2>
           <p>Bengali-first Islamic companion: the full Quran with translations, prayer times computed on the device, qibla, tafsir, hadith, zakat and a worldwide mosque finder.</p>
           <ul class="status-checks">
-            <li><strong>Build:</strong> npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass</li>
+            <li><strong>Build:</strong> npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass; Quran reader split into its own chunk (entry 413 -&gt; 385 kB gzip)</li>
             <li><strong>Tests:</strong> tsc --noEmit via npm run lint - pass</li>
             <li><strong>Live:</strong> HTTP 200, canonical correct, social cover served, Firestore rules deny by default</li>
           </ul>
@@ -301,7 +301,7 @@
           <h2>Shawon- <span class="status-pill ok">HEALTHY</span></h2>
           <p>The interactive talking-video portfolio: React 19, TanStack Start and Tailwind 4, prerendered to static files with a scroll-driven hero.</p>
           <ul class="status-checks">
-            <li><strong>Build:</strong> npm run build with BASE_PATH - pass (single page prerendered)</li>
+            <li><strong>Build:</strong> npm run build with BASE_PATH - pass (single page prerendered); npm ci verified against a freshly regenerated lockfile</li>
             <li><strong>Tests:</strong> vitest run - 1 file, 1 test, pass</li>
             <li><strong>Live:</strong> HTTP 200, canonical, og:image, robots.txt and sitemap.xml all served</li>
           </ul>
