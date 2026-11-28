@@ -792,6 +792,29 @@ html.has-img-pending .portrait img { opacity: 0; }
 .project-body > p { color: var(--muted); font-size: 0.91rem; margin-bottom: 16px; }
 .project-body .tag-list { margin-bottom: 20px; }
 
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  background: var(--bg);
+}
+.project-status .dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: #199a5c;
+}
+.project-status .dot.is-partial { background: #c98a00; }
+
 .project-links {
   display: flex;
   flex-wrap: wrap;
