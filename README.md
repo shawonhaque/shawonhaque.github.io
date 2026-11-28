@@ -44,7 +44,24 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 - **[Nexora](https://github.com/shawonhaque/Nexora)** — full-stack knowledge platform · [live](https://shawonhaque.github.io/Nexora/)
 - **[Shawon-](https://github.com/shawonhaque/Shawon-)** — talking-video portfolio, TanStack Start · [live](https://shawonhaque.github.io/Shawon-/)
 - **[Islamic-Life](https://github.com/shawonhaque/Islamic-Life)** — Bengali-first Islamic companion, React + Vite · [live](https://shawonhaque.github.io/Islamic-Life/)
+- **[Hawa-Computer-](https://github.com/shawonhaque/Hawa-Computer-)** — bilingual shop platform, Next.js + Prisma · [live](https://shawonhaque.github.io/Hawa-Computer-/)
 - **[shawonhaque](https://github.com/shawonhaque/shawonhaque)** — GitHub profile README
+
+## Engineering records
+
+This repository is also the hub for the shared engineering records, because it is
+the one place all six sites are published from.
+
+- [status.html](https://shawonhaque.github.io/status.html) — verified health dashboard,
+  rendered from `engineering-status.json` by `scripts/render-status.py`
+- `MASTER_REPOSITORY_INVENTORY.md` — what each repository is, how it builds, where it deploys
+- `MASTER_PROJECT_STATUS.md` — the same health data as the dashboard, in Markdown
+- `MASTER_AUDIT_REPORT.md` — findings per repository, including checks that were blocked
+- `MASTER_ENGINEERING_CHANGELOG.md` — every change that reached a default branch, with commits
+- `MASTER_MAINTENANCE_PLAN.md` — cadence, failure playbook, security rules
+
+`.github/workflows/health-check.yml` runs every Monday: it validates the status file and
+confirms every live site, sitemap, robots file and social cover still responds.
 
 ## Structure
 
@@ -66,6 +83,10 @@ the 404 page are separate documents that share the same stylesheet and tokens.
 │   ├── portfolio.html    # This site's case study
 │   ├── shawon.html       # Talking-video portfolio case study
 │   └── islamic-life.html # Islamic Life case study
+├── status.html           # Engineering status dashboard (generated)
+├── engineering-status.json  # Source of truth for repository health
+├── scripts/
+│   └── render-status.py  # Renders status.html and MASTER_PROJECT_STATUS.md
 ├── site.webmanifest      # Web app manifest
 ├── robots.txt            # Crawler rules + sitemap reference
 ├── sitemap.xml           # XML sitemap

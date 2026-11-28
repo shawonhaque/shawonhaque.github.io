@@ -1,0 +1,100 @@
+name: Health check
+
+on:
+  schedule:
+    - cron: '20 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify live sites and status records
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate engineering-status.json
+        run: |
+          python3 - <<'PY'
+          import json, sys
+
+          path = "engineering-status.json"
+          data = json.load(open(path, encoding="utf-8"))
+          allowed = set(data["status_values"])
+          errors = []
+
+          if not data.get("verified_at"):
+              errors.append("verified_at is missing")
+
+          repos = data.get("repositories", [])
+          if len(repos) != 6:
+              errors.append(f"expected 6 repositories, found {len(repos)}")
+
+          required = {
+              "name", "role", "summary", "stack", "repo_url", "live_url",
+              "deploy", "ci_workflow", "ci_result", "status", "checks", "open_issues",
+          }
+          for repo in repos:
+              missing = required - repo.keys()
+              if missing:
+                  errors.append(f"{repo.get('name', '?')}: missing {sorted(missing)}")
+              if repo.get("status") not in allowed:
+                  errors.append(f"{repo.get('name', '?')}: unknown status {repo.get('status')!r}")
+
+          if errors:
+              print("\n".join(f"::error::{e}" for e in errors))
+              sys.exit(1)
+          print(f"status file OK: {len(repos)} repositories")
+          PY
+
+      - name: Check every live site, sitemap, robots file and cover
+        run: |
+          python3 - <<'PY'
+          import json, sys, urllib.error, urllib.request
+
+          data = json.load(open("engineering-status.json", encoding="utf-8"))
+          failures = []
+          checked = 0
+
+          def status(url):
+              request = urllib.request.Request(url, headers={"User-Agent": "shawonhaque-health-check"})
+              try:
+                  with urllib.request.urlopen(request, timeout=25) as response:
+                      return response.status
+              except urllib.error.HTTPError as exc:
+                  return exc.code
+              except Exception as exc:  # noqa: BLE001 - report any transport failure as a failure
+                  return f"error: {exc}"
+
+          for repo in data["repositories"]:
+              if repo["role"] == "profile":
+                  continue
+              base = repo["live_url"]
+              for url in (base, base + "sitemap.xml", base + "robots.txt"):
+                  code = status(url)
+                  checked += 1
+                  print(f"{code} {url}")
+                  if code != 200:
+                      failures.append(f"{url} -> {code}")
+
+          covers = [
+              "https://shawonhaque.github.io/Hawa-Computer-/brand/og-cover.jpg",
+              "https://shawonhaque.github.io/Islamic-Life/og-cover.jpg",
+              "https://shawonhaque.github.io/Nexora/og-cover.jpg",
+              "https://shawonhaque.github.io/Shawon-/og-cover.jpg",
+              "https://shawonhaque.github.io/assets/img/og-image.jpg",
+          ]
+          for url in covers:
+              code = status(url)
+              checked += 1
+              print(f"{code} {url}")
+              if code != 200:
+                  failures.append(f"{url} -> {code}")
+
+          print(f"checked {checked} URLs")
+          if failures:
+              print("\n".join(f"::error::{f}" for f in failures))
+              sys.exit(1)
+          PY

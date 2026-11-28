@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-11-28T10:05:00Z",
+  "verified_by": "OpenHands agent (central engineering session)",
+  "status_values": ["HEALTHY", "NEEDS ATTENTION", "CRITICAL", "NOT VERIFIED"],
+  "repositories": [
+    {
+      "name": "shawonhaque.github.io",
+      "role": "portfolio",
+      "summary": "This site. Dependency-free portfolio and case studies, and the home of the central engineering records.",
+      "stack": ["HTML", "CSS", "Vanilla JavaScript"],
+      "repo_url": "https://github.com/shawonhaque/shawonhaque.github.io",
+      "live_url": "https://shawonhaque.github.io/",
+      "deploy": "GitHub Pages, branch deploy from main (legacy build type)",
+      "ci_workflow": "pages-build-deployment",
+      "ci_result": "success",
+      "status": "HEALTHY",
+      "checks": {
+        "build": "n/a - files are served as written; Pages build reported success",
+        "tests": "n/a - no test suite; verified by live browser checks",
+        "live": "HTTP 200, canonical + OG image present, no console errors on mobile and desktop"
+      },
+      "open_issues": []
+    },
+    {
+      "name": "Hawa-Computer-",
+      "role": "project",
+      "summary": "Bilingual storefront and management platform for a computer-services shop: services, applications, shop, library, training, customer accounts and an admin console.",
+      "stack": ["Next.js 15 App Router", "TypeScript", "Tailwind CSS 4", "Prisma 6", "PostgreSQL"],
+      "repo_url": "https://github.com/shawonhaque/Hawa-Computer-",
+      "live_url": "https://shawonhaque.github.io/Hawa-Computer-/",
+      "deploy": "Static mirror published to the gh-pages branch (scripts/publish-gh-pages.sh)",
+      "ci_workflow": "CI (typecheck, lint, build, production image)",
+      "ci_result": "success",
+      "status": "HEALTHY",
+      "checks": {
+        "build": "next build plus scripts/mirror.py crawl - pass",
+        "tests": "tsc --noEmit, eslint, prisma migrate deploy and seed against Postgres 17 - pass",
+        "live": "HTTP 200, 86 sitemap URLs, canonical and og:image absolute, no console errors"
+      },
+      "open_issues": []
+    },
+    {
+      "name": "Islamic-Life",
+      "role": "project",
+      "summary": "Bengali-first Islamic companion: the full Quran with translations, prayer times computed on the device, qibla, tafsir, hadith, zakat and a worldwide mosque finder.",
+      "stack": ["React 19", "TypeScript", "Vite", "Tailwind CSS", "Firebase (Firestore, Auth)"],
+      "repo_url": "https://github.com/shawonhaque/Islamic-Life",
+      "live_url": "https://shawonhaque.github.io/Islamic-Life/",
+      "deploy": "GitHub Actions builds with GITHUB_PAGES=true and publishes dist/ to gh-pages",
+      "ci_workflow": "Deploy to GitHub Pages",
+      "ci_result": "success",
+      "status": "HEALTHY",
+      "checks": {
+        "build": "npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass",
+        "tests": "tsc --noEmit via npm run lint - pass",
+        "live": "HTTP 200, canonical correct, social cover served, Firestore rules deny by default"
+      },
+      "open_issues": []
+    },
+    {
+      "name": "Nexora",
+      "role": "project",
+      "summary": "Personal knowledge platform: live news desks, books, study resources, study tracking, writing and an admin desk, backed by Supabase with row-level security.",
+      "stack": ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase/PostgreSQL"],
+      "repo_url": "https://github.com/shawonhaque/Nexora",
+      "live_url": "https://shawonhaque.github.io/Nexora/",
+      "deploy": "GitHub Actions builds, typechecks and lints, then deploys via the Pages artifact API; a cron refresh rebuilds every six hours",
+      "ci_workflow": "Deploy to GitHub Pages",
+      "ci_result": "success",
+      "status": "HEALTHY",
+      "checks": {
+        "build": "npm run build (feed refresh, tsc -b, vite build, postbuild route shells) - pass",
+        "tests": "npm run typecheck and npm run lint - pass",
+        "live": "HTTP 200, 41 prerendered route shells, sitemap with 35 routes, canonical and social cover present"
+      },
+      "open_issues": []
+    },
+    {
+      "name": "Shawon-",
+      "role": "project",
+      "summary": "The interactive talking-video portfolio: React 19, TanStack Start and Tailwind 4, prerendered to static files with a scroll-driven hero.",
+      "stack": ["React 19", "TanStack Start", "TypeScript", "Tailwind CSS 4", "Vite"],
+      "repo_url": "https://github.com/shawonhaque/Shawon-",
+      "live_url": "https://shawonhaque.github.io/Shawon-/",
+      "deploy": "GitHub Actions runs vitest, builds with BASE_PATH and deploys via the Pages artifact API",
+      "ci_workflow": "Deploy Portfolio to GitHub Pages",
+      "ci_result": "success",
+      "status": "HEALTHY",
+      "checks": {
+        "build": "npm run build with BASE_PATH - pass (single page prerendered)",
+        "tests": "vitest run - 1 file, 1 test, pass",
+        "live": "HTTP 200, canonical, og:image, robots.txt and sitemap.xml all served"
+      },
+      "open_issues": [
+        "package-lock.json is out of sync for npm 11+: npm ci fails locally while npm 10 (CI) succeeds"
+      ]
+    },
+    {
+      "name": "shawonhaque",
+      "role": "profile",
+      "summary": "The GitHub profile README - the ASCII card, the intro and the links to the work.",
+      "stack": ["Markdown", "SVG"],
+      "repo_url": "https://github.com/shawonhaque/shawonhaque",
+      "live_url": "https://github.com/shawonhaque",
+      "deploy": "GitHub profile rendering - no Pages site",
+      "ci_workflow": "Refresh gh-ascii card",
+      "ci_result": "success",
+      "status": "HEALTHY",
+      "checks": {
+        "build": "n/a - Markdown rendered by GitHub",
+        "tests": "n/a",
+        "live": "Profile README renders; links point at the six repositories"
+      },
+      "open_issues": []
+    }
+  ]
+}
