@@ -100,6 +100,13 @@ not what was intended.
 
 ### Nexora
 
+- `Keep the large social card on pages without an image` (`0c404fd`)
+  - `PageMeta` replaced the shell's `summary_large_image` with `summary` on every route that passed
+    no image of its own, and left `og:image` alone, so the card and the image disagreed.
+  - Routes now fall back to the site cover and build both tags from the deploy base.
+  - Verified live with a cold cache: home, `/world` and `/bangladesh` all serve
+    `summary_large_image` with the 1200x630 cover.
+
 - `Point the sitemap at the URLs GitHub Pages serves` (`50fc71c`)
   - `scripts/postbuild.mjs` wrote the shells to `<route>/index.html` but listed `<route>` in the
     sitemap, so all 34 nested routes redirected before rendering.
