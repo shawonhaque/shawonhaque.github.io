@@ -4,7 +4,7 @@ Single source of truth for the health of every repository. This file is
 generated from `engineering-status.json` by `scripts/render-status.py`; edit the
 JSON and re-run the script instead of editing this document by hand.
 
-- Verified at: **2026-11-28T10:39:08Z**
+- Verified at: **2026-11-28T11:04:07Z**
 - Verified by: OpenHands agent (central engineering session)
 - Status values: `HEALTHY`, `NEEDS ATTENTION`, `CRITICAL`, `NOT VERIFIED`
 
@@ -28,7 +28,7 @@ This site. Dependency-free portfolio and case studies, and the home of the centr
 - Live: https://shawonhaque.github.io/
 - Build: n/a - files are served as written; Pages build reported success
 - Tests: n/a - no test suite; verified by live browser checks
-- Live: HTTP 200, canonical + OG image present, no console errors on mobile and desktop
+- Live: HTTP 200, canonical + OG image present, five project cards with status lines, no console errors on mobile and desktop
 - Open issues: none recorded
 
 ### Hawa-Computer- - HEALTHY
@@ -50,9 +50,9 @@ Bengali-first Islamic companion: the full Quran with translations, prayer times 
 - Stack: React 19, TypeScript, Vite, Tailwind CSS, Firebase (Firestore, Auth)
 - Deploy: GitHub Actions builds with GITHUB_PAGES=true and publishes dist/ to gh-pages
 - Live: https://shawonhaque.github.io/Islamic-Life/
-- Build: npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass; Quran reader split into its own chunk (entry 413 -> 385 kB gzip)
+- Build: 135 route pages written after vite build; deep links answer 200 with no redirect
 - Tests: tsc --noEmit via npm run lint - pass
-- Live: HTTP 200, canonical correct, social cover served, Firestore rules deny by default
+- Live: HTTP 200, canonical and per-page titles on the route pages, social cover served, 135 route pages (21 sections + 114 surahs), sitemap lists 133 URLs, robots disallows search/admin/settings/api, Firestore rules deny by default
 - Open issues: none recorded
 
 ### Nexora - HEALTHY
@@ -74,9 +74,9 @@ The interactive talking-video portfolio: React 19, TanStack Start and Tailwind 4
 - Stack: React 19, TanStack Start, TypeScript, Tailwind CSS 4, Vite
 - Deploy: GitHub Actions runs vitest, builds with BASE_PATH and deploys via the Pages artifact API
 - Live: https://shawonhaque.github.io/Shawon-/
-- Build: npm run build with BASE_PATH - pass (single page prerendered); npm ci verified against a freshly regenerated lockfile
+- Build: npm test and BASE_PATH=/Shawon-/ build pass; one document plus five section pages prerendered
 - Tests: vitest run - 1 file, 1 test, pass
-- Live: HTTP 200, canonical, og:image, robots.txt and sitemap.xml all served
+- Live: HTTP 200, canonical to the root on /work/, /about/ and /contact/, og:image, robots.txt and sitemap.xml served; section pages open and scroll to their section
 - Open issues:
   - package-lock.json is out of sync for npm 11+: npm ci fails locally while npm 10 (CI) succeeds
 
@@ -89,5 +89,5 @@ The GitHub profile README - the ASCII card, the intro and the links to the work.
 - Live: https://github.com/shawonhaque
 - Build: n/a - Markdown rendered by GitHub
 - Tests: n/a
-- Live: Profile README renders; links point at the six repositories
+- Live: Profile README renders; the repository table covers all six repositories with live links and status
 - Open issues: none recorded

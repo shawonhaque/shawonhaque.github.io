@@ -143,3 +143,21 @@ No changes.
   visibility, contrast of the new status pills and reduced-motion handling only.
 - **NOT RUN — Dependency vulnerability scan.** `npm audit` was not run; dependency upgrades are
   deliberately out of scope for this pass to avoid unrelated churn.
+
+## Follow-up pass (2026-11-29): deep links
+
+The two single-page apps were the remaining gap between what the sites claimed and what a
+shared link did. Both are fixed and verified live:
+
+| Repository | Before | After |
+|---|---|---|
+| Islamic-Life | `/quran/2/` answered 404; sitemap listed 1 URL | 135 route pages with per-URL titles and canonicals; sitemap lists 133 URLs |
+| Shawon- | `/work` answered 404; one prerendered page | `/about/`, `/skills/`, `/work/`, `/experience/`, `/contact/` prerendered and canonicalised to the root |
+
+Live checks: `200` with `0` redirects on `/Islamic-Life/quran/2/`, `/Islamic-Life/qibla/`,
+`/Islamic-Life/quran/114/`, `/Shawon-/work/`, `/Shawon-/about/` and `/Shawon-/contact/`; the
+browser reports the expected per-page titles, the Quran reader opens on the surah named in the
+URL, and no console errors. Back and forward move between sections in Islamic-Life, which was
+not possible before because nothing was ever pushed to history.
+
+The limits above still stand for this follow-up: no Lighthouse run, no axe run, no `npm audit`.

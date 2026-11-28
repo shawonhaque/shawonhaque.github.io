@@ -203,7 +203,7 @@
       <section class="panel status-table-panel" aria-labelledby="table-title">
         <h2 id="table-title" class="sr-only">Repository overview</h2>
         <table class="status-table">
-          <caption>Last verification: 2026-11-28T10:39:08Z</caption>
+          <caption>Last verification: 2026-11-28T11:04:07Z</caption>
           <thead>
             <tr><th scope="col">Repository</th><th scope="col">Status</th><th scope="col">Stack</th><th scope="col">CI</th><th scope="col">Live</th></tr>
           </thead>
@@ -263,7 +263,7 @@
           <ul class="status-checks">
             <li><strong>Build:</strong> n/a - files are served as written; Pages build reported success</li>
             <li><strong>Tests:</strong> n/a - no test suite; verified by live browser checks</li>
-            <li><strong>Live:</strong> HTTP 200, canonical + OG image present, no console errors on mobile and desktop</li>
+            <li><strong>Live:</strong> HTTP 200, canonical + OG image present, five project cards with status lines, no console errors on mobile and desktop</li>
           </ul>
           <p class="status-links"><a href="https://github.com/shawonhaque/shawonhaque.github.io" target="_blank" rel="noopener">Repository<span aria-hidden="true"> ↗</span></a> <a href="https://shawonhaque.github.io/" target="_blank" rel="noopener">Live<span aria-hidden="true"> ↗</span></a></p>
         </article>
@@ -281,9 +281,9 @@
           <h2>Islamic-Life <span class="status-pill ok">HEALTHY</span></h2>
           <p>Bengali-first Islamic companion: the full Quran with translations, prayer times computed on the device, qibla, tafsir, hadith, zakat and a worldwide mosque finder.</p>
           <ul class="status-checks">
-            <li><strong>Build:</strong> npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass; Quran reader split into its own chunk (entry 413 -&gt; 385 kB gzip)</li>
+            <li><strong>Build:</strong> 135 route pages written after vite build; deep links answer 200 with no redirect</li>
             <li><strong>Tests:</strong> tsc --noEmit via npm run lint - pass</li>
-            <li><strong>Live:</strong> HTTP 200, canonical correct, social cover served, Firestore rules deny by default</li>
+            <li><strong>Live:</strong> HTTP 200, canonical and per-page titles on the route pages, social cover served, 135 route pages (21 sections + 114 surahs), sitemap lists 133 URLs, robots disallows search/admin/settings/api, Firestore rules deny by default</li>
           </ul>
           <p class="status-links"><a href="https://github.com/shawonhaque/Islamic-Life" target="_blank" rel="noopener">Repository<span aria-hidden="true"> ↗</span></a> <a href="https://shawonhaque.github.io/Islamic-Life/" target="_blank" rel="noopener">Live<span aria-hidden="true"> ↗</span></a></p>
         </article>
@@ -301,9 +301,9 @@
           <h2>Shawon- <span class="status-pill ok">HEALTHY</span></h2>
           <p>The interactive talking-video portfolio: React 19, TanStack Start and Tailwind 4, prerendered to static files with a scroll-driven hero.</p>
           <ul class="status-checks">
-            <li><strong>Build:</strong> npm run build with BASE_PATH - pass (single page prerendered); npm ci verified against a freshly regenerated lockfile</li>
+            <li><strong>Build:</strong> npm test and BASE_PATH=/Shawon-/ build pass; one document plus five section pages prerendered</li>
             <li><strong>Tests:</strong> vitest run - 1 file, 1 test, pass</li>
-            <li><strong>Live:</strong> HTTP 200, canonical, og:image, robots.txt and sitemap.xml all served</li>
+            <li><strong>Live:</strong> HTTP 200, canonical to the root on /work/, /about/ and /contact/, og:image, robots.txt and sitemap.xml served; section pages open and scroll to their section</li>
           </ul>
           <p class="status-links"><a href="https://github.com/shawonhaque/Shawon-" target="_blank" rel="noopener">Repository<span aria-hidden="true"> ↗</span></a> <a href="https://shawonhaque.github.io/Shawon-/" target="_blank" rel="noopener">Live<span aria-hidden="true"> ↗</span></a></p>
             <h3>Open issues</h3>
@@ -317,7 +317,7 @@
           <ul class="status-checks">
             <li><strong>Build:</strong> n/a - Markdown rendered by GitHub</li>
             <li><strong>Tests:</strong> n/a</li>
-            <li><strong>Live:</strong> Profile README renders; links point at the six repositories</li>
+            <li><strong>Live:</strong> Profile README renders; the repository table covers all six repositories with live links and status</li>
           </ul>
           <p class="status-links"><a href="https://github.com/shawonhaque/shawonhaque" target="_blank" rel="noopener">Repository<span aria-hidden="true"> ↗</span></a> <a href="https://github.com/shawonhaque" target="_blank" rel="noopener">Live<span aria-hidden="true"> ↗</span></a></p>
         </article>

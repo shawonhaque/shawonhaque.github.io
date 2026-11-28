@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "verified_at": "2026-11-28T10:39:08Z",
+  "verified_at": "2026-11-28T11:04:07Z",
   "verified_by": "OpenHands agent (central engineering session)",
   "status_values": [
     "HEALTHY",
@@ -27,7 +27,7 @@
       "checks": {
         "build": "n/a - files are served as written; Pages build reported success",
         "tests": "n/a - no test suite; verified by live browser checks",
-        "live": "HTTP 200, canonical + OG image present, no console errors on mobile and desktop"
+        "live": "HTTP 200, canonical + OG image present, five project cards with status lines, no console errors on mobile and desktop"
       },
       "open_issues": []
     },
@@ -73,9 +73,9 @@
       "ci_result": "success",
       "status": "HEALTHY",
       "checks": {
-        "build": "npm run build (Quran, brand, SEO and search-index generators plus vite build) - pass; Quran reader split into its own chunk (entry 413 -> 385 kB gzip)",
+        "build": "135 route pages written after vite build; deep links answer 200 with no redirect",
         "tests": "tsc --noEmit via npm run lint - pass",
-        "live": "HTTP 200, canonical correct, social cover served, Firestore rules deny by default"
+        "live": "HTTP 200, canonical and per-page titles on the route pages, social cover served, 135 route pages (21 sections + 114 surahs), sitemap lists 133 URLs, robots disallows search/admin/settings/api, Firestore rules deny by default"
       },
       "open_issues": []
     },
@@ -121,9 +121,9 @@
       "ci_result": "success",
       "status": "HEALTHY",
       "checks": {
-        "build": "npm run build with BASE_PATH - pass (single page prerendered); npm ci verified against a freshly regenerated lockfile",
+        "build": "npm test and BASE_PATH=/Shawon-/ build pass; one document plus five section pages prerendered",
         "tests": "vitest run - 1 file, 1 test, pass",
-        "live": "HTTP 200, canonical, og:image, robots.txt and sitemap.xml all served"
+        "live": "HTTP 200, canonical to the root on /work/, /about/ and /contact/, og:image, robots.txt and sitemap.xml served; section pages open and scroll to their section"
       },
       "open_issues": [
         "package-lock.json is out of sync for npm 11+: npm ci fails locally while npm 10 (CI) succeeds"
@@ -146,7 +146,7 @@
       "checks": {
         "build": "n/a - Markdown rendered by GitHub",
         "tests": "n/a",
-        "live": "Profile README renders; links point at the six repositories"
+        "live": "Profile README renders; the repository table covers all six repositories with live links and status"
       },
       "open_issues": []
     }

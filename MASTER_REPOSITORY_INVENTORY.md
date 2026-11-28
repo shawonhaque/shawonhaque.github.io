@@ -45,7 +45,8 @@ application, but it is one of the six projects it presents, not the hub.
 
 - Purpose: Bengali-first Islamic companion — Quran with Bengali/English translation, prayer times computed on the device, qibla, tafsir, hadith, duas, tasbih, zakat, hijri calendar, mosque finder.
 - Stack: React 19, TypeScript, Vite, Tailwind CSS, Firebase (Firestore + Auth) for optional accounts.
-- Build chain: `scripts/build-quran.mjs` → `build-brand.mjs` → `build-seo.mjs` → `build-search-index.mjs` → `vite build`; `public/` is generated, so sitemap, robots and the social cover are emitted on every build.
+- Build chain: `scripts/build-quran.mjs` → `build-brand.mjs` → `build-seo.mjs` → `build-search-index.mjs` → `vite build` → `build-routes.mjs`; `public/` is generated, so sitemap, robots and the social cover are emitted on every build, and the last step writes one page per section and per surah (135 pages) with per-URL titles and canonicals.
+- URLs: `/quran/`, `/namaz/`, … and `/quran/2/` are real pages; `src/utils/routes.ts` reads the section from the path and keeps the address bar in step. The sitemap lists 133 URLs (home, 18 content sections, 114 surahs); `search`, `admin` and `settings` are noindex via `robots.txt`.
 - Deploy: Actions workflow sets `GITHUB_PAGES=true` (which switches the Vite base to `/Islamic-Life/` and declares that there is no backend), copies `dist/index.html` to `dist/404.html`, and publishes to `gh-pages` with `peaceiris/actions-gh-pages`.
 - Security: `firestore.rules` denies everything by default and validates every collection; `firebase-applet-config.json` holds only the public web config.
 
@@ -61,9 +62,10 @@ application, but it is one of the six projects it presents, not the hub.
 
 - Purpose: the talking-video portfolio — scroll-driven hero, selected work gallery, resume download.
 - Stack: React 19, TanStack Start, Tailwind CSS 4, Vite, motion, vitest.
-- Build: `BASE_PATH=/Shawon-/ npm run build` prerenders the single page into `dist/client`, then the workflow copies `index.html` to `404.html` and adds `.nojekyll`.
+- Build: `BASE_PATH=/Shawon-/ npm run build` prerenders the one-page document plus five section paths (`/about/`, `/skills/`, `/work/`, `/experience/`, `/contact/`) into `dist/client`, then the workflow copies `index.html` to `404.html` and adds `.nojekyll`.
+- Deep links: each section path renders the same document, scrolls to its section and sets `rel="canonical"` back to `/Shawon-/`, so shared links resolve while only the root is indexed.
 - Deploy: Actions workflow runs `npm test` before the build and deploys through the Pages artifact API.
-- Known friction: `package-lock.json` is missing optional Tailwind binaries, so `npm ci` fails on npm 11+ while npm 10 (the CI runtime) succeeds. Pinned in `MASTER_PROJECT_STATUS.md`.
+- Lockfile: regenerated (`46b720d`) so `npm ci` installs on current npm; verified from a clean tree.
 
 ### 6. shawonhaque — profile README
 

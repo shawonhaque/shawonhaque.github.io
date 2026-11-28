@@ -4,6 +4,53 @@ Newest first. One entry per change that reached a repository's default branch, w
 the commit that carries it. Verification notes state what was actually observed,
 not what was intended.
 
+## 2026-11-29 — deep links for the two single-page apps
+
+### Islamic-Life
+
+- `Give every section and surah its own URL` (`434645a`)
+  - The app kept its section in React state, so `/Islamic-Life/quran/2/` answered 404 and the
+    address bar never changed; the sitemap therefore advertised a single URL.
+  - `scripts/build-routes.mjs` now writes 135 pages from the app shell — 21 sections and 114
+    surahs — each with its own title, description, canonical and `og:url`. `src/utils/routes.ts`
+    reads the section (and surah) from the path, `handleNavigate` and search-to-verse navigation
+    push the new path, and `popstate` restores both section and reader position.
+  - `scripts/build-seo.mjs` lists 133 URLs in `sitemap.xml` (home, 18 content sections, 114
+    surahs) and disallows `/search/`, `/admin/`, `/settings/`, `/api/`.
+  - Verified live: `/quran/2/`, `/qibla/`, `/quran/114/` and the root all answer 200 with no
+    redirect; the browser shows title "সূরা আল-বাকারা (Al-Baqarah) — Islamic Life", the reader
+    on সূরা নং 2, and zero console errors. Locally, clicking নামাজ শিক্ষা moved the URL to
+    `/Islamic-Life/namaz/` and Back returned to `/Islamic-Life/quran/2/` with the reader intact.
+
+- `Write robot rules as paths` (`cca5510`)
+  - `Disallow` takes a path; absolute URLs only work because crawlers strip the origin.
+  - Verified in `dist/robots.txt` and the live file.
+
+### Shawon-
+
+- `Give each section its own shareable path` (`320fa81`)
+  - `/Shawon-/work` answered 404 because the site has one route. `/about/`, `/skills/`, `/work/`,
+    `/experience/` and `/contact/` are now prerendered pages that render the document, land on
+    their section and canonicalise to `/Shawon-/` so only the root is indexed.
+  - Verified: `npm test` and the `BASE_PATH=/Shawon-/` build pass; live `/work/`, `/about/` and
+    `/contact/` answer 200 directly; the browser lands at `scrollY 2618` on `/work/` with no
+    console errors.
+
+### shawonhaque.github.io
+
+- `Say where each project actually stands` (`a73d6e6`)
+  - Every project card gained a status line (live, or "source complete — static preview, no live
+    database" for Hawa Computer) and Hawa Computer gained its static preview link, labelled as a
+    preview so nobody expects the ordering flow to work there.
+  - Verified in the browser at 1280px and 390px: five status chips render, no horizontal scroll,
+    links resolve to the sites and case studies.
+
+### shawonhaque (profile)
+
+- `List all six repositories with their real status` (`2225975`)
+  - Adds a repository table covering all six, with live links and an honest status column, so the
+    profile stops describing a subset.
+
 ## 2026-11-28 — central engineering pass
 
 ### shawonhaque.github.io
