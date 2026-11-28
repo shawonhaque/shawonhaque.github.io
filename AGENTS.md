@@ -65,6 +65,9 @@ python3 tools/build-og-images.py
   `.repo-list`, a card in `projects/index.html`, a page in `projects/`, a
   `sitemap.xml` entry, and the previous case study's "Next case study" link
   pointed at it.
+- Each project card states where the project stands in a `.project-status` line
+  (green dot = live, amber = source complete but not deployed in full). Keep
+  that line honest: if a link points at a preview, label it as one.
 - Every page applies the saved/system theme with an inline pre-paint script
   (reads `localStorage.theme`, falls back to `prefers-color-scheme`) to avoid a
   flash; `404.html` does the same.
@@ -76,6 +79,9 @@ python3 tools/build-og-images.py
 - `.site-header` is hidden in print (`@media print`).
 
 ## Engineering records
+
+- Every change that reaches `main` gets an entry in `MASTER_ENGINEERING_CHANGELOG.md` with the
+  commit that carries it and what was actually observed, not what was intended.
 
 - `engineering-status.json` is the single source of truth for the status dashboard. Edit it, then run
   `python3 scripts/render-status.py`, which rewrites both `status.html` and `MASTER_PROJECT_STATUS.md`
