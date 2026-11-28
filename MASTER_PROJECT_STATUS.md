@@ -4,7 +4,7 @@ Single source of truth for the health of every repository. This file is
 generated from `engineering-status.json` by `scripts/render-status.py`; edit the
 JSON and re-run the script instead of editing this document by hand.
 
-- Verified at: **2026-11-28T10:27:51Z**
+- Verified at: **2026-11-28T10:39:08Z**
 - Verified by: OpenHands agent (central engineering session)
 - Status values: `HEALTHY`, `NEEDS ATTENTION`, `CRITICAL`, `NOT VERIFIED`
 
@@ -40,7 +40,7 @@ Bilingual storefront and management platform for a computer-services shop: servi
 - Live: https://shawonhaque.github.io/Hawa-Computer-/
 - Build: next build plus scripts/mirror.py crawl - pass
 - Tests: tsc --noEmit, eslint, prisma migrate deploy and seed against Postgres 17 - pass
-- Live: HTTP 200, 86 sitemap URLs, each page and locale emits its own canonical with hreflang pairs, no console errors
+- Live: HTTP 200, 172 sitemap URLs all answer 200 without redirect, per-page and per-locale canonicals with hreflang, no console errors
 - Open issues: none recorded
 
 ### Islamic-Life - HEALTHY
@@ -64,7 +64,7 @@ Personal knowledge platform: live news desks, books, study resources, study trac
 - Live: https://shawonhaque.github.io/Nexora/
 - Build: npm run build (feed refresh, tsc -b, vite build, postbuild route shells) - pass
 - Tests: npm run typecheck and npm run lint - pass
-- Live: HTTP 200, 41 prerendered route shells, sitemap with 35 routes, canonical and social cover present
+- Live: HTTP 200, 41 prerendered route shells, sitemap with 35 routes, canonical, sitemap URLs and social cover present
 - Open issues: none recorded
 
 ### Shawon- - HEALTHY

@@ -22,6 +22,20 @@ not what was intended.
 
 ### Hawa-Computer-
 
+- `Link the terms page and crawl the whole sitemap` (`26041f7`)
+  - The footer linked the privacy and refund policies but not the terms page, so the one legal
+    page the sitemap advertised had no way in and the mirror never wrote it: `/p/terms` and
+    `/en/p/terms` returned 404 on the live site.
+  - The mirror now seeds its crawl from the sitemap, so it cannot publish a URL it did not write.
+  - Verified: all 172 sitemap URLs answer 200 directly on the live site, none redirect.
+
+- `Serve the URLs the sitemap and the links advertise` (`c9e8d40` follow-up)
+  - GitHub Pages serves a page at `/x/` and 301s `/x`, so every first visit to an inner page
+    paid a redirect and the sitemap advertised the redirecting form.
+  - Internal links, the injected runtime link fixer, canonicals, `hreflang` and the sitemap now
+    all use the served form, and the sitemap lists both locales: 86 Bengali URLs became 172 with
+    `xhtml:link` alternates. Browser check: the tools link loads `/tools/` with status 200.
+
 - `Give every page its own canonical URL` (`b2e35db`)
   - The root layout declared `alternates.canonical = "/"`. Pages that did not override it
     inherited that, so all 86 sitemap URLs told Google the home page was their canonical.
@@ -83,6 +97,13 @@ not what was intended.
   - The shell had only a title and description; it now carries a canonical link, the full Open
     Graph block and a Twitter card with `og-cover.jpg`.
   - Verified: typecheck, lint and build pass; the tags and image are live.
+
+### Nexora
+
+- `Point the sitemap at the URLs GitHub Pages serves` (`50fc71c`)
+  - `scripts/postbuild.mjs` wrote the shells to `<route>/index.html` but listed `<route>` in the
+    sitemap, so all 34 nested routes redirected before rendering.
+  - Verified in the build output: every `<loc>` now carries its trailing slash.
 
 ### Shawon-
 

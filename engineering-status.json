@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "verified_at": "2026-11-28T10:27:51Z",
+  "verified_at": "2026-11-28T10:39:08Z",
   "verified_by": "OpenHands agent (central engineering session)",
   "status_values": [
     "HEALTHY",
@@ -51,7 +51,7 @@
       "checks": {
         "build": "next build plus scripts/mirror.py crawl - pass",
         "tests": "tsc --noEmit, eslint, prisma migrate deploy and seed against Postgres 17 - pass",
-        "live": "HTTP 200, 86 sitemap URLs, each page and locale emits its own canonical with hreflang pairs, no console errors"
+        "live": "HTTP 200, 172 sitemap URLs all answer 200 without redirect, per-page and per-locale canonicals with hreflang, no console errors"
       },
       "open_issues": []
     },
@@ -99,7 +99,7 @@
       "checks": {
         "build": "npm run build (feed refresh, tsc -b, vite build, postbuild route shells) - pass",
         "tests": "npm run typecheck and npm run lint - pass",
-        "live": "HTTP 200, 41 prerendered route shells, sitemap with 35 routes, canonical and social cover present"
+        "live": "HTTP 200, 41 prerendered route shells, sitemap with 35 routes, canonical, sitemap URLs and social cover present"
       },
       "open_issues": []
     },
